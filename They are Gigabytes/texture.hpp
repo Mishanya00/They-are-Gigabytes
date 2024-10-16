@@ -3,6 +3,10 @@
 #include <string>
 #include <glew.h>
 
+
+#define COLOR_TEXTURE_UNIT              GL_TEXTURE0
+
+
 namespace rgl
 {
 	class Texture

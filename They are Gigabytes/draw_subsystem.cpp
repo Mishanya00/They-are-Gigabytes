@@ -5,6 +5,7 @@
 #include "math_3d.h"
 #include "game_kernel.hpp"
 #include "shaders.hpp"
+#include "basic_mesh.hpp"
 
 
 struct Vertex
@@ -28,6 +29,7 @@ GLuint CubeVAO;
 GLuint PyramidVBO;
 GLuint PyramidEBO;
 GLuint PyramidVAO;
+BasicMesh Spider;
 rgl::Texture* pTexture = NULL;
 
 
@@ -160,15 +162,17 @@ void DrawGameFrame()
 
     if (CurrentVAO == CubeVAO)
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
-    else
+    else if (CurrentVAO == PyramidVAO)
         glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, NULL);
+    else
+        Spider.Render();
     
     
 }
 
 void DrawSubsystemInit()
 {
-    pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/texture1.jpg");
+    pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tile_texture.jpg");
    
     if (!pTexture->Load())
     {
@@ -179,12 +183,15 @@ void DrawSubsystemInit()
     CreateCubeVAO();
     CreatePyramidVAO();
 
+    Spider.LoadMesh("../contents/spider.obj");
+    
+
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
 
     glBindVertexArray(PyramidVAO);
 }

@@ -9,7 +9,6 @@
 #include "shaders.hpp"
 #include "draw_subsystem.hpp"
 #include "game_kernel.hpp"
-#include "texture.hpp"
 
 
 static void KeyboardHandler(unsigned char key, int x, int y)
@@ -37,6 +36,9 @@ static void KeyboardHandler(unsigned char key, int x, int y)
         break;
     case '2':
         glBindVertexArray(PyramidVAO);
+        break;
+    case '3':
+        glBindVertexArray(0);
         break;
     }
 }

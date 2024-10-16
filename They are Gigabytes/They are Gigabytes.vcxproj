@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="basic_mesh.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="draw_subsystem.cpp" />
     <ClCompile Include="game_kernel.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="world_transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="basic_mesh.hpp" />
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="draw_subsystem.hpp" />
     <ClInclude Include="game_kernel.hpp" />
