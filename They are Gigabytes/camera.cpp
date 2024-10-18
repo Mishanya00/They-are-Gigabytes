@@ -38,14 +38,27 @@ namespace rgl
         Init();
     }
 
-    void Camera::MoveAcrossVector(Vector3f const & target_vector, bool isNotVertMove)
+    void Camera::MoveAcrossVector(Vector3f const & target_vector, bool isNotVertMove, float distance)
     {
-        if (isNotVertMove)
-            position_ += target_vector * speed_;
+        if (distance == 0)
+        {
+            if (isNotVertMove)
+                position_ += target_vector * speed_;
+            else
+            {
+                position_.x += target_vector.x * speed_;
+                position_.z += target_vector.z * speed_;
+            }
+        }   
         else
         {
-            position_.x += target_vector.x * speed_;
-            position_.z += target_vector.z * speed_;
+            if (isNotVertMove)
+                position_ += target_vector * distance;
+            else
+            {
+                position_.x += target_vector.x * distance;
+                position_.z += target_vector.z * distance;
+            }
         }
     }
 
@@ -61,6 +74,21 @@ namespace rgl
         angle_horz_ += rotY;
 
         Update();
+    }
+
+    void Camera::RotateAroundTargetPoint(float alfa)
+    {
+        float sf = fabs(position_.y / target_.y); // scale factor
+        Vector3f old_position = position_;
+        MoveAcrossVector(target_, true, sf); // sf equals distance because vector is normalized
+        Rotate(0, alfa, 0);
+        MoveAcrossVector(-target_, true, sf);
+        /*
+        float radius = sqrtf(sqrf(sf * target_.x) + sqrf(sf * target_.z));
+        float theta = atanf( ( (sf * target_.x) - fabs(position_.x) ) / ( (sf * target_.z) - fabs(position_.z) ) );
+        
+        position_.x *= sinf(theta + ToRadian(alfa));
+        position_.z *= cosf(theta + ToRadian(alfa));*/
     }
 
     void Camera::Init()
@@ -112,44 +140,6 @@ namespace rgl
     {
         switch (key)
         {
-            /*
-        case 'p':
-            Rotate(0, 20.0f, 0);
-            break;
-        case 'o':
-            Rotate(0, -20.0f, 0);
-            break;
-
-        case 'w':
-        case 'W':
-            position_.z += speed_;
-            break;
-
-        case 's':
-        case 'S':
-            position_.z -= speed_;
-            break;
-
-        case 'a':
-        case 'A':
-        {
-            Vector3f Left = target_.Cross(up_);
-            Left.Normalize();
-            Left *= speed_;
-            position_ += Left;
-        }
-        break;
-
-        case 'd':
-        case 'D':
-        {
-            Vector3f Right = up_.Cross(target_);
-            Right.Normalize();
-            Right *= speed_;
-            position_ += Right;
-        }
-        break; */
-
         case GLUT_KEY_PAGE_UP:
             position_.y += speed_;
             break;
@@ -171,31 +161,38 @@ namespace rgl
 
     void Camera::OnFrame()
     {
+        bool isMoved = false;
         // OS dependent realization
         // Camera movement without height change
         if (GetAsyncKeyState('W'))
         {
             MoveAcrossVector(target_, false);
+            isMoved = true;
         }
         if (GetAsyncKeyState('S'))
         {
             MoveAcrossVector(-target_, false);
+            isMoved = true;
         }
         if (GetAsyncKeyState('A'))
         {
             MoveAcrossVector(-left_, false);
+            isMoved = true;
         }
         if (GetAsyncKeyState('D'))
         {
             MoveAcrossVector(left_, false);
+            isMoved = true;
         }
-        if (GetAsyncKeyState('E') && !is_lower_edge_ && !is_upper_edge_ && !is_left_edge_ && !is_right_edge_)
+        if (GetAsyncKeyState('E') && !is_lower_edge_ && !is_upper_edge_ && !is_left_edge_ && !is_right_edge_ && !isMoved)
         {
-            Rotate(0, rotation_speed_, 0);
+            RotateAroundTargetPoint(rotation_speed_);
+            //Rotate(0, rotation_speed_, 0);
         }
-        if (GetAsyncKeyState('Q') && !is_lower_edge_ && !is_upper_edge_ && !is_left_edge_ && !is_right_edge_)
+        if (GetAsyncKeyState('Q') && !is_lower_edge_ && !is_upper_edge_ && !is_left_edge_ && !is_right_edge_ && !isMoved)
         {
-            Rotate(0, -rotation_speed_, 0);
+            RotateAroundTargetPoint(-rotation_speed_);
+            //Rotate(0, -rotation_speed_, 0);
         }
 
         Update();
@@ -209,7 +206,8 @@ namespace rgl
         switch (button)
         {   // mouse wheel lacks special const to determine. So according to docs its 3 and 4
         case 3:
-            position_ += target_ * speed_;
+            if (position_.y > 1.0f)
+                position_ += target_ * speed_;
             break;
         case 4:
             position_ -= target_ * speed_;
@@ -260,28 +258,17 @@ namespace rgl
         bool ShouldUpdate = false;
 
         if (is_left_edge_) {
-            position_.x -= speed_;
-            ShouldUpdate = true;
+            MoveAcrossVector(-left_, false);
         }
         else if (is_right_edge_) {
-            position_.x += speed_;
-            ShouldUpdate = true;
+            MoveAcrossVector(left_, false);
         }
 
         if (is_upper_edge_) {
-                position_.z += target_.z * speed_;
-                position_.x += target_.x * speed_;
-                ShouldUpdate = true;
-            
+                MoveAcrossVector(target_, false);
         }
         else if (is_lower_edge_) {
-                position_.z -= target_.z * speed_;
-                position_.x -= target_.x * speed_;
-                ShouldUpdate = true;
-        }
-
-        if (ShouldUpdate) {
-            Update();
+                MoveAcrossVector(-target_, false);
         }
     }
 

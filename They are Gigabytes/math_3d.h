@@ -16,9 +16,11 @@
 #include <assert.h>     // for normalize func
 
 #define powi(base,exp) (int)powf((float)(base), (float)(exp))
+#define sqrf(a) (a*a)
 
 #define ToRadian(x) (float)(((x) * M_PI / 180.0f))
 #define ToDegree(x) (float)(((x) * 180.0f / M_PI))
+
 
 struct Vector2i
 {

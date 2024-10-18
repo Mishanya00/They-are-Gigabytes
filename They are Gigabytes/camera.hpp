@@ -20,7 +20,8 @@ namespace rgl
 		void SetRotationSpeed(float new_rotation_speed);
 
 		void Rotate(float rotX, float rotY, float rotZ);
-		void MoveAcrossVector(Vector3f const & target_vector, bool isNotVertMove = true);
+		void RotateAroundTargetPoint(float alfa);
+		void MoveAcrossVector(Vector3f const & target_vector, bool isNotVertMove = true, float distance = 0);
 
 		void OnKeyboard(unsigned char key);
         void OnMouse(int button, int state, int x, int y);
