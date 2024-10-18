@@ -183,7 +183,7 @@ void DrawSubsystemInit()
     CreateCubeVAO();
     CreatePyramidVAO();
 
-    Spider.LoadMesh("../contents/spider.obj");
+    Spider.LoadMesh("../contents/map_tile2.obj");
     
 
     glEnable(GL_CULL_FACE);

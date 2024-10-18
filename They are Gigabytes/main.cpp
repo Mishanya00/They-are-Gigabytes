@@ -21,16 +21,6 @@ static void KeyboardHandler(unsigned char key, int x, int y)
         exit(0);
         break;
 
-    case 'q':
-    case 'Q':
-        WorldMatrix.Rotate(0, 10.0f, 0);
-        break;
-
-    case 'e':
-    case 'E':
-        WorldMatrix.Rotate(0, -10.0f, 0);
-        break;
-
     case '1':
         glBindVertexArray(CubeVAO);
         break;
@@ -45,7 +35,7 @@ static void KeyboardHandler(unsigned char key, int x, int y)
 
 static void KeyboardSpecialHandler(int key, int x, int y)
 {
-    GameCamera.OnKeyboard(key);
+    //GameCamera.OnKeyboard(key);
    
     switch (key)
     {
@@ -66,21 +56,13 @@ static void KeyboardSpecialHandler(int key, int x, int y)
 
 static void MouseHandler(int button, int state, int x, int y)
 {
-    switch (button)
-    {   // mouse wheel lacks special const to determine. So according to docs its 3 and 4
-    case 3:
-        WorldMatrix.Scale(1.1f);
-        break;
-    case 4:
-        WorldMatrix.Scale(0.9f);
-        break;
-    }
+    GameCamera.OnMouse(button, state, x, y);
 }
 
 static void PassiveMotionHandler(int x, int y)
 {
     //std::cout << x << ' ' << y << '\n';
-    GameCamera.OnMouse(x, y);
+    GameCamera.OnMouse(0, 0, x, y);
 }
 
 static void UpdateWindowSize(int width, int height)
@@ -96,6 +78,8 @@ static void UpdateWindowSize(int width, int height)
 
 static void RenderScene()
 {
+    GameFrame();
+
     DrawGameFrame();
 
     glutSwapBuffers();

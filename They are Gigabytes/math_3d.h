@@ -154,6 +154,11 @@ struct Vector3f
 
     Vector3f(const Vector4f& v);
 
+    Vector3f operator-() const
+    {
+        return Vector3f(-x, -y, -z);
+    }
+
     Vector3f& operator+=(const Vector3f& r)
     {
         x += r.x;

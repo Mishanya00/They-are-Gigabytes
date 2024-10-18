@@ -8,41 +8,24 @@ namespace rgl
 	{
 	public:
 
-		Camera();
+        Camera(int WindowWidth, int WindowHeight);
 
-		void SetPosition(float x, float y, float z);
-		void SetPosition(Vector3f new_position);
-
-		void OnKeyboard(unsigned char key);
-
-		Matrix4f GetMatrix();
-
-
-	private:
-
-		Vector3f position_;
-		Vector3f target_;
-		Vector3f up_;
-		float speed_;
-	};
-
-	class QuaternionCamera
-	{
-	public:
-
-        QuaternionCamera(int WindowWidth, int WindowHeight);
-
-        QuaternionCamera(int WindowWidth, int WindowHeight, const Vector3f& Pos, const Vector3f& Target, const Vector3f& Up);
+        Camera(int WindowWidth, int WindowHeight, const Vector3f& Pos, 
+						const Vector3f& Target, const Vector3f& Up, const Vector3f & Left);
 
         void SetPosition(float x, float y, float z);
 		void SetPosition(Vector3f new_position);
 		void SetWindowSize(int width, int height);
+		void SetSpeed(float new_speed);
+		void SetRotationSpeed(float new_rotation_speed);
 
-        void OnKeyboard(unsigned char key);
+		void Rotate(float rotX, float rotY, float rotZ);
+		void MoveAcrossVector(Vector3f const & target_vector, bool isNotVertMove = true);
 
-        void OnMouse(int x, int y);
-
+		void OnKeyboard(unsigned char key);
+        void OnMouse(int button, int state, int x, int y);
         void OnRender();
+		void OnFrame();
 
         Matrix4f GetMatrix();
 
@@ -54,6 +37,7 @@ namespace rgl
 		Vector3f position_;
 		Vector3f target_;
 		Vector3f up_;
+		Vector3f left_;
 
 		float speed_;
 		float rotation_speed_;
