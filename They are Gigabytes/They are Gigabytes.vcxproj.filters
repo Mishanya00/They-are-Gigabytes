@@ -13,6 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Gameplay">
+      <UniqueIdentifier>{7246bbf3-55d8-4d5b-9d04-be4aa4d79d29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gameplay\Sources">
+      <UniqueIdentifier>{e14b5244-96fb-46ed-bf9c-19849236175e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gameplay\Headers">
+      <UniqueIdentifier>{162d9c83-1a62-410f-a038-75929d096ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{c70ec590-c1d2-4b42-b699-cae8fb6f9b7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\GLSL Shaders">
+      <UniqueIdentifier>{25476f0b-b8f6-41b7-803e-2ea46181248c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Sources">
+      <UniqueIdentifier>{9e99c02b-5fa8-4af2-abab-62795363808b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Headers">
+      <UniqueIdentifier>{9389c120-7e6c-435d-a8cf-c49ab18bf500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials and Textures">
+      <UniqueIdentifier>{c6daf286-8791-4988-94f2-23520d85d660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials and Textures\Headers">
+      <UniqueIdentifier>{f770469f-9dfd-4653-b35a-5ec0eba218f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials and Textures\Sources">
+      <UniqueIdentifier>{ffb26850-9db3-49b4-aeff-aba734fa97d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,20 +60,26 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shaders.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="draw_subsystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game_kernel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="basic_mesh.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Gameplay\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="technique.cpp">
+      <Filter>Shaders\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="lighting_technique.cpp">
+      <Filter>Shaders\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Materials and Textures\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="shaders.cpp">
+      <Filter>Shaders\Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,28 +95,43 @@
     <ClInclude Include="camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="shaders.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="draw_subsystem.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_kernel.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="basic_mesh.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="map.hpp">
+      <Filter>Gameplay\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="technique.hpp">
+      <Filter>Shaders\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="lighting_technique.hpp">
+      <Filter>Shaders\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.hpp">
+      <Filter>Materials and Textures\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="material.hpp">
+      <Filter>Materials and Textures\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="shaders.hpp">
+      <Filter>Shaders\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.fs">
-      <Filter>Resource Files</Filter>
+      <Filter>Shaders\GLSL Shaders</Filter>
     </None>
     <None Include="shader.vs">
-      <Filter>Resource Files</Filter>
+      <Filter>Shaders\GLSL Shaders</Filter>
+    </None>
+    <None Include="lighting.vs">
+      <Filter>Shaders\GLSL Shaders</Filter>
+    </None>
+    <None Include="lighting.fs">
+      <Filter>Shaders\GLSL Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

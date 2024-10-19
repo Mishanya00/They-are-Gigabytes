@@ -2,6 +2,7 @@
 
 #include <string>
 #include <glew.h>
+#include "math_3d.h"
 
 
 #define COLOR_TEXTURE_UNIT              GL_TEXTURE0

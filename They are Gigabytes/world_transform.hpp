@@ -21,6 +21,9 @@ namespace rgl
 		void Rotate(float x, float y, float z);
 		void Rotate(Vector3f d_rotation);
 
+		void Save();
+		void LoadSaved();
+
 		void Scale(float d_scale);
 
 		Matrix4f GetMatrix();
@@ -29,5 +32,9 @@ namespace rgl
 		float scale_ = 1.0f;
 		Vector3f position_ = Vector3f(0.0f, 0.0f, 0.0f);
 		Vector3f rotation_ = Vector3f(0.0f, 0.0f, 0.0f);
+
+		float scale_saved_;
+		Vector3f position_saved_;
+		Vector3f rotation_saved_;
 	};
 }

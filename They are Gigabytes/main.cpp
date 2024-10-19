@@ -7,7 +7,6 @@
 #include "world_transform.hpp"
 #include "camera.hpp"
 #include "shaders.hpp"
-#include "draw_subsystem.hpp"
 #include "game_kernel.hpp"
 
 
@@ -19,16 +18,6 @@ static void KeyboardHandler(unsigned char key, int x, int y)
     {
     case 27:
         exit(0);
-        break;
-
-    case '1':
-        glBindVertexArray(CubeVAO);
-        break;
-    case '2':
-        glBindVertexArray(PyramidVAO);
-        break;
-    case '3':
-        glBindVertexArray(0);
         break;
     }
 }
@@ -113,12 +102,10 @@ int main(int argc, char** argv)
     glutReshapeWindow(ClientWidth, ClientHeight);
     glutFullScreen();
 
-    InitGameKernel();
+    GameKernelInit();
     DrawSubsystemInit();
 
     CompileShaders();
-
-    InitGameKernel();
 
     RegisterGlutCallbacks();
 

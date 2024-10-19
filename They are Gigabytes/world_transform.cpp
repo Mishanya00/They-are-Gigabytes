@@ -47,6 +47,20 @@ namespace rgl
 		rotation_.y += y;
 		rotation_.z += z;
 	}
+
+	void WorldTransform::Save()
+	{
+		scale_saved_ = scale_;
+		position_saved_ = position_;
+		rotation_saved_ = rotation_;
+	}
+
+	void WorldTransform::LoadSaved()
+	{
+		scale_ = scale_saved_;
+		position_ = position_saved_;
+		rotation_ = rotation_saved_;
+	}
 	
 	Matrix4f WorldTransform::GetMatrix()
 	{

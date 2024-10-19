@@ -6,7 +6,7 @@
 
 namespace mishanya
 {
-    bool ReadFile(std::string& pFileName, std::string& outFile)
+    bool ReadFile(std::string const & pFileName, std::string & outFile)
     {
         std::ifstream f(pFileName);
 
