@@ -22,7 +22,6 @@ struct Vertex
     }
 };
 
-BasicMesh Spider;
 rgl::Texture* pTexture = NULL;
 
 int ClientWidth = 1920;
@@ -43,24 +42,18 @@ void GameKernelInit()
     GameCamera.SetPosition(Vector3f(0.0f, 3.0f, -5.0f));
     GameCamera.SetSpeed(0.1f);
     GameCamera.SetRotationSpeed(1.0f);
-    GameCamera.Rotate(15.0f, 0, 0);
-    Field = new Map(20, 20);
+    GameCamera.Rotate(45.0f, 0, 0);
+    Field = new Map(10, 10);
     Field->Init();
 }
 
 void DrawSubsystemInit()
 {
     //pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tile_texture.jpg");
-    pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/energy_tile_texture.jpg");
+    pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tile/tile_texture.jpg");
     if (!pTexture->Load())
     {
         std::cerr << "Texture not loaded\n";
-        exit(1);
-    }
-
-    if (!Spider.LoadMesh("../contents/map_tile.obj"))
-    {
-        std::cout << "Model not loaded!\n";
         exit(1);
     }
 
@@ -104,5 +97,5 @@ void DrawGameFrame()
     pTexture->Bind(GL_TEXTURE0);
     glUniform1i(gSamplerLocation, 0);
 
-    Field->Render();
+    Field->Render(gWorld);
 }

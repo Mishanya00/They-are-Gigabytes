@@ -33,8 +33,10 @@ namespace rgl
 			return false;
 		}
 
-		glTexParameterf(texture_target_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameterf(texture_target_, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		//glTexParameterf(texture_target_, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		//glTexParameterf(texture_target_, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameterf(texture_target_, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameterf(texture_target_, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameterf(texture_target_, GL_TEXTURE_WRAP_S, GL_CLAMP);
 		glTexParameterf(texture_target_, GL_TEXTURE_WRAP_T, GL_CLAMP);
 

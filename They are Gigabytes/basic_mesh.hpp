@@ -19,7 +19,9 @@
 class BasicMesh
 {
 public:
-    BasicMesh() {};
+    BasicMesh() {
+        m_worldTransform.SetPosition(Vector3f(0, 0, 0));
+    };
 
     ~BasicMesh();
 

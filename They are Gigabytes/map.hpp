@@ -26,7 +26,7 @@ public:
 	~Map();
 
 	bool Init();
-	void Render();
+	void Render(GLint gWorld);
 
 
 private:
