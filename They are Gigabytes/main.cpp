@@ -6,7 +6,6 @@
 #include "math_3d.h"
 #include "world_transform.hpp"
 #include "camera.hpp"
-#include "shaders.hpp"
 #include "game_kernel.hpp"
 #include "audio.hpp"
 
@@ -95,8 +94,6 @@ int main(int argc, char** argv)
 
     GameKernelInit();
     DrawSubsystemInit();
-
-    CompileShaders();
 
     RegisterGlutCallbacks();
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "basic_mesh.hpp"
-
+#include "first_technique.hpp"
 #include <vector>
 
 
@@ -26,7 +26,7 @@ public:
 	~Map();
 
 	bool Init();
-	void Render(GLint gWorld);
+	void Render(FirstTechnique & gWorld);
 
 
 private:

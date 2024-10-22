@@ -31,9 +31,6 @@
     <Filter Include="Shaders\Sources">
       <UniqueIdentifier>{9e99c02b-5fa8-4af2-abab-62795363808b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Headers">
-      <UniqueIdentifier>{9389c120-7e6c-435d-a8cf-c49ab18bf500}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Materials and Textures">
       <UniqueIdentifier>{c6daf286-8791-4988-94f2-23520d85d660}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="Materials and Textures\Sources">
       <UniqueIdentifier>{ffb26850-9db3-49b4-aeff-aba734fa97d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Headers">
+      <UniqueIdentifier>{9389c120-7e6c-435d-a8cf-c49ab18bf500}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,14 +78,14 @@
     <ClCompile Include="texture.cpp">
       <Filter>Materials and Textures\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="shaders.cpp">
-      <Filter>Shaders\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="miniaudio.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="first_technique.cpp">
+      <Filter>Shaders\Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,11 +122,11 @@
     <ClInclude Include="material.hpp">
       <Filter>Materials and Textures\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="shaders.hpp">
-      <Filter>Shaders\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="audio.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="first_technique.hpp">
+      <Filter>Shaders\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

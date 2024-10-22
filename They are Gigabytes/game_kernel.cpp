@@ -5,6 +5,7 @@
 #include "math_3d.h"
 #include "game_kernel.hpp"
 #include "shaders.hpp"
+#include "first_technique.hpp"
 #include "basic_mesh.hpp"
 
 
@@ -31,6 +32,7 @@ PersProjInfo ProjectionInfo{ 90.0f, (float)ClientWidth, (float)ClientHeight, 0.1
 rgl::WorldTransform WorldMatrix;
 rgl::Camera GameCamera(ClientWidth, ClientHeight);
 Map * Field; // dangerous moment. I cannot call map constructor before compilation because it's dependent of ope
+FirstTechnique* ActiveShader;
 
 
 void GameKernelInit()
@@ -43,6 +45,11 @@ void GameKernelInit()
     GameCamera.SetSpeed(0.1f);
     GameCamera.SetRotationSpeed(1.0f);
     GameCamera.Rotate(45.0f, 0, 0);
+
+    ActiveShader = new FirstTechnique;
+    ActiveShader->Init();
+    ActiveShader->Enable();
+
     Field = new Map(10, 10);
     Field->Init();
 }
@@ -88,14 +95,18 @@ void DrawGameFrame()
 
     Matrix4f ViewMatrix = GameCamera.GetMatrix();
 
-    glUniformMatrix4fv(gWorld, 1, GL_TRUE, &WorldMatrix.GetMatrix().m[0][0]);
+    /*glUniformMatrix4fv(gWorld, 1, GL_TRUE, &WorldMatrix.GetMatrix().m[0][0]);
     glUniformMatrix4fv(gProjectionLocation, 1, GL_TRUE, &ProjectionMatrix.m[0][0]);
-    glUniformMatrix4fv(gViewLocation, 1, GL_TRUE, &ViewMatrix.m[0][0]);
+    glUniformMatrix4fv(gViewLocation, 1, GL_TRUE, &ViewMatrix.m[0][0]);*/
 
+    ActiveShader->SetWorldUniform(WorldMatrix.GetMatrix());
+    ActiveShader->SetProjectionUniform(ProjectionMatrix);
+    ActiveShader->SetViewUniform(ViewMatrix);
 
     //Texture
     pTexture->Bind(GL_TEXTURE0);
-    glUniform1i(gSamplerLocation, 0);
+    //glUniform1i(gSamplerLocation, 0);
+    ActiveShader->SetTextureUnit(0);
 
-    Field->Render(gWorld);
+    Field->Render(*ActiveShader);
 }
