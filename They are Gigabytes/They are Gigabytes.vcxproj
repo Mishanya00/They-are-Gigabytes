@@ -139,7 +139,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="math_3d.cpp" />
-    <ClCompile Include="miniaudio.c" />
+    <ClCompile Include="miniaudio.cpp" />
     <ClCompile Include="mishanya_utils.cpp" />
     <ClCompile Include="shaders.cpp" />
     <ClCompile Include="technique.cpp" />
