@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="audio.cpp" />
     <ClCompile Include="basic_mesh.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="game_kernel.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="math_3d.cpp" />
+    <ClCompile Include="miniaudio.c" />
     <ClCompile Include="mishanya_utils.cpp" />
     <ClCompile Include="shaders.cpp" />
     <ClCompile Include="technique.cpp" />
@@ -145,6 +147,7 @@
     <ClCompile Include="world_transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="audio.hpp" />
     <ClInclude Include="basic_mesh.hpp" />
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="game_kernel.hpp" />

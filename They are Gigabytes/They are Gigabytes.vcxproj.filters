@@ -81,6 +81,12 @@
     <ClCompile Include="shaders.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="miniaudio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mishanya_utils.hpp">
@@ -118,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="shaders.hpp">
       <Filter>Shaders\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

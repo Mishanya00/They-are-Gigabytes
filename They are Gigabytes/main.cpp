@@ -8,6 +8,10 @@
 #include "camera.hpp"
 #include "shaders.hpp"
 #include "game_kernel.hpp"
+#include "audio.hpp"
+
+MiniaudioEngine music;
+MiniaudioEngine player;
 
 
 static void KeyboardHandler(unsigned char key, int x, int y)
@@ -24,27 +28,14 @@ static void KeyboardHandler(unsigned char key, int x, int y)
 
 static void KeyboardSpecialHandler(int key, int x, int y)
 {
-    //GameCamera.OnKeyboard(key);
-   
-    switch (key)
-    {
-    case GLUT_KEY_RIGHT:
-        WorldMatrix.Translate(0.1f, 0, 0);
-        break;
-    case GLUT_KEY_LEFT:
-        WorldMatrix.Translate(-0.1f, 0, 0);
-        break;
-    case GLUT_KEY_UP:
-        WorldMatrix.Translate(0, 0.1f, 0);
-        break;
-    case GLUT_KEY_DOWN:
-        WorldMatrix.Translate(0, -0.1f, 0);
-        break;
-    }
+    GameCamera.OnKeyboard(key);
 }
 
 static void MouseHandler(int button, int state, int x, int y)
 {
+    if (button == GLUT_LEFT_BUTTON && state==GLUT_DOWN)
+        player.Play("../contents/Audio/click.wav");
+
     GameCamera.OnMouse(button, state, x, y);
 }
 
@@ -109,5 +100,7 @@ int main(int argc, char** argv)
 
     RegisterGlutCallbacks();
 
+    player.Play("../contents/Audio/main_theme.mp3");
+   
     glutMainLoop();
 }

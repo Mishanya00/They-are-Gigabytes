@@ -141,10 +141,12 @@ namespace rgl
         switch (key)
         {
         case GLUT_KEY_PAGE_UP:
-            position_.y += speed_;
+            if (speed_ < 0.2f)
+                speed_ += 0.01f;
             break;
         case GLUT_KEY_PAGE_DOWN:
-            position_.y -= speed_;
+            if (speed_ > 0.01f)
+                speed_ -= 0.01f;
             break;
         }
     }
