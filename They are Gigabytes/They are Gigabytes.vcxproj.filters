@@ -87,6 +87,9 @@
     <ClCompile Include="first_technique.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="visitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mishanya_utils.hpp">
@@ -127,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="first_technique.hpp">
       <Filter>Shaders\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="visitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source_file_names.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

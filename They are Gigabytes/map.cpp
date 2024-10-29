@@ -3,6 +3,11 @@
 #include "world_transform.hpp"
 #include <glew.h>
 
+
+#define TILE_MODEL_PATH "../contents/buildings/tile/map_tile.obj"
+
+
+
 Map::Map()
 {
 	width_ = 10;
@@ -38,13 +43,13 @@ bool Map::Init()
 		}
 	}
 
-	if (!tile_mesh_->LoadMesh("../contents/tile/map_tile.obj")) {
+	if (!tile_mesh_->LoadMesh(TILE_MODEL_PATH)) {
 		return false;
 	}
 	return true;
 }
 
-void Map::Render(FirstTechnique & gWorld)
+void Map::Render(Technique & shader_prog)
 {
 	rgl::WorldTransform TileMatrix;
 	TileMatrix.SetScale(1.0f);
@@ -55,7 +60,7 @@ void Map::Render(FirstTechnique & gWorld)
 		for (int j = 0; j < width_; j++)
 		{
 			TileMatrix.SetPosition(Vector3f(static_cast<float>(2*j), 0.0f, static_cast<float>(2*i)));
-			gWorld.SetWorldUniform(TileMatrix.GetMatrix());
+			shader_prog.SetWorldUniform(TileMatrix.GetMatrix());
 			//glUniformMatrix4fv(gWorld, 1, GL_TRUE, &TileMatrix.GetMatrix().m[0][0]);
 
 			tile_mesh_->Render();

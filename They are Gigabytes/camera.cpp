@@ -83,12 +83,6 @@ namespace rgl
         MoveAcrossVector(target_, true, sf); // sf equals distance because vector is normalized
         Rotate(0, alfa, 0);
         MoveAcrossVector(-target_, true, sf);
-        /*
-        float radius = sqrtf(sqrf(sf * target_.x) + sqrf(sf * target_.z));
-        float theta = atanf( ( (sf * target_.x) - fabs(position_.x) ) / ( (sf * target_.z) - fabs(position_.z) ) );
-        
-        position_.x *= sinf(theta + ToRadian(alfa));
-        position_.z *= cosf(theta + ToRadian(alfa));*/
     }
 
     void Camera::Init()

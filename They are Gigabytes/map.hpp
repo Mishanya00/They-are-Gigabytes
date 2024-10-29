@@ -4,6 +4,13 @@
 #include "first_technique.hpp"
 #include <vector>
 
+/*
+class Drawable
+{
+public:
+	Drawable() {}
+	virtual void Render() = 0;
+}; */
 
 enum TyleType
 {
@@ -26,7 +33,7 @@ public:
 	~Map();
 
 	bool Init();
-	void Render(FirstTechnique & gWorld);
+	void Render(Technique& shader_prog);
 
 
 private:

@@ -33,6 +33,7 @@ rgl::WorldTransform WorldMatrix;
 rgl::Camera GameCamera(ClientWidth, ClientHeight);
 Map * Field; // dangerous moment. I cannot call map constructor before compilation because it's dependent of ope
 FirstTechnique* ActiveShader;
+BasicMesh* tower;
 
 
 void GameKernelInit()
@@ -56,8 +57,13 @@ void GameKernelInit()
 
 void DrawSubsystemInit()
 {
-    //pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tile_texture.jpg");
-    pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tile/tile_texture.jpg");
+    tower = new BasicMesh();
+    if (!tower->LoadMesh("../contents/buildings/kernel/kernel.obj")) {
+        std::cerr << "Tower mesh not loaded!\n";
+    }
+
+    //pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tile/tile_texture.jpg");
+    pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tex.jpg");
     if (!pTexture->Load())
     {
         std::cerr << "Texture not loaded\n";
@@ -95,10 +101,6 @@ void DrawGameFrame()
 
     Matrix4f ViewMatrix = GameCamera.GetMatrix();
 
-    /*glUniformMatrix4fv(gWorld, 1, GL_TRUE, &WorldMatrix.GetMatrix().m[0][0]);
-    glUniformMatrix4fv(gProjectionLocation, 1, GL_TRUE, &ProjectionMatrix.m[0][0]);
-    glUniformMatrix4fv(gViewLocation, 1, GL_TRUE, &ViewMatrix.m[0][0]);*/
-
     ActiveShader->SetWorldUniform(WorldMatrix.GetMatrix());
     ActiveShader->SetProjectionUniform(ProjectionMatrix);
     ActiveShader->SetViewUniform(ViewMatrix);
@@ -107,6 +109,8 @@ void DrawGameFrame()
     pTexture->Bind(GL_TEXTURE0);
     //glUniform1i(gSamplerLocation, 0);
     ActiveShader->SetTextureUnit(0);
-
+    tower->Render();
     Field->Render(*ActiveShader);
+    tower->Render();
+    
 }

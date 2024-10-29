@@ -56,6 +56,8 @@ namespace rgl
 
 		int margin_;
 
+		int move_span_x_, move_span_y_;
+
         Vector2i mouse_pos_;
 	};
 }

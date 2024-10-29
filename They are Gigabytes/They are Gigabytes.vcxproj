@@ -144,6 +144,7 @@
     <ClCompile Include="technique.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="first_technique.cpp" />
+    <ClCompile Include="visitor.cpp" />
     <ClCompile Include="world_transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,9 +157,11 @@
     <ClInclude Include="material.hpp" />
     <ClInclude Include="math_3d.h" />
     <ClInclude Include="mishanya_utils.hpp" />
+    <ClInclude Include="source_file_names.h" />
     <ClInclude Include="technique.hpp" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="first_technique.hpp" />
+    <ClInclude Include="visitor.hpp" />
     <ClInclude Include="world_transform.hpp" />
   </ItemGroup>
   <ItemGroup>
