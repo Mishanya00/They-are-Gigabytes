@@ -70,6 +70,7 @@ void Map::Render(Technique & active_shader)
 		{
 			TileMatrix.SetPosition(Vector3f(static_cast<float>(2*j), 0.0f, static_cast<float>(2*i)));
 			active_shader.SetWorldUniform(TileMatrix.GetMatrix());
+			//active_shader.SetWorldUniform(Matrix4f(static_cast<float>(2 * j), 0.0f, static_cast<float>(2 * i), 1.0f));
 			//glUniformMatrix4fv(gWorld, 1, GL_TRUE, &TileMatrix.GetMatrix().m[0][0]);
 
 			tile_mesh_->Render();

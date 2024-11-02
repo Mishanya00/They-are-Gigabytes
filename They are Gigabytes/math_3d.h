@@ -487,6 +487,22 @@ public:
         m[3][0] = a30; m[3][1] = a31; m[3][2] = a32; m[3][3] = a33;
     }
 
+    Matrix4f(Vector4f main_diagonal)
+    {
+        m[0][0] = main_diagonal.x; m[0][1] = 0; m[0][2] = 0; m[0][3] = 0;
+        m[1][0] = 0; m[1][1] = main_diagonal.y; m[1][2] = 0; m[1][3] = 0;
+        m[2][0] = 0; m[2][1] = 0; m[2][2] = main_diagonal.z; m[2][3] = 0;
+        m[3][0] = 0; m[3][1] = 0; m[3][2] = 0; m[3][3] = main_diagonal.w;
+    }
+
+    Matrix4f(float x, float y, float z, float w)
+    {
+        m[0][0] = x; m[0][1] = 0; m[0][2] = 0; m[0][3] = 0;
+        m[1][0] = 0; m[1][1] = y; m[1][2] = 0; m[1][3] = 0;
+        m[2][0] = 0; m[2][1] = 0; m[2][2] = z; m[2][3] = 0;
+        m[3][0] = 0; m[3][1] = 0; m[3][2] = 0; m[3][3] = w;
+    }
+
     // constructor from Assimp matrix
     Matrix4f(const aiMatrix4x4& AssimpMatrix)
     {

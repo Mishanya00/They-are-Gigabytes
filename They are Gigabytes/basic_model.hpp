@@ -9,6 +9,7 @@
 #include "technique.hpp"
 #include "first_technique.hpp"
 #include "lighting_technique.hpp"
+//#include "world_transform.hpp"
 
 
 class BasicModel
@@ -16,8 +17,8 @@ class BasicModel
 public:
 
 	// shared pointer not to duplicate the same meshes for each existing model
-	BasicModel(std::shared_ptr<BasicMesh>, Vector3f coords);
-	BasicModel(std::shared_ptr<BasicMesh>, float x, float y, float z);
+	BasicModel(std::shared_ptr<BasicMesh> mesh, Vector3f coords);
+	BasicModel(std::shared_ptr<BasicMesh> mesh, float x, float y, float z);
 
 
 	void Render(FirstTechnique & shader);
@@ -25,8 +26,9 @@ public:
 
 private:
 
+	//rgl::WorldTransform model_matrix;
 	std::shared_ptr<BasicMesh> mesh_;
-	Vector3f coord_;
+	Vector3f coords_;
 	Vector3f tilt_;		// in case someone wants to rotate models
 	float scale_;
 };
