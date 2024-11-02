@@ -9,18 +9,8 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Gameplay">
       <UniqueIdentifier>{7246bbf3-55d8-4d5b-9d04-be4aa4d79d29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Gameplay\Sources">
-      <UniqueIdentifier>{e14b5244-96fb-46ed-bf9c-19849236175e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Gameplay\Headers">
-      <UniqueIdentifier>{162d9c83-1a62-410f-a038-75929d096ccd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{c70ec590-c1d2-4b42-b699-cae8fb6f9b7a}</UniqueIdentifier>
@@ -34,27 +24,22 @@
     <Filter Include="Materials and Textures">
       <UniqueIdentifier>{c6daf286-8791-4988-94f2-23520d85d660}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Materials and Textures\Headers">
-      <UniqueIdentifier>{f770469f-9dfd-4653-b35a-5ec0eba218f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Materials and Textures\Sources">
-      <UniqueIdentifier>{ffb26850-9db3-49b4-aeff-aba734fa97d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders\Headers">
       <UniqueIdentifier>{9389c120-7e6c-435d-a8cf-c49ab18bf500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{b98bc88e-89a5-43dc-9510-6bb57394e68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mishanya_utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="world_transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="math_3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
@@ -63,23 +48,11 @@
     <ClCompile Include="game_kernel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="basic_mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="map.cpp">
-      <Filter>Gameplay\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="technique.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
     <ClCompile Include="lighting_technique.cpp">
       <Filter>Shaders\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.cpp">
-      <Filter>Materials and Textures\Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="audio.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="miniaudio.cpp">
       <Filter>Source Files</Filter>
@@ -87,17 +60,35 @@
     <ClCompile Include="first_technique.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="visitor.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="basic_mesh.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="math_3d.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="mishanya_utils.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Materials and Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="shaders.cpp">
+      <Filter>Shaders\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_manager.cpp">
+      <Filter>Shaders\Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="basic_model.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mishanya_utils.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="math_3d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="world_transform.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -107,35 +98,47 @@
     <ClInclude Include="game_kernel.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="basic_mesh.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="map.hpp">
-      <Filter>Gameplay\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="technique.hpp">
       <Filter>Shaders\Headers</Filter>
     </ClInclude>
     <ClInclude Include="lighting_technique.hpp">
       <Filter>Shaders\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="texture.hpp">
-      <Filter>Materials and Textures\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="material.hpp">
-      <Filter>Materials and Textures\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="audio.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="first_technique.hpp">
       <Filter>Shaders\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="visitor.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="basic_mesh.hpp">
+      <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="source_file_names.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="mesh_common.hpp">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="mishanya_utils.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="math_3d.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="map.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="material.hpp">
+      <Filter>Materials and Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.hpp">
+      <Filter>Materials and Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="shaders.hpp">
+      <Filter>Shaders\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_manager.hpp">
+      <Filter>Shaders\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="basic_model.hpp">
+      <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

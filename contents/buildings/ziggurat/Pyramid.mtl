@@ -1,0 +1,14 @@
+# Blender 4.2.3 LTS MTL File: 'CPU_MISHA1.blend'
+# www.blender.org
+
+newmtl Material
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd texture.png
+# map_Ns D:/MY D/work/BLENDER_work/CPU_FBX/Pyramid_DefaultMaterial_Roughness.png
+# map_refl D:/MY D/work/BLENDER_work/CPU_FBX/Pyramid_DefaultMaterial_Metallic.png
+# map_Bump -bm 1.000000 D:/MY D/work/BLENDER_work/CPU_FBX/Pyramid_DefaultMaterial_Normal.png

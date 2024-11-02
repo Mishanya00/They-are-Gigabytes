@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="basic_mesh.cpp" />
+    <ClCompile Include="basic_model.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="game_kernel.cpp" />
     <ClCompile Include="lighting_technique.cpp" />
@@ -141,27 +142,30 @@
     <ClCompile Include="math_3d.cpp" />
     <ClCompile Include="miniaudio.cpp" />
     <ClCompile Include="mishanya_utils.cpp" />
+    <ClCompile Include="shaders.cpp" />
+    <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="technique.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="first_technique.cpp" />
-    <ClCompile Include="visitor.cpp" />
     <ClCompile Include="world_transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.hpp" />
     <ClInclude Include="basic_mesh.hpp" />
+    <ClInclude Include="basic_model.hpp" />
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="game_kernel.hpp" />
     <ClInclude Include="lighting_technique.hpp" />
     <ClInclude Include="map.hpp" />
     <ClInclude Include="material.hpp" />
     <ClInclude Include="math_3d.h" />
+    <ClInclude Include="mesh_common.hpp" />
     <ClInclude Include="mishanya_utils.hpp" />
-    <ClInclude Include="source_file_names.h" />
+    <ClInclude Include="shaders.hpp" />
+    <ClInclude Include="shader_manager.hpp" />
     <ClInclude Include="technique.hpp" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="first_technique.hpp" />
-    <ClInclude Include="visitor.hpp" />
     <ClInclude Include="world_transform.hpp" />
   </ItemGroup>
   <ItemGroup>

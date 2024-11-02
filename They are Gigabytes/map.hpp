@@ -33,7 +33,7 @@ public:
 	~Map();
 
 	bool Init();
-	void Render(Technique& shader_prog);
+	void Render(Technique & active_shader);
 
 
 private:

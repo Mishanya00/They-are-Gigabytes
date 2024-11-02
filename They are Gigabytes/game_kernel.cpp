@@ -58,16 +58,8 @@ void GameKernelInit()
 void DrawSubsystemInit()
 {
     tower = new BasicMesh();
-    if (!tower->LoadMesh("../contents/buildings/kernel/kernel.obj")) {
+    if (!tower->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
         std::cerr << "Tower mesh not loaded!\n";
-    }
-
-    //pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tile/tile_texture.jpg");
-    pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tex.jpg");
-    if (!pTexture->Load())
-    {
-        std::cerr << "Texture not loaded\n";
-        exit(1);
     }
 
     glEnable(GL_CULL_FACE);
@@ -105,12 +97,8 @@ void DrawGameFrame()
     ActiveShader->SetProjectionUniform(ProjectionMatrix);
     ActiveShader->SetViewUniform(ViewMatrix);
 
-    //Texture
-    pTexture->Bind(GL_TEXTURE0);
-    //glUniform1i(gSamplerLocation, 0);
     ActiveShader->SetTextureUnit(0);
     tower->Render();
     Field->Render(*ActiveShader);
     tower->Render();
-    
 }

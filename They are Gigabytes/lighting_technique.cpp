@@ -63,5 +63,5 @@ void LightingTechnique::SetLight(const BaseLight& Light)
 
 void LightingTechnique::SetMaterial(const Material& material)
 {
-    glUniform3f(materialAmbientColorLoc, material.ambient_color.r, material.ambient_color.g, material.ambient_color.b);
+    glUniform3f(materialAmbientColorLoc, material.AmbientColor.r, material.AmbientColor.g, material.AmbientColor.b);
 }

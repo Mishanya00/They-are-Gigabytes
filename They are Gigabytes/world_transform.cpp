@@ -14,6 +14,18 @@ namespace rgl
 	{
 		rotation_ = new_rotation;
 	}
+	void WorldTransform::SetPosition(float x, float y, float z)
+	{
+		position_.x = x;
+		position_.y = y;
+		position_.y = y;
+	}
+	void WorldTransform::SetRotation(float rotX, float rotY, float rotZ)
+	{
+		rotation_.x = rotX;
+		rotation_.y = rotY;
+		rotation_.z = rotZ;
+	}
 
 	void WorldTransform::Scale(float d_scale)
 	{
@@ -77,4 +89,8 @@ namespace rgl
 
 		return WorldTransformation;
 	}
+
+	float WorldTransform::GetScale() const { return scale_; }
+	Vector3f WorldTransform::GetPosition() const { return position_; }
+	Vector3f WorldTransform::GetRotation() const { return rotation_; }
 }

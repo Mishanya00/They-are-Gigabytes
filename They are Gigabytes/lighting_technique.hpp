@@ -21,6 +21,8 @@ public:
 
 class LightingTechnique : public Technique
 {
+public:
+
     LightingTechnique();
 
     virtual bool Init();

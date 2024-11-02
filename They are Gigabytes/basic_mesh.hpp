@@ -1,6 +1,5 @@
 #pragma once
 
-#include <map>
 #include <vector>
 #include <glew.h>
 #include <assimp/Importer.hpp>      
@@ -11,61 +10,48 @@
 #include "math_3d.h"
 #include "texture.hpp"
 #include "world_transform.hpp"
+#include "mesh_common.hpp"
+
+// | aiProcess_FlipUVs
+#define ASSIMP_LOAD_FLAGS (aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices)
+#define INVALID_MATERIAL 0xFFFFFFFF
+typedef unsigned int uint;
+
+//#define USE_MESH_OPTIMIZER
 
 
-#define ASSIMP_LOAD_FLAGS (aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices)
-
-
-class BasicMesh
+class BasicMesh : public MeshCommon
 {
 public:
-    BasicMesh() {
-        m_worldTransform.SetPosition(Vector3f(0, 0, 0));
-    };
+    BasicMesh() {};
 
     ~BasicMesh();
 
     bool LoadMesh(const std::string& Filename);
 
-    void Render();
+    void Render(IRenderCallbacks* pRenderCallbacks = NULL);
 
-    void Render(unsigned int NumInstances, const Matrix4f* WVPMats, const Matrix4f* WorldMats);
+    void Render(uint DrawIndex, uint PrimID);
 
-    rgl::WorldTransform& GetWorldTransform() { return m_worldTransform; }
+    void Render(uint NumInstances, const Matrix4f* WVPMats, const Matrix4f* WorldMats);
 
-private:
+    const Material& GetMaterial();
+
+    PBRMaterial& GetPBRMaterial() { return m_Materials[0].PBRmaterial; };
+
+    void GetLeadingVertex(uint DrawIndex, uint PrimID, Vector3f& Vertex);
+
+    void SetPBR(bool IsPBR) { m_isPBR = IsPBR; }
+
+protected:
+
     void Clear();
-
-    bool InitFromScene(const aiScene* pScene, const std::string& Filename);
-
-    void CountVerticesAndIndices(const aiScene* pScene, unsigned int& NumVertices, unsigned int& NumIndices);
-
-    void ReserveSpace(unsigned int NumVertices, unsigned int NumIndices);
-
-    void InitAllMeshes(const aiScene* pScene);
-
-    void InitSingleMesh(const aiMesh* paiMesh);
-
-    bool InitMaterials(const aiScene* pScene, const std::string& Filename);
-
-    void PopulateBuffers();
-
-#define INVALID_MATERIAL 0xFFFFFFFF
-
-
-    enum BUFFER_TYPE {
-        INDEX_BUFFER = 0,
-        POS_VB = 1,
-        TEXCOORD_VB = 2,
-        NORMAL_VB = 3,
-        WVP_MAT_VB = 4,
-        WORLD_MAT_VB = 5,
-        NUM_BUFFERS = 6
-    };
-
-    rgl::WorldTransform m_worldTransform;
-    GLuint m_VAO = 0;
-    GLuint m_Buffers[NUM_BUFFERS] = { 0 };
+    virtual void ReserveSpace(uint NumVertices, uint NumIndices);
+    virtual void InitSingleMesh(uint MeshIndex, const aiMesh* paiMesh);
+    //virtual void InitSingleMeshOpt(uint MeshIndex, const aiMesh* paiMesh);
+    virtual void PopulateBuffers();
+    virtual void PopulateBuffersNonDSA();
+    virtual void PopulateBuffersDSA();
 
     struct BasicMeshEntry {
         BasicMeshEntry()
@@ -76,18 +62,77 @@ private:
             MaterialIndex = INVALID_MATERIAL;
         }
 
-        unsigned int NumIndices;
-        unsigned int BaseVertex;
-        unsigned int BaseIndex;
-        unsigned int MaterialIndex;
+        uint NumIndices;
+        uint BaseVertex;
+        uint BaseIndex;
+        uint MaterialIndex;
     };
 
     std::vector<BasicMeshEntry> m_Meshes;
-    std::vector<rgl::Texture*> m_Textures;
+
+    const aiScene* m_pScene;
+
+    Matrix4f m_GlobalInverseTransform;
+
+    std::vector<uint> m_Indices;
+
+    enum BUFFER_TYPE {
+        INDEX_BUFFER = 0,
+        VERTEX_BUFFER = 1,
+        WVP_MAT_BUFFER = 2,  // required only for instancing
+        WORLD_MAT_BUFFER = 3,  // required only for instancing
+        NUM_BUFFERS = 4
+    };
+
+    GLuint m_VAO = 0;
+
+    GLuint m_Buffers[NUM_BUFFERS] = { 0 };
+
+private:
+    struct Vertex {
+        Vector3f Position;
+        Vector2f TexCoords;
+        Vector3f Normal;
+    };
+
+    bool InitFromScene(const aiScene* pScene, const std::string& Filename);
+    void CountVerticesAndIndices(const aiScene* pScene, uint& NumVertices, uint& NumIndices);
+    void InitAllMeshes(const aiScene* pScene);
+    //void OptimizeMesh(int MeshIndex, std::vector<uint>& Indices, std::vector<Vertex>& Vertices);
+    bool InitMaterials(const aiScene* pScene, const std::string& Filename);
+    void LoadTextures(const std::string& Dir, const aiMaterial* pMaterial, int index);
+
+    void LoadDiffuseTexture(const std::string& Dir, const aiMaterial* pMaterial, int index);
+    void LoadDiffuseTextureEmbedded(const aiTexture* paiTexture, int MaterialIndex);
+    void LoadDiffuseTextureFromFile(const std::string& dir, const aiString& Path, int MaterialIndex);
+
+    void LoadSpecularTexture(const std::string& Dir, const aiMaterial* pMaterial, int index);
+    void LoadSpecularTextureEmbedded(const aiTexture* paiTexture, int MaterialIndex);
+    void LoadSpecularTextureFromFile(const std::string& dir, const aiString& Path, int MaterialIndex);
+
+    void LoadAlbedoTexture(const std::string& Dir, const aiMaterial* pMaterial, int index);
+    void LoadAlbedoTextureEmbedded(const aiTexture* paiTexture, int MaterialIndex);
+    void LoadAlbedoTextureFromFile(const std::string& dir, const aiString& Path, int MaterialIndex);
+
+    void LoadMetalnessTexture(const std::string& Dir, const aiMaterial* pMaterial, int index);
+    void LoadMetalnessTextureEmbedded(const aiTexture* paiTexture, int MaterialIndex);
+    void LoadMetalnessTextureFromFile(const std::string& dir, const aiString& Path, int MaterialIndex);
+
+    void LoadRoughnessTexture(const std::string& Dir, const aiMaterial* pMaterial, int index);
+    void LoadRoughnessTextureEmbedded(const aiTexture* paiTexture, int MaterialIndex);
+    void LoadRoughnessTextureFromFile(const std::string& dir, const aiString& Path, int MaterialIndex);
+
+    void LoadColors(const aiMaterial* pMaterial, int index);
+
+    void SetupRenderMaterialsPhong(unsigned int MeshIndex, unsigned int MaterialIndex, IRenderCallbacks* pRenderCallbacks);
+    void SetupRenderMaterialsPBR();
+
+    std::vector<Material> m_Materials;
 
     // Temporary space for vertex stuff before we load them into the GPU
-    std::vector<Vector3f> m_Positions;
-    std::vector<Vector3f> m_Normals;
-    std::vector<Vector2f> m_TexCoords;
-    std::vector<unsigned int> m_Indices;
+    std::vector<Vertex> m_Vertices;
+
+    Assimp::Importer m_Importer;
+
+    bool m_isPBR = false;
 };

@@ -1,10 +1,11 @@
 #include "map.hpp"
 
+#include "shaders.hpp"
 #include "world_transform.hpp"
 #include <glew.h>
 
 
-#define TILE_MODEL_PATH "../contents/buildings/tile/map_tile.obj"
+#define TILE_MODEL_PATH "../contents/buildings/tile/tile.obj"
 
 
 
@@ -30,6 +31,14 @@ Map::~Map()
 
 bool Map::Init()
 {
+	/*
+	pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tex.jpg");
+	if (!pTexture->Load())
+	{
+		std::cerr << "Texture not loaded\n";
+		exit(1);
+	}*/
+
 	tile_mesh_ = new BasicMesh();
 	tiles_.resize(height_);
 
@@ -49,7 +58,7 @@ bool Map::Init()
 	return true;
 }
 
-void Map::Render(Technique & shader_prog)
+void Map::Render(Technique & active_shader)
 {
 	rgl::WorldTransform TileMatrix;
 	TileMatrix.SetScale(1.0f);
@@ -60,11 +69,10 @@ void Map::Render(Technique & shader_prog)
 		for (int j = 0; j < width_; j++)
 		{
 			TileMatrix.SetPosition(Vector3f(static_cast<float>(2*j), 0.0f, static_cast<float>(2*i)));
-			shader_prog.SetWorldUniform(TileMatrix.GetMatrix());
+			active_shader.SetWorldUniform(TileMatrix.GetMatrix());
 			//glUniformMatrix4fv(gWorld, 1, GL_TRUE, &TileMatrix.GetMatrix().m[0][0]);
 
 			tile_mesh_->Render();
 		}
 	}
-
 }
