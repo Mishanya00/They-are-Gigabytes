@@ -9,7 +9,7 @@ namespace rgl
 	{
 	public:
 
-		WorldTransform() {}
+		WorldTransform();
 
 		void SetScale(float new_scale);
 		void SetPosition(Vector3f new_position);
@@ -38,8 +38,9 @@ namespace rgl
 		Vector3f position_ = Vector3f(0.0f, 0.0f, 0.0f);
 		Vector3f rotation_ = Vector3f(0.0f, 0.0f, 0.0f);
 
-		float scale_saved_;
-		Vector3f position_saved_;
-		Vector3f rotation_saved_;
+		//lmao, dont remember why did I create these members
+		float scale_saved_ = scale_;
+		Vector3f position_saved_ = position_;
+		Vector3f rotation_saved_ = rotation_;
 	};
 }

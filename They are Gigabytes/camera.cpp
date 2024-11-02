@@ -202,10 +202,12 @@ namespace rgl
         switch (button)
         {   // mouse wheel lacks special const to determine. So according to docs its 3 and 4
         case 3:
-            if (position_.y > 1.0f)
+            
+            if (position_.y > 1.0f) // prohibits camera to be too near from map
                 position_ += target_ * speed_;
             break;
         case 4:
+            if (position_.y < 10.0f) // prohibits camera to be too far from map
             position_ -= target_ * speed_;
             break;
         }

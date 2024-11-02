@@ -7,6 +7,8 @@
 #include "shaders.hpp"
 #include "first_technique.hpp"
 #include "basic_mesh.hpp"
+#include "basic_model.hpp"
+#include <memory>
 
 
 struct Vertex
@@ -33,7 +35,9 @@ rgl::WorldTransform WorldMatrix;
 rgl::Camera GameCamera(ClientWidth, ClientHeight);
 Map * Field; // dangerous moment. I cannot call map constructor before compilation because it's dependent of ope
 FirstTechnique* ActiveShader;
-BasicMesh* tower;
+
+std::shared_ptr<BasicMesh> tower_mesh;
+std::unique_ptr<BasicModel> tower;
 
 
 void GameKernelInit()
@@ -43,24 +47,29 @@ void GameKernelInit()
     WorldMatrix.SetRotation(Vector3f(0.0f, 0.0f, 0.0f));
 
     GameCamera.SetPosition(Vector3f(0.0f, 3.0f, -5.0f));
-    GameCamera.SetSpeed(0.1f);
-    GameCamera.SetRotationSpeed(1.0f);
+    GameCamera.SetSpeed(0.2f);
+    GameCamera.SetRotationSpeed(1.5f);
     GameCamera.Rotate(45.0f, 0, 0);
 
     ActiveShader = new FirstTechnique;
     ActiveShader->Init();
     ActiveShader->Enable();
 
-    Field = new Map(10, 10);
+    Field = new Map(50, 50);
     Field->Init();
 }
 
 void DrawSubsystemInit()
 {
-    tower = new BasicMesh();
-    if (!tower->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
+    //tower_mesh = new BasicMesh();
+    tower_mesh = std::make_shared<BasicMesh>();
+    if (!tower_mesh->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
         std::cerr << "Tower mesh not loaded!\n";
     }
+    tower = std::make_unique<BasicModel>(tower_mesh, 4.0f, 0, 4.0f);
+    tower->SetCoords(8.0f, 0, 16.0f);
+    tower->SetScale(1.1f);
+
 
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
@@ -73,6 +82,7 @@ void DrawSubsystemInit()
 void GameFrame()
 {
     GameCamera.OnFrame();
+    tower->Move(0, 0, -0.01);
 }
 
 void UpdateGameWindowSize(int width, int height)
@@ -98,7 +108,7 @@ void DrawGameFrame()
     ActiveShader->SetViewUniform(ViewMatrix);
 
     ActiveShader->SetTextureUnit(0);
-    tower->Render();
+
     Field->Render(*ActiveShader);
-    tower->Render();
+    tower->Render(*ActiveShader);
 }

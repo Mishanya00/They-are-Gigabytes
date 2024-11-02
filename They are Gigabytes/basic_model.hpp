@@ -9,7 +9,7 @@
 #include "technique.hpp"
 #include "first_technique.hpp"
 #include "lighting_technique.hpp"
-//#include "world_transform.hpp"
+#include "world_transform.hpp"
 
 
 class BasicModel
@@ -20,15 +20,19 @@ public:
 	BasicModel(std::shared_ptr<BasicMesh> mesh, Vector3f coords);
 	BasicModel(std::shared_ptr<BasicMesh> mesh, float x, float y, float z);
 
+	void SetScale(float new_scale);
+	void Scale(float scale_by);
+
+	void SetCoords(Vector3f new_coords);
+	void SetCoords(float x, float y, float z);
+	void Move(Vector3f d_move);
+	void Move(float x, float y, float z);
 
 	void Render(FirstTechnique & shader);
 	void Render(LightingTechnique& shader);
 
 private:
 
-	//rgl::WorldTransform model_matrix;
+	rgl::WorldTransform world_matrix_;   // position, rotation and scale of model
 	std::shared_ptr<BasicMesh> mesh_;
-	Vector3f coords_;
-	Vector3f tilt_;		// in case someone wants to rotate models
-	float scale_;
 };

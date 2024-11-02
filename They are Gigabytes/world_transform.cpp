@@ -2,6 +2,8 @@
 
 namespace rgl
 {
+	WorldTransform::WorldTransform() {}
+
 	void WorldTransform::SetScale(float new_scale)
 	{
 		scale_ = new_scale;
@@ -18,7 +20,7 @@ namespace rgl
 	{
 		position_.x = x;
 		position_.y = y;
-		position_.y = y;
+		position_.z = z;
 	}
 	void WorldTransform::SetRotation(float rotX, float rotY, float rotZ)
 	{
