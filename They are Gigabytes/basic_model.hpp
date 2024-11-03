@@ -31,6 +31,8 @@ public:
 	void Render(FirstTechnique & shader);
 	void Render(LightingTechnique& shader);
 
+	Vector3f GetPosition();
+
 private:
 
 	rgl::WorldTransform world_matrix_;   // position, rotation and scale of model

@@ -134,6 +134,7 @@
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="basic_mesh.cpp" />
     <ClCompile Include="basic_model.cpp" />
+    <ClCompile Include="building.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="game_kernel.cpp" />
     <ClCompile Include="lighting_technique.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="math_3d.cpp" />
     <ClCompile Include="miniaudio.cpp" />
     <ClCompile Include="mishanya_utils.cpp" />
+    <ClCompile Include="models_manager.cpp" />
     <ClCompile Include="shaders.cpp" />
     <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="technique.cpp" />
@@ -153,6 +155,7 @@
     <ClInclude Include="audio.hpp" />
     <ClInclude Include="basic_mesh.hpp" />
     <ClInclude Include="basic_model.hpp" />
+    <ClInclude Include="building.hpp" />
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="game_kernel.hpp" />
     <ClInclude Include="lighting_technique.hpp" />
@@ -161,6 +164,7 @@
     <ClInclude Include="math_3d.h" />
     <ClInclude Include="mesh_common.hpp" />
     <ClInclude Include="mishanya_utils.hpp" />
+    <ClInclude Include="models_manager.hpp" />
     <ClInclude Include="shaders.hpp" />
     <ClInclude Include="shader_manager.hpp" />
     <ClInclude Include="technique.hpp" />

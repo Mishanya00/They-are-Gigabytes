@@ -23,16 +23,20 @@ bool LightingTechnique::Init()
         return false;
     }
 
-    WVPLoc = GetUniformLocation("gWVP");
+    perspectiveLoc = GetUniformLocation("Projection");
+    viewLoc = GetUniformLocation("View");
+    worldLoc = GetUniformLocation("World");
     samplerLoc = GetUniformLocation("gSampler");
     lightColorLoc = GetUniformLocation("gLight.Color");
     lightAmbientIntensityLoc = GetUniformLocation("gLight.AmbientIntensity");
     materialAmbientColorLoc = GetUniformLocation("gMaterial.AmbientColor");
 
-    if (lightAmbientIntensityLoc == 0xFFFFFFFF ||
-        WVPLoc == 0xFFFFFFFF ||
-        samplerLoc == 0xFFFFFFFF ||
-        lightColorLoc == 0xFFFFFFFF ||
+    if (lightAmbientIntensityLoc == -1 ||
+        worldLoc == -1 ||
+        viewLoc == -1 ||
+        perspectiveLoc == -1 ||
+        samplerLoc == -1 ||
+        lightColorLoc == -1 ||
         materialAmbientColorLoc == 0xFFF)
 
     {
@@ -42,9 +46,18 @@ bool LightingTechnique::Init()
     return true;
 }
 
-void LightingTechnique::SetWVP(const Matrix4f& WVP)
+void LightingTechnique::SetWorldUniform(const Matrix4f& gWorld)
 {
-    glUniformMatrix4fv(WVPLoc, 1, GL_TRUE, (const GLfloat*)WVP.m);
+    glUniformMatrix4fv(worldLoc, 1, GL_TRUE, (const GLfloat*)gWorld.m);
+}
+void LightingTechnique::SetViewUniform(const Matrix4f& gView)
+{
+    glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (const GLfloat*)gView.m);
+}
+
+void LightingTechnique::SetProjectionUniform(const Matrix4f& gPerspective)
+{
+    glUniformMatrix4fv(perspectiveLoc, 1, GL_TRUE, (const GLfloat*)gPerspective.m);
 }
 
 

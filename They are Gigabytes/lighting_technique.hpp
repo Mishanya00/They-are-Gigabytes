@@ -14,7 +14,7 @@ public:
     BaseLight()
     {
         Color = Vector3f(1.0f, 1.0f, 1.0f);
-        AmbientIntensity = 0.0f;
+        AmbientIntensity = 0.5f;
     }
 };
 
@@ -27,14 +27,16 @@ public:
 
     virtual bool Init();
 
-    void SetWVP(const Matrix4f& WVP);
+    void SetWorldUniform(const Matrix4f& gWorld);
+    void SetViewUniform(const Matrix4f& gView);
+    void SetProjectionUniform(const Matrix4f& gPerspective);
     void SetTextureUnit(unsigned int TextureUnit);
     void SetLight(const BaseLight& Light);
     void SetMaterial(const Material& material);
 
 private:
 
-    GLuint WVPLoc;
+    GLuint worldLoc, viewLoc, perspectiveLoc;
     GLuint samplerLoc;
     GLuint lightColorLoc;
     GLuint lightAmbientIntensityLoc;

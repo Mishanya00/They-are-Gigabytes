@@ -34,10 +34,24 @@ PersProjInfo ProjectionInfo{ 90.0f, (float)ClientWidth, (float)ClientHeight, 0.1
 rgl::WorldTransform WorldMatrix;
 rgl::Camera GameCamera(ClientWidth, ClientHeight);
 Map * Field; // dangerous moment. I cannot call map constructor before compilation because it's dependent of ope
-FirstTechnique* ActiveShader;
+LightingTechnique* ActiveShader;
 
 std::shared_ptr<BasicMesh> tower_mesh;
+std::shared_ptr<BasicMesh> zigg_mesh;
 std::unique_ptr<BasicModel> tower;
+
+
+void LoadMeshes()
+{
+    tower_mesh = std::make_shared<BasicMesh>();
+    if (!tower_mesh->LoadMesh("../contents/buildings/tower/tower2.obj")) {
+        std::cerr << "Tower mesh not loaded!\n";
+    }
+    zigg_mesh = std::make_shared<BasicMesh>();
+    if (!zigg_mesh->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
+        std::cerr << "Ziggurat mesh not loaded!\n";
+    }
+}
 
 
 void GameKernelInit()
@@ -51,22 +65,20 @@ void GameKernelInit()
     GameCamera.SetRotationSpeed(1.5f);
     GameCamera.Rotate(45.0f, 0, 0);
 
-    ActiveShader = new FirstTechnique;
+    ActiveShader = new LightingTechnique;
     ActiveShader->Init();
     ActiveShader->Enable();
 
     Field = new Map(50, 50);
     Field->Init();
+    LoadMeshes();
 }
 
 void DrawSubsystemInit()
 {
     //tower_mesh = new BasicMesh();
-    tower_mesh = std::make_shared<BasicMesh>();
-    if (!tower_mesh->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
-        std::cerr << "Tower mesh not loaded!\n";
-    }
-    tower = std::make_unique<BasicModel>(tower_mesh, 4.0f, 0, 4.0f);
+
+    tower = std::make_unique<BasicModel>(zigg_mesh, 4.0f, 0, 4.0f);
     tower->SetCoords(8.0f, 0, 16.0f);
     tower->SetScale(1.1f);
 
@@ -81,8 +93,13 @@ void DrawSubsystemInit()
 
 void GameFrame()
 {
+    static float temp_speed = -0.01;
     GameCamera.OnFrame();
-    tower->Move(0, 0, -0.01);
+    tower->Move(0, 0, temp_speed);
+    if (tower->GetPosition().z < 0)
+        temp_speed = 0.01;
+    if (tower->GetPosition().z > 100.0)
+        temp_speed = -0.01;
 }
 
 void UpdateGameWindowSize(int width, int height)
@@ -107,7 +124,7 @@ void DrawGameFrame()
     ActiveShader->SetProjectionUniform(ProjectionMatrix);
     ActiveShader->SetViewUniform(ViewMatrix);
 
-    ActiveShader->SetTextureUnit(0);
+    //ActiveShader->SetTextureUnit(0);
 
     Field->Render(*ActiveShader);
     tower->Render(*ActiveShader);

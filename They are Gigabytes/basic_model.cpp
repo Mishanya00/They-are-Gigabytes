@@ -52,3 +52,17 @@ void BasicModel::Render(FirstTechnique& shader)
 	shader.SetWorldUniform(world_matrix_.GetMatrix());
 	mesh_->Render();
 }
+
+void BasicModel::Render(LightingTechnique& shader)
+{
+	//BaseLight
+	shader.SetWorldUniform(world_matrix_.GetMatrix());
+	shader.SetLight(BaseLight());
+	shader.SetMaterial(mesh_->GetMaterial());
+	mesh_->Render();
+}
+
+Vector3f BasicModel::GetPosition()
+{
+	return world_matrix_.GetPosition();
+}

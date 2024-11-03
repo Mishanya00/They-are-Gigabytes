@@ -87,6 +87,12 @@
     <ClCompile Include="basic_model.cpp">
       <Filter>Model</Filter>
     </ClCompile>
+    <ClCompile Include="building.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="models_manager.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="world_transform.hpp">
@@ -138,6 +144,12 @@
       <Filter>Shaders\Headers</Filter>
     </ClInclude>
     <ClInclude Include="basic_model.hpp">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="building.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="models_manager.hpp">
       <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
