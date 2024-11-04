@@ -3,6 +3,7 @@
 #include "shaders.hpp"
 #include "world_transform.hpp"
 #include <glew.h>
+#include <iostream>
 
 
 #define TILE_MODEL_PATH "../contents/buildings/tile/tile.obj"
@@ -25,8 +26,9 @@ Map::Map(int width, int height)
 
 Map::~Map()
 {
+	/* Disabled because I use smart pointers
 	if (tile_mesh_)
-		delete tile_mesh_;
+		delete tile_mesh_; */
 }
 
 bool Map::Init()
@@ -39,7 +41,10 @@ bool Map::Init()
 		exit(1);
 	}*/
 
-	tile_mesh_ = new BasicMesh();
+	tile_mesh_ = std::make_shared<BasicMesh>();
+	if (!tile_mesh_->LoadMesh(TILE_MODEL_PATH)) {
+		std::cerr << "tile mesh not loaded!\n";
+	}
 	tiles_.resize(height_);
 
 	for (int i = 0; i < height_; i++)
@@ -49,16 +54,14 @@ bool Map::Init()
 		{
 			tiles_[i][j].isWalkable = true;
 			tiles_[i][j].type = ttNormal;
+			tiles_[i][j].model = std::make_unique<BasicModel>(tile_mesh_, static_cast<float>(2 * j), 0.0f, static_cast<float>(2 * i));
 		}
 	}
 
-	if (!tile_mesh_->LoadMesh(TILE_MODEL_PATH)) {
-		return false;
-	}
 	return true;
 }
 
-void Map::Render(Technique & active_shader)
+void Map::Render(LightingTechnique& shader, DirectionalLight& light)
 {
 	rgl::WorldTransform TileMatrix;
 	TileMatrix.SetScale(1.0f);
@@ -68,10 +71,7 @@ void Map::Render(Technique & active_shader)
 	{
 		for (int j = 0; j < width_; j++)
 		{
-			TileMatrix.SetPosition(Vector3f(static_cast<float>(2*j), 0.0f, static_cast<float>(2*i)));
-			active_shader.SetWorldUniform(TileMatrix.GetMatrix());
-
-			tile_mesh_->Render();
+			tiles_[i][j].model->Render(shader, light);
 		}
 	}
 }

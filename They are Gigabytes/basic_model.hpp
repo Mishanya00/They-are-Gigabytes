@@ -29,7 +29,7 @@ public:
 	void Move(float x, float y, float z);
 
 	void Render(FirstTechnique & shader);
-	void Render(LightingTechnique& shader);
+	void Render(LightingTechnique& shader, DirectionalLight& light);
 
 	Vector3f GetPosition();
 

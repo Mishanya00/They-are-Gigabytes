@@ -14,8 +14,22 @@ public:
     BaseLight()
     {
         Color = Vector3f(1.0f, 1.0f, 1.0f);
-        AmbientIntensity = 0.5f;
+        AmbientIntensity = 0.7f;
     }
+};
+
+
+class DirectionalLight : public BaseLight
+{
+public:
+    Vector3f WorldDirection = Vector3f(0, 0, 0);
+    float DiffuseIntensity = 0;
+
+    void CalcLocalDirection(const Matrix4f& World);
+
+    const Vector3f& GetLocalDirection() const { return LocalDirection; }
+private:
+    Vector3f LocalDirection = Vector3f(0, 0, 0);
 };
 
 
@@ -31,14 +45,23 @@ public:
     void SetViewUniform(const Matrix4f& gView);
     void SetProjectionUniform(const Matrix4f& gPerspective);
     void SetTextureUnit(unsigned int TextureUnit);
-    void SetLight(const BaseLight& Light);
+    void SetLight(const DirectionalLight& Light);
     void SetMaterial(const Material& material);
 
 private:
 
     GLuint worldLoc, viewLoc, perspectiveLoc;
     GLuint samplerLoc;
-    GLuint lightColorLoc;
-    GLuint lightAmbientIntensityLoc;
-    GLuint materialAmbientColorLoc;
+
+    struct {
+        GLuint AmbientColor;
+        GLuint DiffuseColor;
+    } materialLoc;
+
+    struct {
+        GLuint Color;
+        GLuint AmbientIntensity;
+        GLuint Direction;
+        GLuint DiffuseIntensity;
+    } lightLoc;
 };

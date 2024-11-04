@@ -53,11 +53,11 @@ void BasicModel::Render(FirstTechnique& shader)
 	mesh_->Render();
 }
 
-void BasicModel::Render(LightingTechnique& shader)
+void BasicModel::Render(LightingTechnique& shader, DirectionalLight& light)
 {
-	//BaseLight
+	light.CalcLocalDirection(world_matrix_.GetMatrix());
+	shader.SetLight(light);
 	shader.SetWorldUniform(world_matrix_.GetMatrix());
-	shader.SetLight(BaseLight());
 	shader.SetMaterial(mesh_->GetMaterial());
 	mesh_->Render();
 }

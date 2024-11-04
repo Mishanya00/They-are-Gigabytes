@@ -6,6 +6,7 @@
 #include "game_kernel.hpp"
 #include "shaders.hpp"
 #include "first_technique.hpp"
+#include "lighting_technique.hpp"
 #include "basic_mesh.hpp"
 #include "basic_model.hpp"
 #include <memory>
@@ -34,7 +35,9 @@ PersProjInfo ProjectionInfo{ 90.0f, (float)ClientWidth, (float)ClientHeight, 0.1
 rgl::WorldTransform WorldMatrix;
 rgl::Camera GameCamera(ClientWidth, ClientHeight);
 Map * Field; // dangerous moment. I cannot call map constructor before compilation because it's dependent of ope
+ 
 LightingTechnique* ActiveShader;
+DirectionalLight GlobalLight;
 
 std::shared_ptr<BasicMesh> tower_mesh;
 std::shared_ptr<BasicMesh> zigg_mesh;
@@ -56,18 +59,10 @@ void LoadMeshes()
 
 void GameKernelInit()
 {
-    WorldMatrix.SetScale(1.0f);
-    WorldMatrix.SetPosition(Vector3f(0.0f, 0.0f, 0.0f));
-    WorldMatrix.SetRotation(Vector3f(0.0f, 0.0f, 0.0f));
-
     GameCamera.SetPosition(Vector3f(0.0f, 3.0f, -5.0f));
     GameCamera.SetSpeed(0.2f);
     GameCamera.SetRotationSpeed(1.5f);
     GameCamera.Rotate(45.0f, 0, 0);
-
-    ActiveShader = new LightingTechnique;
-    ActiveShader->Init();
-    ActiveShader->Enable();
 
     Field = new Map(50, 50);
     Field->Init();
@@ -76,12 +71,22 @@ void GameKernelInit()
 
 void DrawSubsystemInit()
 {
-    //tower_mesh = new BasicMesh();
+    WorldMatrix.SetScale(1.0f);
+    WorldMatrix.SetPosition(Vector3f(0.0f, 0.0f, 0.0f));
+    WorldMatrix.SetRotation(Vector3f(0.0f, 0.0f, 0.0f));
+
+    GlobalLight.AmbientIntensity = 0.2f;
+    GlobalLight.DiffuseIntensity = 1.0f;
+    GlobalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
+    GlobalLight.WorldDirection = Vector3f(0.5f, -1.0f, 0.5f);
 
     tower = std::make_unique<BasicModel>(zigg_mesh, 4.0f, 0, 4.0f);
     tower->SetCoords(8.0f, 0, 16.0f);
     tower->SetScale(1.1f);
 
+    ActiveShader = new LightingTechnique;
+    ActiveShader->Init();
+    ActiveShader->Enable();
 
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
@@ -124,8 +129,6 @@ void DrawGameFrame()
     ActiveShader->SetProjectionUniform(ProjectionMatrix);
     ActiveShader->SetViewUniform(ViewMatrix);
 
-    //ActiveShader->SetTextureUnit(0);
-
-    Field->Render(*ActiveShader);
-    tower->Render(*ActiveShader);
+    Field->Render(*ActiveShader, GlobalLight);
+    tower->Render(*ActiveShader, GlobalLight);
 }
