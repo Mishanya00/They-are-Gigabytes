@@ -42,6 +42,7 @@ DirectionalLight GlobalLight;
 std::shared_ptr<BasicMesh> tower_mesh;
 std::shared_ptr<BasicMesh> zigg_mesh;
 std::unique_ptr<BasicModel> tower;
+std::unique_ptr<BasicModel> zigg;
 
 
 void LoadMeshes()
@@ -80,9 +81,12 @@ void DrawSubsystemInit()
     GlobalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
     GlobalLight.WorldDirection = Vector3f(0.5f, -1.0f, 0.5f);
 
-    tower = std::make_unique<BasicModel>(zigg_mesh, 4.0f, 0, 4.0f);
+    tower = std::make_unique<BasicModel>(tower_mesh, 4.0f, 0, 4.0f);
     tower->SetCoords(8.0f, 0, 16.0f);
     tower->SetScale(1.1f);
+    zigg = std::make_unique<BasicModel>(zigg_mesh, 4.0f, 0, 4.0f);
+    zigg->SetCoords(10.0f, 0, 16.0f);
+    zigg->SetScale(1.1f);
 
     ActiveShader = new LightingTechnique;
     ActiveShader->Init();
@@ -98,13 +102,14 @@ void DrawSubsystemInit()
 
 void GameFrame()
 {
-    static float temp_speed = -0.01;
     GameCamera.OnFrame();
+    /*
+    static float temp_speed = -0.01;
     tower->Move(0, 0, temp_speed);
     if (tower->GetPosition().z < 0)
         temp_speed = 0.01;
     if (tower->GetPosition().z > 100.0)
-        temp_speed = -0.01;
+        temp_speed = -0.01;*/
 }
 
 void UpdateGameWindowSize(int width, int height)
@@ -131,4 +136,5 @@ void DrawGameFrame()
 
     Field->Render(*ActiveShader, GlobalLight);
     tower->Render(*ActiveShader, GlobalLight);
+    zigg->Render(*ActiveShader, GlobalLight);
 }

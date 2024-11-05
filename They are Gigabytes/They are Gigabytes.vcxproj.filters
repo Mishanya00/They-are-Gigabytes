@@ -54,9 +54,6 @@
     <ClCompile Include="lighting_technique.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="miniaudio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="first_technique.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="models_manager.cpp">
       <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="miniaudio.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
