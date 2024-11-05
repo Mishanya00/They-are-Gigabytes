@@ -8,7 +8,7 @@ They are Gigabytes [TAG] - is a future RTS 3D videogame. Virus attacked computer
 
 * C++
 
-* OpenGL.  (GLUT for "multiplatformness" and glew for Modern OpenGL features)
+* OpenGL.  (GLUT for "multiplatformness" and GLEW for Modern OpenGL features)
 
 * Assimp (For loading models of various formats) 
 
@@ -26,7 +26,7 @@ This game is being created for educational purposes and I do my best to follow O
 
 * Very basic support of audio
 
-* BasicModel class that any visible object in game will aggregate. BasicModel aggregates BasicMesh class which is created by Etai Meiri https://github.com/emeiri[emeiri (Etay Meiri) · GitHub](https://github.com/emeiri), kudos to him for amazing OpenGL tutorials)
+* BasicModel class that any visible object in game will aggregate. BasicModel aggregates BasicMesh class which is created by Etai Meiri (https://github.com/emeiri), kudos to him for amazing OpenGL tutorials
 
 * Simplest light shader and its support.
 
