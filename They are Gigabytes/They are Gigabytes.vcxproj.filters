@@ -93,6 +93,9 @@
     <ClCompile Include="miniaudio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="interface.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="world_transform.hpp">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="models_manager.hpp">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="interface.hpp">
+      <Filter>Other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

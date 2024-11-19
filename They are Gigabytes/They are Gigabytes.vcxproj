@@ -140,6 +140,7 @@
     <ClCompile Include="building.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="game_kernel.cpp" />
+    <ClCompile Include="interface.cpp" />
     <ClCompile Include="lighting_technique.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="building.hpp" />
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="game_kernel.hpp" />
+    <ClInclude Include="interface.hpp" />
     <ClInclude Include="lighting_technique.hpp" />
     <ClInclude Include="map.hpp" />
     <ClInclude Include="material.hpp" />
