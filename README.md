@@ -8,7 +8,7 @@ They are Gigabytes [TAG] - is a future RTS 3D videogame. Virus attacked computer
 
 * C++
 
-* OpenGL.  (GLUT for "multiplatformness" and glew for Modern OpenGL features)
+* OpenGL.  (GLUT for "multiplatformness" and GLEW for Modern OpenGL features)
 
 * Assimp (For loading models of various formats) 
 
@@ -26,7 +26,7 @@ This game is being created for educational purposes and I do my best to follow O
 
 * Very basic support of audio
 
-* BasicModel class that any visible object in game will aggregate. BasicModel aggregates BasicMesh class which is created by Etai Meiri https://github.com/emeiri[emeiri (Etay Meiri) · GitHub](https://github.com/emeiri), kudos to him for amazing OpenGL tutorials)
+* BasicModel class that any visible object in game will aggregate. BasicModel aggregates BasicMesh class which is created by Etai Meiri (https://github.com/emeiri), kudos to him for amazing OpenGL tutorials
 
 * Simplest light shader and its support.
 
@@ -40,12 +40,14 @@ This game is being created for educational purposes and I do my best to follow O
 
 * More difficult shader techniques (Because models I use support shining, normal mapping, etc...)
 
-* 
 
-![](C:\Users\HP\AppData\Roaming\marktext\images\2024-11-05-11-31-30-image.png)
+
+![2024-11-05-11-31-30-image](https://github.com/user-attachments/assets/da3516b9-263f-4c9f-b46f-420c94cfea5a)
+
 
       *Picture 1 - current state of graphics in game*
 
-![](C:\Users\HP\AppData\Roaming\marktext\images\2024-11-05-11-41-10-image.png)
+![2024-11-05-11-41-10-image](https://github.com/user-attachments/assets/057e3bdf-3497-4b1c-ae67-94f1ec724ef5)
+
 
 *Picture 2 - Example of log during compilation (loaded textures and models)*
