@@ -141,6 +141,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="game_kernel.cpp" />
     <ClCompile Include="interface.cpp" />
+    <ClCompile Include="interface_technique.cpp" />
     <ClCompile Include="lighting_technique.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="game_kernel.hpp" />
     <ClInclude Include="interface.hpp" />
+    <ClInclude Include="interface_technique.hpp" />
     <ClInclude Include="lighting_technique.hpp" />
     <ClInclude Include="map.hpp" />
     <ClInclude Include="material.hpp" />
@@ -178,6 +180,8 @@
     <ClInclude Include="world_transform.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="interface.fs" />
+    <None Include="interface.vs" />
     <None Include="lighting.fs" />
     <None Include="lighting.vs" />
     <None Include="shader.fs" />

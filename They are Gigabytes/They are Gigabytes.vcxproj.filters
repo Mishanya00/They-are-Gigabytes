@@ -96,6 +96,9 @@
     <ClCompile Include="interface.cpp">
       <Filter>Other</Filter>
     </ClCompile>
+    <ClCompile Include="interface_technique.cpp">
+      <Filter>Shaders\Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="world_transform.hpp">
@@ -158,6 +161,9 @@
     <ClInclude Include="interface.hpp">
       <Filter>Other</Filter>
     </ClInclude>
+    <ClInclude Include="interface_technique.hpp">
+      <Filter>Shaders\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.fs">
@@ -170,6 +176,12 @@
       <Filter>Shaders\GLSL Shaders</Filter>
     </None>
     <None Include="lighting.fs">
+      <Filter>Shaders\GLSL Shaders</Filter>
+    </None>
+    <None Include="interface.fs">
+      <Filter>Shaders\GLSL Shaders</Filter>
+    </None>
+    <None Include="interface.vs">
       <Filter>Shaders\GLSL Shaders</Filter>
     </None>
   </ItemGroup>

@@ -870,3 +870,4 @@ int CalcNextPowerOfTwo(int x);
 
 
 bool IsPointInsideViewFrustum(const Vector3f& p, const Matrix4f& VP);
+Matrix4f GetOrthoMatrix(float left, float right, float bottom, float top, float near, float far);

@@ -347,3 +347,14 @@ Vector3f Quaternion::ToDegrees()
 
     return Vector3f(f);
 }
+
+Matrix4f GetOrthoMatrix(float left, float right, float bottom, float top, float near, float far) {
+    Matrix4f result(1.0f, 1.0f, 1.0f, 1.0f);
+    result.m[0][0] = 2 / (right - left);
+    result.m[1][1] = 2 / (top - bottom);
+    result.m[2][2] = -2 / (far - near);
+    result.m[3][0] = -(right + left) / (right - left);
+    result.m[3][1] = -(top + bottom) / (top - bottom);
+    result.m[3][2] = -(far + near) / (far - near);
+    return result;
+}

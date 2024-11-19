@@ -1,15 +1,20 @@
 #include "game_kernel.hpp"
-#include "map.hpp"
+
 #include <iostream>
+#include <memory>
 #include <glew.h>
 #include "math_3d.h"
 #include "game_kernel.hpp"
+
 #include "shaders.hpp"
 #include "first_technique.hpp"
 #include "lighting_technique.hpp"
+#include "interface_technique.hpp"
+
 #include "basic_mesh.hpp"
 #include "basic_model.hpp"
-#include <memory>
+
+#include "map.hpp"
 
 
 struct Vertex
@@ -28,7 +33,7 @@ struct Vertex
 
 rgl::Texture* pTexture = NULL;
 
-int ClientWidth = 1920;
+int ClientWidth = 1920; 
 int ClientHeight = 1080;
 
 PersProjInfo ProjectionInfo{ 90.0f, (float)ClientWidth, (float)ClientHeight, 0.1f, 100.0f };
@@ -37,6 +42,7 @@ rgl::Camera GameCamera(ClientWidth, ClientHeight);
 Map * Field; // dangerous moment. I cannot call map constructor before compilation because it's dependent of ope
  
 LightingTechnique* ActiveShader;
+InterfaceTechnique* InterfaceShader;
 DirectionalLight GlobalLight;
 
 std::shared_ptr<BasicMesh> tower_mesh;
@@ -92,12 +98,17 @@ void DrawSubsystemInit()
     ActiveShader->Init();
     ActiveShader->Enable();
 
+    InterfaceShader = new InterfaceTechnique;
+    InterfaceShader->Init();
+
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
 
     glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
+
+    glOrtho(0, 1920, 1080, 0, 1, -1);
 }
 
 void GameFrame()
@@ -117,6 +128,13 @@ void UpdateGameWindowSize(int width, int height)
     ProjectionInfo.Width = (float)ClientWidth;
     ProjectionInfo.Height = (float)ClientHeight;
     GameCamera.SetWindowSize(ClientWidth, ClientHeight);
+}
+
+void DrawInterface()
+{
+    float rect[] = { 500, 500, 0, 700, 500, 0, 700,300,0, 500,300,0 };
+    Matrix4f Projection = GetOrthoMatrix(0, ProjectionInfo.Width, 0, ProjectionInfo.Height, 1, -1);
+    Matrix4f View(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 void DrawGameFrame()
