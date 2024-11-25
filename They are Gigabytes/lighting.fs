@@ -40,6 +40,7 @@ void main()
                        DiffuseFactor;
     }
 
-    FragColor = texture(gSampler, TexCoord0.xy) *
-                (AmbientColor + DiffuseColor);
+
+    FragColor = texture(gSampler, TexCoord0.xy);
+    FragColor.xyz *= (AmbientColor + DiffuseColor).xyz;
 }

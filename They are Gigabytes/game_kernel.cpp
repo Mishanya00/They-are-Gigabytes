@@ -104,6 +104,9 @@ void DrawSubsystemInit()
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glBlendFunc(GL_SRC_ALPHA, 
 
     glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
 
@@ -134,16 +137,16 @@ void DrawInterface()
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     InterfaceShader->Enable();
-    InterfaceShader->SetColorUniform(0.0f, 0.0f, 1.0f, 1.0f);
+    InterfaceShader->SetColorUniform(0.0f, 0.0f, 0.0f, 1.0f);
 
     GLuint VBO;
     Vector3f Vertices[6];
-    Vertices[0] = Vector3f(200.0f, 300.0f, 0.0f);
-    Vertices[1] = Vector3f(500.0f, 300.0f, 0.0f);
-    Vertices[2] = Vector3f(500.0f, 400.0f, 0.0f);
-    Vertices[3] = Vector3f(200.0f, 300.0f, 0.0f);
-    Vertices[4] = Vector3f(500.0f, 400.0f, 0.0f);
-    Vertices[5] = Vector3f(200.0f, 400.0f, 0.0f);
+    Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
+    Vertices[1] = Vector3f(1920.0f, 0, 0.0f);
+    Vertices[2] = Vector3f(1920.0f, 200.0f, 0.0f);
+    Vertices[3] = Vector3f(0.0f, 0.0f, 0.0f);
+    Vertices[4] = Vector3f(1920.0f, 200.0f, 0.0f);
+    Vertices[5] = Vector3f(0.0f, 200.0f, 0.0f);
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
