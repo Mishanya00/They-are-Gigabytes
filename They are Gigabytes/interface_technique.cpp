@@ -22,11 +22,9 @@ bool InterfaceTechnique::Init()
         return false;
     }
 
-    perspectiveLoc = GetUniformLocation("Projection");
-    viewLoc = GetUniformLocation("View");
-    samplerLoc = GetUniformLocation("gSampler");
+    colorLoc = GetUniformLocation("BtnColor");
 
-    if ( samplerLoc == 0xFFFFFFFF )
+    if ( colorLoc == 0xFFFFFFFF )
     {
         return false;
     }
@@ -34,18 +32,8 @@ bool InterfaceTechnique::Init()
     return true;
 }
 
-void InterfaceTechnique::SetViewUniform(const Matrix4f& gView)
+void InterfaceTechnique::SetColorUniform(GLfloat r, GLfloat g, GLfloat b, GLfloat alpha)
 {
-    glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (const GLfloat*)gView.m);
-}
-
-void InterfaceTechnique::SetProjectionUniform(const Matrix4f& gPerspective)
-{
-    glUniformMatrix4fv(perspectiveLoc, 1, GL_TRUE, (const GLfloat*)gPerspective.m);
-}
-
-
-void InterfaceTechnique::SetTextureUnit(unsigned int TextureUnit)
-{
-    glUniform1i(samplerLoc, TextureUnit);
+    //glUniform4fv(colorLoc, 1, GL_TRUE, (const GLfloat*)RGB);
+    glUniform4f(colorLoc, r, g, b, alpha);
 }

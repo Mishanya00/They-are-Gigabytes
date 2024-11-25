@@ -63,6 +63,8 @@ static void RenderScene()
 
     DrawGameFrame();
 
+    DrawInterface();
+
     glutSwapBuffers();
 
     glutPostRedisplay();

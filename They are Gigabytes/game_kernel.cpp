@@ -84,7 +84,7 @@ void DrawSubsystemInit()
 
     GlobalLight.AmbientIntensity = 0.2f;
     GlobalLight.DiffuseIntensity = 1.0f;
-    GlobalLight.Color = Vector3f(1.0f, 1.0f, 1.0f);
+    GlobalLight.Color = Vector3f(1.0f, 1.0f, 1.2f);
     GlobalLight.WorldDirection = Vector3f(0.5f, -1.0f, 0.5f);
 
     tower = std::make_unique<BasicModel>(tower_mesh, 4.0f, 0, 4.0f);
@@ -96,7 +96,6 @@ void DrawSubsystemInit()
 
     ActiveShader = new LightingTechnique;
     ActiveShader->Init();
-    ActiveShader->Enable();
 
     InterfaceShader = new InterfaceTechnique;
     InterfaceShader->Init();
@@ -114,13 +113,13 @@ void DrawSubsystemInit()
 void GameFrame()
 {
     GameCamera.OnFrame();
-    /*
+    
     static float temp_speed = -0.01;
     tower->Move(0, 0, temp_speed);
     if (tower->GetPosition().z < 0)
         temp_speed = 0.01;
     if (tower->GetPosition().z > 100.0)
-        temp_speed = -0.01;*/
+        temp_speed = -0.01;
 }
 
 void UpdateGameWindowSize(int width, int height)
@@ -132,13 +131,37 @@ void UpdateGameWindowSize(int width, int height)
 
 void DrawInterface()
 {
-    float rect[] = { 500, 500, 0, 700, 500, 0, 700,300,0, 500,300,0 };
-    Matrix4f Projection = GetOrthoMatrix(0, ProjectionInfo.Width, 0, ProjectionInfo.Height, 1, -1);
-    Matrix4f View(1.0f, 1.0f, 1.0f, 1.0f);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_DEPTH_TEST);
+    InterfaceShader->Enable();
+    InterfaceShader->SetColorUniform(0.0f, 0.0f, 1.0f, 1.0f);
+
+    GLuint VBO;
+    Vector3f Vertices[6];
+    Vertices[0] = Vector3f(200.0f, 300.0f, 0.0f);
+    Vertices[1] = Vector3f(500.0f, 300.0f, 0.0f);
+    Vertices[2] = Vector3f(500.0f, 400.0f, 0.0f);
+    Vertices[3] = Vector3f(200.0f, 300.0f, 0.0f);
+    Vertices[4] = Vector3f(500.0f, 400.0f, 0.0f);
+    Vertices[5] = Vector3f(200.0f, 400.0f, 0.0f);
+
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDisableVertexAttribArray(0);
 }
 
 void DrawGameFrame()
 {
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
+    ActiveShader->Enable();
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     GameCamera.OnRender();

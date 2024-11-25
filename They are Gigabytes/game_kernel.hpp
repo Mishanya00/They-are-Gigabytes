@@ -19,3 +19,4 @@ void UpdateGameWindowSize(int width, int height);
 void GameFrame();
 void DrawGameFrame();
 void DrawSubsystemInit();
+void DrawInterface();
