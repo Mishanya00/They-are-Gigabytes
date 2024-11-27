@@ -1,15 +1,27 @@
 #pragma once
 
 #include <string>
-
+#include <glew.h>
+#include "math_3d.h"
+#include "interface_technique.hpp"
 
 namespace rgl
 {
 	class Panel
 	{
-		float vert[8];
-		char isHover, isDown;
+	public:
 
+		Panel(float left, float bottom, float right, float top);
+
+		void Render(InterfaceTechnique& shader);
+		bool isHover();
+
+	private:
+
+		GLuint VBO_;
+		Vector3f vertices_[6];
+		Vector3f color_;
+		char isHover_, isDown_;
 	};
 
 	class Button

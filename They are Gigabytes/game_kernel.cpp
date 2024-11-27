@@ -16,6 +16,8 @@
 
 #include "map.hpp"
 
+#include "interface.hpp"
+
 
 struct Vertex
 {
@@ -71,7 +73,7 @@ void GameKernelInit()
     GameCamera.SetRotationSpeed(1.5f);
     GameCamera.Rotate(45.0f, 0, 0);
 
-    Field = new Map(50, 50);
+    Field = new Map(10, 10);
     Field->Init();
     LoadMeshes();
 }
@@ -139,24 +141,8 @@ void DrawInterface()
     InterfaceShader->Enable();
     InterfaceShader->SetColorUniform(0.0f, 0.0f, 0.0f, 1.0f);
 
-    GLuint VBO;
-    Vector3f Vertices[6];
-    Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
-    Vertices[1] = Vector3f(1920.0f, 0, 0.0f);
-    Vertices[2] = Vector3f(1920.0f, 200.0f, 0.0f);
-    Vertices[3] = Vector3f(0.0f, 0.0f, 0.0f);
-    Vertices[4] = Vector3f(1920.0f, 200.0f, 0.0f);
-    Vertices[5] = Vector3f(0.0f, 200.0f, 0.0f);
-
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    glDisableVertexAttribArray(0);
+    rgl::Panel bottom_panel(0.0f, 0.0f, 1920.0f, 200.0f);
+    bottom_panel.Render(*InterfaceShader);
 }
 
 void DrawGameFrame()
