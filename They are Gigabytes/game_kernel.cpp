@@ -13,6 +13,7 @@
 
 #include "basic_mesh.hpp"
 #include "basic_model.hpp"
+#include "models_manager.hpp"
 
 #include "map.hpp"
 
@@ -47,23 +48,8 @@ LightingTechnique* ActiveShader;
 InterfaceTechnique* InterfaceShader;
 DirectionalLight GlobalLight;
 
-std::shared_ptr<BasicMesh> tower_mesh;
-std::shared_ptr<BasicMesh> zigg_mesh;
 std::unique_ptr<BasicModel> tower;
 std::unique_ptr<BasicModel> zigg;
-
-
-void LoadMeshes()
-{
-    tower_mesh = std::make_shared<BasicMesh>();
-    if (!tower_mesh->LoadMesh("../contents/buildings/tower/tower2.obj")) {
-        std::cerr << "Tower mesh not loaded!\n";
-    }
-    zigg_mesh = std::make_shared<BasicMesh>();
-    if (!zigg_mesh->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
-        std::cerr << "Ziggurat mesh not loaded!\n";
-    }
-}
 
 
 void GameKernelInit()
@@ -74,8 +60,8 @@ void GameKernelInit()
     GameCamera.Rotate(45.0f, 0, 0);
 
     Field = new Map(10, 10);
+    Field->ReadSave("../contents/first_map.txt");
     Field->Init();
-    LoadMeshes();
 }
 
 void DrawSubsystemInit()
@@ -89,6 +75,7 @@ void DrawSubsystemInit()
     GlobalLight.Color = Vector3f(1.0f, 1.0f, 1.2f);
     GlobalLight.WorldDirection = Vector3f(0.5f, -1.0f, 0.5f);
 
+    LoadMeshes();
     tower = std::make_unique<BasicModel>(tower_mesh, 4.0f, 0, 4.0f);
     tower->SetCoords(8.0f, 0, 16.0f);
     tower->SetScale(1.1f);
@@ -108,7 +95,7 @@ void DrawSubsystemInit()
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    //glBlendFunc(GL_SRC_ALPHA, 
+
 
     glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
 
@@ -141,8 +128,11 @@ void DrawInterface()
     InterfaceShader->Enable();
     InterfaceShader->SetColorUniform(0.0f, 0.0f, 0.0f, 1.0f);
 
+    rgl::Panel upper_panel(0.0f, 1030.0f, 1920.0f, 1080.0f);
     rgl::Panel bottom_panel(0.0f, 0.0f, 1920.0f, 200.0f);
+
     bottom_panel.Render(*InterfaceShader);
+    upper_panel.Render(*InterfaceShader);
 }
 
 void DrawGameFrame()
@@ -163,7 +153,7 @@ void DrawGameFrame()
     ActiveShader->SetWorldUniform(WorldMatrix.GetMatrix());
     ActiveShader->SetProjectionUniform(ProjectionMatrix);
     ActiveShader->SetViewUniform(ViewMatrix);
-
+    
     Field->Render(*ActiveShader, GlobalLight);
     tower->Render(*ActiveShader, GlobalLight);
     zigg->Render(*ActiveShader, GlobalLight);

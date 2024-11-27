@@ -15,13 +15,14 @@ namespace rgl
 
 		void Render(InterfaceTechnique& shader);
 		bool isHover();
+		bool isVisible();
 
 	private:
 
 		GLuint VBO_;
 		Vector3f vertices_[6];
 		Vector3f color_;
-		char isHover_, isDown_;
+		char isHover_, isDown_, isVisible_;
 	};
 
 	class Button

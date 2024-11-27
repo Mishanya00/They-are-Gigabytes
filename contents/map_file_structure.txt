@@ -1,0 +1,12 @@
+First line: width and length of the map (w and l)
+Then w lines of l numbers where 1 - standart map tile 2 - energy tile
+
+Then w lines of l numbers which mean building on the tile:
+0 - empty tile
+1 - kernel
+2 - tower
+3 - energy extractor
+4 - CPU
+5 - Virus base
+
+Then potentionally n lines with information about enemy and player's units

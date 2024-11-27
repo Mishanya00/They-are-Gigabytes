@@ -23,6 +23,11 @@ bool Panel::isHover()
 	return isHover_;
 }
 
+bool Panel::isVisible()
+{
+    return isVisible_;
+}
+
 void Panel::Render(InterfaceTechnique& shader)
 {
     shader.SetColorUniform(color_.x, color_.y, color_.z, 1.0f);

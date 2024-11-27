@@ -3,16 +3,11 @@
 #include "basic_mesh.hpp"
 #include "basic_model.hpp"
 #include "lighting_technique.hpp"
+
+#include <string>
 #include <vector>
 #include <memory>
 
-/*
-class Drawable
-{
-public:
-	Drawable() {}
-	virtual void Render() = 0;
-}; */
 
 enum TyleType
 {
@@ -35,8 +30,9 @@ public:
 	Map(int width, int height);
 	~Map();
 
+	void ReadSave(std::string save_file);
 	bool Init();
-	void Render(LightingTechnique & shader, DirectionalLight & light);
+	void Render(LightingTechnique& shader, DirectionalLight & light);
 
 
 private:

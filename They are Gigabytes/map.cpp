@@ -1,13 +1,11 @@
 #include "map.hpp"
 
-#include "shaders.hpp"
 #include "world_transform.hpp"
+#include "mishanya_utils.hpp"
 #include <glew.h>
 #include <iostream>
 
-
 #define TILE_MODEL_PATH "../contents/buildings/tile/tile.obj"
-
 
 
 Map::Map()
@@ -33,14 +31,6 @@ Map::~Map()
 
 bool Map::Init()
 {
-	/*
-	pTexture = new rgl::Texture(GL_TEXTURE_2D, "../contents/tex.jpg");
-	if (!pTexture->Load())
-	{
-		std::cerr << "Texture not loaded\n";
-		exit(1);
-	}*/
-
 	tile_mesh_ = std::make_shared<BasicMesh>();
 	if (!tile_mesh_->LoadMesh(TILE_MODEL_PATH)) {
 		std::cerr << "tile mesh not loaded!\n";
@@ -59,6 +49,13 @@ bool Map::Init()
 	}
 
 	return true;
+}
+
+void Map::ReadSave(std::string save_file)
+{
+	std::string buffer;
+	mishanya::ReadFile(save_file, buffer);
+	std::cout << buffer;
 }
 
 void Map::Render(LightingTechnique& shader, DirectionalLight& light)

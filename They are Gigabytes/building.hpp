@@ -20,7 +20,7 @@ class Building
 {
 public:
 
-
+	Building(BuildingType type, int max_hp_, int hp_);
 
 private:
 
