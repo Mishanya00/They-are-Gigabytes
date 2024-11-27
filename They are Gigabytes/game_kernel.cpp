@@ -81,7 +81,7 @@ void DrawSubsystemInit()
     tower->SetScale(1.1f);
     zigg = std::make_unique<BasicModel>(zigg_mesh, 4.0f, 0, 4.0f);
     zigg->SetCoords(10.0f, 0, 16.0f);
-    zigg->SetScale(1.1f);
+    zigg->SetScale(1.5f);
 
     ActiveShader = new LightingTechnique;
     ActiveShader->Init();
@@ -106,12 +106,13 @@ void GameFrame()
 {
     GameCamera.OnFrame();
     
+    /*
     static float temp_speed = -0.01;
     tower->Move(0, 0, temp_speed);
     if (tower->GetPosition().z < 0)
         temp_speed = 0.01;
     if (tower->GetPosition().z > 100.0)
-        temp_speed = -0.01;
+        temp_speed = -0.01;*/
 }
 
 void UpdateGameWindowSize(int width, int height)

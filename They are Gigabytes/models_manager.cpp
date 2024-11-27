@@ -13,7 +13,8 @@ void LoadMeshes()
         std::cerr << "Tower mesh not loaded!\n";
     }
     zigg_mesh = std::make_shared<BasicMesh>();
-    if (!zigg_mesh->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
+    //if (!zigg_mesh->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
+    if (!zigg_mesh->LoadMesh("../contents/buildings/cpu/cpu.obj")) {
         std::cerr << "Ziggurat mesh not loaded!\n";
     }
 }
