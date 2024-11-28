@@ -2,25 +2,27 @@
 
 #include <memory>
 #include "basic_model.hpp"
+#include "lighting_technique.hpp"
 
 
 enum BuildingType {
-	btKernel,
-	btShieldTower,
-	btCPU,
-	btAntivirus,
-	btScaner,
-	btPointDefense,
-	btEnergyStorage,
-	btEnergyExtractor,
-	btZiggurat,
+	btKernel = 1,
+	btShieldTower = 2,
+	btEnergyExtractor = 3,
+	btEnergyStorage = 4,
+	btCPU = 5,
+	btAntivirus = 6,
+	btScaner = 7,
+	btPointDefense = 8,
+	btZiggurat = -1,
 };
 
 class Building
 {
 public:
 
-	Building(BuildingType type, int max_hp_, int hp_);
+	Building(BuildingType type, Vector3f position, int max_hp, int hp);
+	void Render(LightingTechnique & shader, DirectionalLight & light);
 
 private:
 

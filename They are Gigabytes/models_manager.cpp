@@ -4,6 +4,7 @@
 
 std::shared_ptr<BasicMesh> tower_mesh;
 std::shared_ptr<BasicMesh> zigg_mesh;
+std::shared_ptr<BasicMesh> cpu_mesh;
 
 
 void LoadMeshes()
@@ -12,9 +13,14 @@ void LoadMeshes()
     if (!tower_mesh->LoadMesh("../contents/buildings/tower/tower2.obj")) {
         std::cerr << "Tower mesh not loaded!\n";
     }
+
     zigg_mesh = std::make_shared<BasicMesh>();
-    //if (!zigg_mesh->LoadMesh("../contents/buildings/ziggurat/p3.obj")) {
-    if (!zigg_mesh->LoadMesh("../contents/buildings/cpu/cpu.obj")) {
+    if (!zigg_mesh->LoadMesh("../contents/buildings/ziggurat/Pyramid.obj")) {
         std::cerr << "Ziggurat mesh not loaded!\n";
+    }
+
+    cpu_mesh = std::make_shared<BasicMesh>();
+    if (!cpu_mesh->LoadMesh("../contents/buildings/cpu/cpu.obj")) {
+        std::cerr << "CPU mesh not loaded!\n";
     }
 }

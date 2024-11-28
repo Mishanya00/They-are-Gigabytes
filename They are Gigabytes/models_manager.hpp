@@ -7,6 +7,7 @@
 
 
 extern std::shared_ptr<BasicMesh> tower_mesh;
+extern std::shared_ptr<BasicMesh> cpu_mesh;
 extern std::shared_ptr<BasicMesh> zigg_mesh;
 
 void LoadMeshes();

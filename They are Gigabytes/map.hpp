@@ -34,6 +34,8 @@ public:
 	bool Init();
 	void Render(LightingTechnique& shader, DirectionalLight & light);
 
+	int GetWidth() { return width_;  }
+	int GetHeight() { return height_; }
 
 private:
 	int width_, height_;

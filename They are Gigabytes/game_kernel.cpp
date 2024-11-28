@@ -1,5 +1,6 @@
 #include "game_kernel.hpp"
 
+#include <vector>
 #include <iostream>
 #include <memory>
 #include <glew.h>
@@ -12,8 +13,8 @@
 #include "interface_technique.hpp"
 
 #include "basic_mesh.hpp"
-#include "basic_model.hpp"
 #include "models_manager.hpp"
+#include "building.hpp"
 
 #include "map.hpp"
 
@@ -48,8 +49,7 @@ LightingTechnique* ActiveShader;
 InterfaceTechnique* InterfaceShader;
 DirectionalLight GlobalLight;
 
-std::unique_ptr<BasicModel> tower;
-std::unique_ptr<BasicModel> zigg;
+std::vector<std::unique_ptr <Building>> BuildingsList;
 
 
 void GameKernelInit()
@@ -66,6 +66,8 @@ void GameKernelInit()
 
 void DrawSubsystemInit()
 {
+    LoadMeshes();
+
     WorldMatrix.SetScale(1.0f);
     WorldMatrix.SetPosition(Vector3f(0.0f, 0.0f, 0.0f));
     WorldMatrix.SetRotation(Vector3f(0.0f, 0.0f, 0.0f));
@@ -75,13 +77,13 @@ void DrawSubsystemInit()
     GlobalLight.Color = Vector3f(1.0f, 1.0f, 1.2f);
     GlobalLight.WorldDirection = Vector3f(0.5f, -1.0f, 0.5f);
 
-    LoadMeshes();
-    tower = std::make_unique<BasicModel>(tower_mesh, 4.0f, 0, 4.0f);
-    tower->SetCoords(8.0f, 0, 16.0f);
-    tower->SetScale(1.1f);
-    zigg = std::make_unique<BasicModel>(zigg_mesh, 4.0f, 0, 4.0f);
-    zigg->SetCoords(10.0f, 0, 16.0f);
-    zigg->SetScale(1.5f);
+    for (int i = 0; i < Field->GetHeight(); i++)
+    {
+        BuildingsList.push_back(std::make_unique<Building>(btCPU, Vector3f(0.0f, 0.0f, 2*i), 1000, 1000));
+        BuildingsList.push_back(std::make_unique<Building>(btShieldTower, Vector3f(2.0f, 0.0f, 2*i), 1000, 1000));
+        BuildingsList.push_back(std::make_unique<Building>(btZiggurat, Vector3f(4.0f, 0.0f, 2*i), 1000, 1000));
+    }
+
 
     ActiveShader = new LightingTechnique;
     ActiveShader->Init();
@@ -105,14 +107,6 @@ void DrawSubsystemInit()
 void GameFrame()
 {
     GameCamera.OnFrame();
-    
-    /*
-    static float temp_speed = -0.01;
-    tower->Move(0, 0, temp_speed);
-    if (tower->GetPosition().z < 0)
-        temp_speed = 0.01;
-    if (tower->GetPosition().z > 100.0)
-        temp_speed = -0.01;*/
 }
 
 void UpdateGameWindowSize(int width, int height)
@@ -130,7 +124,7 @@ void DrawInterface()
     InterfaceShader->SetColorUniform(0.0f, 0.0f, 0.0f, 1.0f);
 
     rgl::Panel upper_panel(0.0f, 1030.0f, 1920.0f, 1080.0f);
-    rgl::Panel bottom_panel(0.0f, 0.0f, 1920.0f, 200.0f);
+    rgl::Panel bottom_panel(0.0f, 0.0f, 1920.0f, 150.0f);
 
     bottom_panel.Render(*InterfaceShader);
     upper_panel.Render(*InterfaceShader);
@@ -156,6 +150,9 @@ void DrawGameFrame()
     ActiveShader->SetViewUniform(ViewMatrix);
     
     Field->Render(*ActiveShader, GlobalLight);
-    tower->Render(*ActiveShader, GlobalLight);
-    zigg->Render(*ActiveShader, GlobalLight);
+
+    for (int i = 0; i < BuildingsList.size(); i++)
+    {
+        BuildingsList[i]->Render(*ActiveShader, GlobalLight);
+    }
 }
