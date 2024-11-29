@@ -53,6 +53,17 @@ std::vector<std::unique_ptr <Building>> BuildingsList;
 std::vector<rgl::Panel> ComponentsList;
 
 
+void PassiveMouseComponentsHandler(int x, int y)
+{
+    y = ClientHeight - y;
+    for (int i = 0; i < ComponentsList.size(); i++)
+    {
+        ComponentsList[i].SetHover(x, y);
+        if (ComponentsList[i].isHover())
+            std::cout << "Panel " << i << " is hovered!\n";
+    }
+}
+
 void GameKernelInit()
 {
     GameCamera.SetPosition(Vector3f(0.0f, 3.0f, -5.0f));

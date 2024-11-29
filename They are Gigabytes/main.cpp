@@ -44,6 +44,7 @@ static void PassiveMotionHandler(int x, int y)
 {
     //std::cout << x << ' ' << y << '\n';
     GameCamera.OnMouse(0, 0, x, y);
+    PassiveMouseComponentsHandler(x, y);
 }
 
 static void UpdateWindowSize(int width, int height)

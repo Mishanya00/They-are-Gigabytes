@@ -14,6 +14,7 @@ extern rgl::Texture* pTexture;
 extern rgl::Camera GameCamera;
 
 
+void PassiveMouseComponentsHandler(int x, int y);
 void GameKernelInit();
 void UpdateGameWindowSize(int width, int height);
 void GameFrame();
