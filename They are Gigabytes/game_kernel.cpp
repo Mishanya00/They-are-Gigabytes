@@ -50,6 +50,7 @@ InterfaceTechnique* InterfaceShader;
 DirectionalLight GlobalLight;
 
 std::vector<std::unique_ptr <Building>> BuildingsList;
+std::vector<rgl::Panel> ComponentsList;
 
 
 void GameKernelInit()
@@ -84,6 +85,10 @@ void DrawSubsystemInit()
         BuildingsList.push_back(std::make_unique<Building>(btZiggurat, Vector3f(4.0f, 0.0f, 2*i), 1000, 1000));
     }
 
+    ComponentsList.push_back(rgl::Panel(0.0f, 0.0f, 1920.0f, 150.0f));
+    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
+    ComponentsList.push_back(rgl::UpperPanel(0.0f, 1030.0f, 1920.0f, 1080.0f));
+    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
 
     ActiveShader = new LightingTechnique;
     ActiveShader->Init();
@@ -98,10 +103,7 @@ void DrawSubsystemInit()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
     glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
-
-    glOrtho(0, 1920, 1080, 0, 1, -1);
 }
 
 void GameFrame()
@@ -121,13 +123,11 @@ void DrawInterface()
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     InterfaceShader->Enable();
-    InterfaceShader->SetColorUniform(0.0f, 0.0f, 0.0f, 1.0f);
 
-    rgl::Panel upper_panel(0.0f, 1030.0f, 1920.0f, 1080.0f);
-    rgl::Panel bottom_panel(0.0f, 0.0f, 1920.0f, 150.0f);
-
-    bottom_panel.Render(*InterfaceShader);
-    upper_panel.Render(*InterfaceShader);
+    for (int i = 0; i < ComponentsList.size(); i++)
+    {
+        ComponentsList[i].Render(*InterfaceShader);
+    }
 }
 
 void DrawGameFrame()

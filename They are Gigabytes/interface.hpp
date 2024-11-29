@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include <glew.h>
 #include "math_3d.h"
 #include "interface_technique.hpp"
@@ -11,32 +12,34 @@ namespace rgl
 	{
 	public:
 
+		//Panel() {}
 		Panel(float left, float bottom, float right, float top);
 
 		void Render(InterfaceTechnique& shader);
+
+		void SetHover(int mouseX, int mouseY);
+		void SetColor(Vector3f new_color);
+
 		bool isHover();
 		bool isVisible();
+		virtual void Click();
+		
 
-	private:
+	protected:
 
 		GLuint VBO_;
+		int left_, bottom_, right_, top_;
 		Vector3f vertices_[6];
 		Vector3f color_;
 		char isHover_, isDown_, isVisible_;
 	};
 
-	class Button
+	class UpperPanel : public Panel
 	{
-		std::string name;
-		std::string caption;
-
-		float vert[8];
-		char isHover, isDown;
-		int checkGroup, radioGroup;
-		// text
-		//float buffer[50 * nameLen];
-		int num_quads;
-		float textPosX, textPosY, textScale;
+	public:
+		UpperPanel(float left, float bottom, float right, float top);
+		
+		void Click();
 	};
 
 	class Label
