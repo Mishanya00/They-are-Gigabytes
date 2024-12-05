@@ -4,6 +4,41 @@
 
 using namespace rgl;
 
+
+Selection::Selection()
+{
+    color_ = Vector3f(0, 1.0f, 0);
+
+    vertices_[0] = Vector3f(0.0f, 0.0f, 0.0f);
+    vertices_[1] = Vector3f(0.0f, 0.0f, 0.0f);
+    vertices_[2] = Vector3f(0.0f, 0.0f, 0.0f);
+    vertices_[3] = Vector3f(0.0f, 0.0f, 0.0f);
+    vertices_[4] = Vector3f(0.0f, 0.0f, 0.0f);
+    vertices_[5] = Vector3f(0.0f, 0.0f, 0.0f);
+
+    isVisible_ = false;
+    color_ = Vector3f(0.0f, 0.0f, 0.0f); // black
+
+    glGenBuffers(1, &VBO_);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO_);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_), vertices_, GL_STATIC_DRAW);
+}
+
+void Selection::SetColor(Vector3f color)
+{
+    color_ = color;
+}
+
+void Selection::Render(InterfaceTechnique& shader)
+{
+    shader.SetColorUniform(color_.x, color_.y, color_.z, 1.0f);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO_);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDisableVertexAttribArray(0);
+}
+
 Panel::Panel(float left, float bottom, float right, float top)
 {
     left_ = left;

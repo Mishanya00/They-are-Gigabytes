@@ -99,6 +99,9 @@
     <ClCompile Include="interface_technique.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Include\FreetypeGL\freetypeGL.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="world_transform.hpp">
@@ -164,6 +167,9 @@
     <ClInclude Include="interface_technique.hpp">
       <Filter>Shaders\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Include\FreetypeGL\freetypeGL.h">
+      <Filter>Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.fs">
@@ -182,6 +188,12 @@
       <Filter>Shaders\GLSL Shaders</Filter>
     </None>
     <None Include="interface.vs">
+      <Filter>Shaders\GLSL Shaders</Filter>
+    </None>
+    <None Include="Include\FreetypeGL\font_shader.frag">
+      <Filter>Shaders\GLSL Shaders</Filter>
+    </None>
+    <None Include="Include\FreetypeGL\font_shader.vert">
       <Filter>Shaders\GLSL Shaders</Filter>
     </None>
   </ItemGroup>

@@ -8,6 +8,23 @@
 
 namespace rgl
 {
+	class Selection
+	{
+	public:
+
+		Selection();
+		void Render(InterfaceTechnique& shader);
+		void SetColor(Vector3f color);
+
+	private:
+		
+		GLuint VBO_;
+		Vector3f color_;
+		bool isVisible_;
+		float left_, right_, bottom_, top_;
+		Vector3f vertices_[6];
+	};
+
 	class Panel
 	{
 	public:

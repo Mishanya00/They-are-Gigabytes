@@ -19,6 +19,7 @@
 #include "map.hpp"
 
 #include "interface.hpp"
+#include "freetypeGL.h"
 
 
 struct Vertex
@@ -51,6 +52,7 @@ DirectionalLight GlobalLight;
 
 std::vector<std::unique_ptr <Building>> BuildingsList;
 std::vector<rgl::Panel> ComponentsList;
+rgl::FontRenderer Font;
 
 
 void PassiveMouseComponentsHandler(int x, int y)
@@ -101,6 +103,8 @@ void DrawSubsystemInit()
     ComponentsList.push_back(rgl::UpperPanel(0.0f, 1030.0f, 1920.0f, 1080.0f));
     ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
 
+    Font.InitFontRenderer(ClientWidth, ClientHeight);
+
     ActiveShader = new LightingTechnique;
     ActiveShader->Init();
 
@@ -139,6 +143,8 @@ void DrawInterface()
     {
         ComponentsList[i].Render(*InterfaceShader);
     }
+
+    Font.RenderText(rgl::FONT_TYPE_OLD_STANDARD, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
 }
 
 void DrawGameFrame()

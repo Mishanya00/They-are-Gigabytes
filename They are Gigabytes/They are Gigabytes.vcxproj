@@ -122,14 +122,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Include\FreetypeGL;Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc143-mt.lib;freeglutd.lib;glew32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype-gl.lib;freetype.lib;assimp-vc143-mt.lib;freeglutd.lib;glew32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>Lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -140,6 +140,7 @@
     <ClCompile Include="building.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="game_kernel.cpp" />
+    <ClCompile Include="Include\FreetypeGL\freetypeGL.cpp" />
     <ClCompile Include="interface.cpp" />
     <ClCompile Include="interface_technique.cpp" />
     <ClCompile Include="lighting_technique.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="building.hpp" />
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="game_kernel.hpp" />
+    <ClInclude Include="Include\FreetypeGL\freetypeGL.h" />
     <ClInclude Include="interface.hpp" />
     <ClInclude Include="interface_technique.hpp" />
     <ClInclude Include="lighting_technique.hpp" />
@@ -180,6 +182,8 @@
     <ClInclude Include="world_transform.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Include\FreetypeGL\font_shader.frag" />
+    <None Include="Include\FreetypeGL\font_shader.vert" />
     <None Include="interface.fs" />
     <None Include="interface.vs" />
     <None Include="lighting.fs" />
