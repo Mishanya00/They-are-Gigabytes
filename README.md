@@ -16,6 +16,8 @@ They are Gigabytes [TAG] - is a future RTS 3D videogame. Virus attacked computer
 
 * Miniaudio (C lib for audio that is implemented through miniaudio.cpp and miniaudio.h files)
 
+* FreetypeGL for text output and fonts support
+
 * Others (that I maybe forget or will add in future)
 
 This game is being created for educational purposes and I do my best to follow OOP and Architecture recommendatioins to make the game easy to develop and modify.
@@ -30,16 +32,15 @@ This game is being created for educational purposes and I do my best to follow O
 
 * Simplest light shader and its support.
 
+* Rudiments of interface, font support
+
 **What's should be done?**
 
-* Models manager that handles all model and mesh loadings by itself
-
-* Interface subsystem
+* Interaction between player and game :)
 
 * Gameplay mechanics
 
 * More difficult shader techniques (Because models I use support shining, normal mapping, etc...)
-
 
 
 ![2024-11-05-11-31-30-image](https://github.com/user-attachments/assets/da3516b9-263f-4c9f-b46f-420c94cfea5a)
