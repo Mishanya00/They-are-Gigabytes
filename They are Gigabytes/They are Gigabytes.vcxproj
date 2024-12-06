@@ -150,6 +150,7 @@
     <ClCompile Include="miniaudio.cpp" />
     <ClCompile Include="mishanya_utils.cpp" />
     <ClCompile Include="models_manager.cpp" />
+    <ClCompile Include="scenario.cpp" />
     <ClCompile Include="shaders.cpp" />
     <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="technique.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="mesh_common.hpp" />
     <ClInclude Include="mishanya_utils.hpp" />
     <ClInclude Include="models_manager.hpp" />
+    <ClInclude Include="scenario.hpp" />
     <ClInclude Include="shaders.hpp" />
     <ClInclude Include="shader_manager.hpp" />
     <ClInclude Include="technique.hpp" />

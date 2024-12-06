@@ -102,6 +102,9 @@
     <ClCompile Include="Include\FreetypeGL\freetypeGL.cpp">
       <Filter>Other</Filter>
     </ClCompile>
+    <ClCompile Include="scenario.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="world_transform.hpp">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Include\FreetypeGL\freetypeGL.h">
       <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="scenario.hpp">
+      <Filter>Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

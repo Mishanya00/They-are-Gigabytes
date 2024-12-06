@@ -144,7 +144,12 @@ void DrawInterface()
         ComponentsList[i].Render(*InterfaceShader);
     }
 
-    Font.RenderText(rgl::FONT_TYPE_OLD_STANDARD, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
+    Font.RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
+    Font.RenderText(rgl::FONT_TYPE_OLD_STANDARD_46, rgl::clBlue, rgl::clYellow, 50, 900, "They are Gigabytes!");
+    Font.RenderText(rgl::FONT_TYPE_SOURCE_CODE_PRO_30, rgl::clYellow, rgl::clYellow, 50, 800, "They are Gigabytes!");
+    Font.RenderText(rgl::FONT_TYPE_SOURCE_CODE_PRO_46, rgl::clRed, rgl::clYellow, 50, 700, "They are Gigabytes!");
+    Font.RenderText(rgl::FONT_TYPE_SOURCE_SANS_PRO_30, rgl::clCyan, rgl::clYellow, 50, 600, "They are Gigabytes!");
+    Font.RenderText(rgl::FONT_TYPE_SOURCE_SANS_PRO_46, rgl::clWhite, rgl::clYellow, 50, 500, "They are Gigabytes!");
 }
 
 void DrawGameFrame()

@@ -25,7 +25,7 @@ typedef struct {
     vec4 color;
 } vertex_t;
 
-static const char* FontPaths[NUM_FONTS] = {
+static const char* FontPaths[] = {
     "../contents/fonts/amiri-regular.ttf",
     "../contents/fonts/Liberastika-regular.ttf",
     "../contents/fonts/Lobster-regular.ttf",    
@@ -39,7 +39,7 @@ static const char* FontPaths[NUM_FONTS] = {
     "../contents/fonts/VeraMono.ttf"
 };
 
-void add_text(vertex_buffer_t* m_pBuffer, texture_font_t* pFont, char* text, vec2 pen, vec4 fg_color_1, vec4 fg_color_2)
+void add_text(vertex_buffer_t* m_pBuffer, texture_font_t * pFont, char* text, vec2 pen, vec4 fg_color_1, vec4 fg_color_2)
 {
     for (size_t i = 0; i < strlen(text); ++i)
     {
@@ -79,7 +79,6 @@ FontRenderer::FontRenderer()
 {
 }
 
-
 FontRenderer::~FontRenderer()
 {
 }
@@ -107,20 +106,36 @@ void FontRenderer::InitFontRenderer(int WindowWidth, int WindowHeight)
     mat4_set_orthographic(&m_projection, 0, (float)WindowWidth, 0, (float)WindowHeight, -1, 1);
 }
 
+void FontRenderer::LoadFont(FONT_TYPE type, int size)
+{
+    if (type < 0 || type > NUM_FONTS) {
+        printf("Error loading font!\n");
+        exit(0);
+    }
+
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, size, FontPaths[type]));
+}
 
 void FontRenderer::LoadFonts()
 {
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "../contents/fonts/OldStandard-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "../contents/fonts/OldStandard-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "../contents/fonts/SourceCodePro-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "../contents/fonts/SourceCodePro-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "../contents/fonts/SourceSansPro-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "../contents/fonts/SourceSansPro-regular.ttf"));
+
+    /*
     for (int i = 0; i < NUM_FONTS; i++) {
-        m_pFonts[i] = texture_font_new_from_file(m_pAtlas, 128, FontPaths[i]);
+        m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, FontPaths[i]));
 
         if (!m_pFonts[i]) {
             printf("Error loading fonts '%s'\n", FontPaths[i]);
             exit(0);
         }
     }
+    */
 }
-
-
 
 void FontRenderer::RenderText(FONT_TYPE FontType,
                               const vec4& TopColor, const vec4& BottomColor,

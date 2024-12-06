@@ -8,6 +8,9 @@
 #include "mat4.h"
 #include "shader.h"
 
+#include <vector>
+
+
 using namespace ftgl;
 
 namespace rgl {
@@ -27,17 +30,12 @@ namespace rgl {
 
 
     enum FONT_TYPE {
-        FONT_TYPE_AMIRI,
-        FONT_TYPE_LIBERASTIKA,
-        FONT_TYPE_LOBSTER,
-        FONT_TYPE_LUCKIEST_GUY,
-        FONT_TYPE_OLD_STANDARD,
-        FONT_TYPE_SOURCE_CODE_PRO,
-        FONT_TYPE_SOURCE_SANS_PRO,
-        FONT_TYPE_VERA,
-        FONT_TYPE_VERA_MOBD,
-        FONT_TYPE_VERA_MOBI,
-        FONT_TYPE_VERA_MONO,
+        FONT_TYPE_OLD_STANDARD_30,
+        FONT_TYPE_OLD_STANDARD_46,
+        FONT_TYPE_SOURCE_CODE_PRO_30,
+        FONT_TYPE_SOURCE_CODE_PRO_46,
+        FONT_TYPE_SOURCE_SANS_PRO_30,
+        FONT_TYPE_SOURCE_SANS_PRO_46,
         NUM_FONTS
     };
 
@@ -58,6 +56,13 @@ namespace rgl {
             unsigned int y,
             const char* pText);
 
+        void RenderText(texture_font_t & active_font,
+            const vec4& TopColor,
+            const vec4& BottomColor,
+            unsigned int x,
+            unsigned int y,
+            const char* pText);
+
         void RenderText(FONT_TYPE FontType,
             const vec4& Color,
             unsigned int x,
@@ -67,13 +72,15 @@ namespace rgl {
             RenderText(FontType, Color, Color, x, y, pText);
         }
 
+        void LoadFont(FONT_TYPE type, int size);
+
     private:
 
         void LoadFonts();
 
         texture_atlas_t* m_pAtlas = NULL;
         vertex_buffer_t* m_pBuffer = NULL;
-        texture_font_t* m_pFonts[NUM_FONTS] = {};
+        std::vector<texture_font_t*> m_pFonts;
         GLuint m_shaderProg = -1;
         mat4 m_model, m_view, m_projection;
     };
