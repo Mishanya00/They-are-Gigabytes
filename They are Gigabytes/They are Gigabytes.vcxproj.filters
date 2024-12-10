@@ -78,9 +78,6 @@
     <ClCompile Include="shaders.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="shader_manager.cpp">
-      <Filter>Shaders\Sources</Filter>
-    </ClCompile>
     <ClCompile Include="basic_model.cpp">
       <Filter>Model</Filter>
     </ClCompile>
@@ -152,9 +149,6 @@
     <ClInclude Include="shaders.hpp">
       <Filter>Shaders\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="shader_manager.hpp">
-      <Filter>Shaders\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="basic_model.hpp">
       <Filter>Model</Filter>
     </ClInclude>
@@ -178,12 +172,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader.fs">
-      <Filter>Shaders\GLSL Shaders</Filter>
-    </None>
-    <None Include="shader.vs">
-      <Filter>Shaders\GLSL Shaders</Filter>
-    </None>
     <None Include="lighting.vs">
       <Filter>Shaders\GLSL Shaders</Filter>
     </None>

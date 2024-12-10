@@ -14,7 +14,6 @@ void DirectionalLight::CalcLocalDirection(const Matrix4f& World)
     LocalDirection = LocalDirection.Normalize();
 }
 
-
 LightingTechnique::LightingTechnique()
 {
 }

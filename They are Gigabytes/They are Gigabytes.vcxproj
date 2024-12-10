@@ -152,7 +152,6 @@
     <ClCompile Include="models_manager.cpp" />
     <ClCompile Include="scenario.cpp" />
     <ClCompile Include="shaders.cpp" />
-    <ClCompile Include="shader_manager.cpp" />
     <ClCompile Include="technique.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="first_technique.cpp" />
@@ -177,7 +176,6 @@
     <ClInclude Include="models_manager.hpp" />
     <ClInclude Include="scenario.hpp" />
     <ClInclude Include="shaders.hpp" />
-    <ClInclude Include="shader_manager.hpp" />
     <ClInclude Include="technique.hpp" />
     <ClInclude Include="texture.hpp" />
     <ClInclude Include="first_technique.hpp" />
@@ -190,8 +188,6 @@
     <None Include="interface.vs" />
     <None Include="lighting.fs" />
     <None Include="lighting.vs" />
-    <None Include="shader.fs" />
-    <None Include="shader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
