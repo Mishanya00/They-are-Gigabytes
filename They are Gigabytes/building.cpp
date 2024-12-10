@@ -1,5 +1,5 @@
 #include "building.hpp"
-#include "models_manager.hpp"
+#include "meshes_manager.hpp"
 
 
 Building::Building(BuildingType type, Vector3f position, int max_hp, int hp)

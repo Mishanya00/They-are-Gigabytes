@@ -8,10 +8,9 @@
 #include "game_kernel.hpp"
 
 #include "shaders.hpp"
-#include "first_technique.hpp"
 #include "interface_technique.hpp"
 
-#include "models_manager.hpp"
+#include "meshes_manager.hpp"
 
 #include "interface.hpp"
 #include "freetypeGL.h"
@@ -93,7 +92,7 @@ void GameKernelInit()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
     ActiveScenario = std::make_unique<Scenario>("../contents/first_map.txt");
     ActiveScenario->DrawSubsystemInit();
@@ -102,9 +101,9 @@ void GameKernelInit()
 void GameInterfaceInit()
 {
     ComponentsList.push_back(rgl::Panel(0.0f, 0.0f, 1920.0f, 150.0f));
-    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
+    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.0, 0.0f));
     ComponentsList.push_back(rgl::UpperPanel(0.0f, 1030.0f, 1920.0f, 1080.0f));
-    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
+    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.0, 0.0f));
 
     Font.InitFontRenderer(ClientWidth, ClientHeight);
 

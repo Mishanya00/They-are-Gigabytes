@@ -84,7 +84,7 @@
     <ClCompile Include="building.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="models_manager.cpp">
+    <ClCompile Include="meshes_manager.cpp">
       <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="miniaudio.cpp">
@@ -155,7 +155,7 @@
     <ClInclude Include="building.hpp">
       <Filter>Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="models_manager.hpp">
+    <ClInclude Include="meshes_manager.hpp">
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="interface.hpp">

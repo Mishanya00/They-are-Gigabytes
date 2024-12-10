@@ -2,7 +2,7 @@
 
 #include "world_transform.hpp"
 #include "mishanya_utils.hpp"
-#include "models_manager.hpp"
+#include "meshes_manager.hpp"
 #include <glew.h>
 #include <iostream>
 #include <sstream>
@@ -24,12 +24,7 @@ Map::Map(int width, int height)
 	Init();
 }
 
-Map::~Map()
-{
-	/* Disabled because I use smart pointers
-	if (tile_mesh_)
-		delete tile_mesh_; */
-}
+Map::~Map() {}
 
 bool Map::Init()
 {
@@ -53,21 +48,36 @@ void Map::ReadSave(std::string save_file)
 {
 	std::string buffer, buffer2;
 	std::stringstream ss;
+	int curr_tile;
 
 	mishanya::ReadFile(save_file, buffer);
 	ss << buffer;
 
-	int x, y;
-	ss >> x >> y;
-	/*
-	for (int i = 0; i < x; ++i)
-	{
-		for (int j = 0; j < y; ++j)
-		{
+	ss >> height_ >> width_;
+	tiles_.resize(height_);
 
+	for (int i = 0; i < height_; i++)
+	{
+		tiles_[i].resize(width_);
+		for (int j = 0; j < width_; j++)
+		{	
+			ss >> curr_tile;
+			if (curr_tile == 2)
+			{
+				tiles_[i][j].type = ttEnergy;
+				tiles_[i][j].model = std::make_unique<BasicModel>(energy_tile_mesh, static_cast<float>(2 * j), 0.0f, static_cast<float>(2 * i));
+			}
+			else
+			{
+				tiles_[i][j].type = ttNormal;
+				tiles_[i][j].model = std::make_unique<BasicModel>(tile_mesh, static_cast<float>(2 * j), 0.0f, static_cast<float>(2 * i));
+			}
+
+			tiles_[i][j].isWalkable = true;
+			tiles_[i][j].model->SetScale(1.01f);	// Initially models were created a little smaller that should be. This line to avoid artefacts
 		}
 	}
-	*/
+	
 }
 
 void Map::Render(LightingTechnique& shader, DirectionalLight& light)

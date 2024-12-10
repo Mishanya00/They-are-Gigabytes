@@ -7,7 +7,7 @@ Scenario::Scenario(std::string map_name)
 {
     Field = std::make_unique<Map>(10, 10);
     Field->ReadSave("../contents/scenarios/first_map.txt");
-    Field->Init();
+    //Field->Init();
 
     ScenarioInit();
 }

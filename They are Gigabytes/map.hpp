@@ -10,8 +10,8 @@
 
 enum TyleType
 {
-	ttEnergy,
-	ttNormal
+	ttNormal,
+	ttEnergy
 };
 
 struct Tile
