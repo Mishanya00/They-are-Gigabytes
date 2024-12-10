@@ -14,39 +14,19 @@ Map::Map()
 {
 	width_ = 10;
 	height_ = 10;
-	Init();
 }
 
 Map::Map(int width, int height)
 {
 	width_ = width;
 	height_ = height;
-	Init();
 }
 
 Map::~Map() {}
 
-bool Map::Init()
-{
-	tiles_.resize(height_);
-
-	for (int i = 0; i < height_; i++)
-	{
-		tiles_[i].resize(width_);
-		for (int j = 0; j < width_; j++)
-		{
-			tiles_[i][j].isWalkable = true;
-			tiles_[i][j].type = ttNormal;
-			tiles_[i][j].model = std::make_unique<BasicModel>(tile_mesh, static_cast<float>(2 * j), 0.0f, static_cast<float>(2 * i));
-		}
-	}
-
-	return true;
-}
-
 void Map::ReadSave(std::string save_file)
 {
-	std::string buffer, buffer2;
+	std::string buffer;
 	std::stringstream ss;
 	int curr_tile;
 

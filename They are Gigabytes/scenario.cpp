@@ -1,15 +1,49 @@
 #include "scenario.hpp"
 
 #include <glew.h>
+#include <sstream>
 
 
 Scenario::Scenario(std::string map_name)
 {
-    Field = std::make_unique<Map>(10, 10);
-    Field->ReadSave("../contents/scenarios/first_map.txt");
-    //Field->Init();
+    scenario_name_ = map_name;
+    Field = std::make_unique<Map>();
+    Field->ReadSave(scenario_name_);
 
     ScenarioInit();
+}
+
+void Scenario::ReadScenarioInfo()
+{
+    std::string buffer;
+    std::stringstream ss;
+    int x, y;
+    int curr_element;
+
+    mishanya::ReadFile(scenario_name_, buffer);
+    ss << buffer;
+
+    ss >> x >> y;
+
+    // One file for map and for all objects on it, so initially we skip to the buildings part
+    for (int i = 0; i < y; i++)
+    {
+        for (int j = 0; j < x; j++)
+        {
+            ss >> curr_element;
+        }
+    }
+
+    for (int i = 0; i < y; i++)
+    {
+        for (int j = 0; j < x; j++)
+        {
+            ss >> curr_element;
+            if ( curr_element == btZiggurat || curr_element == btCPU || curr_element == btShieldTower )
+                BuildingsList.push_back(std::make_unique<Building>(static_cast<BuildingType>(curr_element),
+                    Vector3f(static_cast<float>(2 * j), 0.0f, static_cast<float>(2 * i)), 1000, 1000));
+        }
+    }
 }
 
 void Scenario::ScenarioInit()
@@ -19,6 +53,8 @@ void Scenario::ScenarioInit()
     GameCamera.SetSpeed(0.2f);
     GameCamera.SetRotationSpeed(1.5f);
     GameCamera.Rotate(45.0f, 0, 0);
+
+    ReadScenarioInfo();
 }
 
 void Scenario::DrawSubsystemInit()
@@ -27,13 +63,6 @@ void Scenario::DrawSubsystemInit()
     GlobalLight.DiffuseIntensity = 1.0f;
     GlobalLight.Color = Vector3f(1.0f, 1.0f, 1.2f);
     GlobalLight.WorldDirection = Vector3f(0.5f, -1.0f, 0.5f);
-
-    for (int i = 0; i < Field->GetHeight(); i++)
-    {
-        BuildingsList.push_back(std::make_unique<Building>(btCPU, Vector3f(0.0f, 0.0f, 2 * i), 1000, 1000));
-        BuildingsList.push_back(std::make_unique<Building>(btShieldTower, Vector3f(2.0f, 0.0f, 2 * i), 1000, 1000));
-        BuildingsList.push_back(std::make_unique<Building>(btZiggurat, Vector3f(4.0f, 0.0f, 2 * i), 1000, 1000));
-    }
 
     ActiveShader = new LightingTechnique;
     ActiveShader->Init();

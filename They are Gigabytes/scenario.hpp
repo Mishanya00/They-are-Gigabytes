@@ -27,10 +27,15 @@ public:
 	PersProjInfo ProjectionInfo{ 90.0f, (float)1920, (float)1080, 0.1f, 100.0f };
 
 private:
-	std::vector<std::unique_ptr <Building>> BuildingsList;
-	rgl::WorldTransform WorldMatrix;
-	std::unique_ptr<Map> Field;
 
+	void ReadScenarioInfo();
+
+	std::string scenario_name_;
+
+	std::vector<std::unique_ptr <Building>> BuildingsList;
+	std::unique_ptr<Map> Field;
+	
+	rgl::WorldTransform WorldMatrix;
 	LightingTechnique* ActiveShader;
 	DirectionalLight GlobalLight;
 };

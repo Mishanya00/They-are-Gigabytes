@@ -30,7 +30,6 @@ public:
 	~Map();
 
 	void ReadSave(std::string save_file);
-	bool Init();
 	void Render(LightingTechnique& shader, DirectionalLight & light);
 
 	int GetWidth() { return width_;  }

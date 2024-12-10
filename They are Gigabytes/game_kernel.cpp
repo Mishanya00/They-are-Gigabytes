@@ -94,7 +94,7 @@ void GameKernelInit()
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-    ActiveScenario = std::make_unique<Scenario>("../contents/first_map.txt");
+    ActiveScenario = std::make_unique<Scenario>("../contents/scenarios/first_map.txt");
     ActiveScenario->DrawSubsystemInit();
 }
 
