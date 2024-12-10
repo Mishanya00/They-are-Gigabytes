@@ -1,19 +1,10 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
 #include <memory>
-#include <glew.h>
-#include "math_3d.h"
-#include "game_kernel.hpp"
 
-#include "shaders.hpp"
-#include "first_technique.hpp"
 #include "lighting_technique.hpp"
-#include "interface_technique.hpp"
 
-#include "basic_mesh.hpp"
-#include "models_manager.hpp"
 #include "building.hpp"
 
 #include "map.hpp"
@@ -33,12 +24,12 @@ public:
 
 
 	rgl::Camera GameCamera;
-	PersProjInfo ProjectionInfo{ 90.0f, (float)ClientWidth, (float)ClientHeight, 0.1f, 100.0f };
+	PersProjInfo ProjectionInfo{ 90.0f, (float)1920, (float)1080, 0.1f, 100.0f };
 
 private:
 	std::vector<std::unique_ptr <Building>> BuildingsList;
 	rgl::WorldTransform WorldMatrix;
-	Map* Field;
+	std::unique_ptr<Map> Field;
 
 	LightingTechnique* ActiveShader;
 	DirectionalLight GlobalLight;

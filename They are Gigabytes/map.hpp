@@ -1,6 +1,5 @@
 #pragma once
 
-#include "basic_mesh.hpp"
 #include "basic_model.hpp"
 #include "lighting_technique.hpp"
 
@@ -40,5 +39,4 @@ public:
 private:
 	int width_, height_;
 	std::vector<std::vector<Tile>> tiles_;
-	std::shared_ptr<BasicMesh> tile_mesh_;
 };

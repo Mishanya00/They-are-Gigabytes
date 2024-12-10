@@ -9,5 +9,6 @@
 extern std::shared_ptr<BasicMesh> tower_mesh;
 extern std::shared_ptr<BasicMesh> cpu_mesh;
 extern std::shared_ptr<BasicMesh> zigg_mesh;
+extern std::shared_ptr<BasicMesh> tile_mesh;
 
 void LoadMeshes();

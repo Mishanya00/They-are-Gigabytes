@@ -74,7 +74,7 @@ int main(int argc, char** argv)
     glutFullScreen();
 
     GameKernelInit();
-    DrawSubsystemInit();
+    GameInterfaceInit();
 
     RegisterGlutCallbacks();
 

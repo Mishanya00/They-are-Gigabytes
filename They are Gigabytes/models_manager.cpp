@@ -2,10 +2,12 @@
 
 #include <iostream>
 
+#define TILE_MODEL_PATH "../contents/buildings/tile/tile.obj"
+
 std::shared_ptr<BasicMesh> tower_mesh;
 std::shared_ptr<BasicMesh> zigg_mesh;
 std::shared_ptr<BasicMesh> cpu_mesh;
-
+std::shared_ptr<BasicMesh> tile_mesh;
 
 void LoadMeshes()
 {
@@ -22,5 +24,10 @@ void LoadMeshes()
     cpu_mesh = std::make_shared<BasicMesh>();
     if (!cpu_mesh->LoadMesh("../contents/buildings/cpu/cpu.obj")) {
         std::cerr << "CPU mesh not loaded!\n";
+    }
+
+    tile_mesh = std::make_shared<BasicMesh>();
+    if (!tile_mesh->LoadMesh(TILE_MODEL_PATH)) {
+        std::cerr << "tile mesh not loaded!\n";
     }
 }

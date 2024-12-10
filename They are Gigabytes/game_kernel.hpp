@@ -14,7 +14,7 @@ void GameKernelInit();
 void UpdateGameWindowSize(int width, int height);
 void GameFrame();
 void DrawGameFrame();
-void DrawSubsystemInit();
+void GameInterfaceInit();
 void DrawInterface();
 
 void GameMouseHandler(int button, int state, int x, int y);

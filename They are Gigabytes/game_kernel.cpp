@@ -84,22 +84,7 @@ void PassiveMouseComponentsHandler(int x, int y)
 
 void GameKernelInit()
 {
-    ActiveScenario = std::make_unique<Scenario>("../contents/first_map.txt");
-}
-
-void DrawSubsystemInit()
-{
     LoadMeshes();
-
-    ComponentsList.push_back(rgl::Panel(0.0f, 0.0f, 1920.0f, 150.0f));
-    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
-    ComponentsList.push_back(rgl::UpperPanel(0.0f, 1030.0f, 1920.0f, 1080.0f));
-    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
-
-    Font.InitFontRenderer(ClientWidth, ClientHeight);
-
-    InterfaceShader = new InterfaceTechnique;
-    InterfaceShader->Init();
 
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
@@ -110,7 +95,21 @@ void DrawSubsystemInit()
 
     glClearColor(0.1f, 0.1f, 0.1f, 0.0f);
 
+    ActiveScenario = std::make_unique<Scenario>("../contents/first_map.txt");
     ActiveScenario->DrawSubsystemInit();
+}
+
+void GameInterfaceInit()
+{
+    ComponentsList.push_back(rgl::Panel(0.0f, 0.0f, 1920.0f, 150.0f));
+    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
+    ComponentsList.push_back(rgl::UpperPanel(0.0f, 1030.0f, 1920.0f, 1080.0f));
+    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.05f, 0.12f));
+
+    Font.InitFontRenderer(ClientWidth, ClientHeight);
+
+    InterfaceShader = new InterfaceTechnique;
+    InterfaceShader->Init();
 }
 
 void GameFrame()
