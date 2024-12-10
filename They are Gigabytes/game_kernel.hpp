@@ -8,11 +8,6 @@
 
 extern int ClientWidth;
 extern int ClientHeight;
-extern rgl::WorldTransform WorldMatrix;
-extern PersProjInfo ProjectionInfo;
-extern rgl::Texture* pTexture;
-extern rgl::Camera GameCamera;
-
 
 void PassiveMouseComponentsHandler(int x, int y);
 void GameKernelInit();
@@ -21,3 +16,8 @@ void GameFrame();
 void DrawGameFrame();
 void DrawSubsystemInit();
 void DrawInterface();
+
+void GameMouseHandler(int button, int state, int x, int y);
+void KeyboardHandler(unsigned char key, int x, int y);
+void PassiveMotionHandler(int x, int y);
+void KeyboardSpecialHandler(int key, int x, int y);

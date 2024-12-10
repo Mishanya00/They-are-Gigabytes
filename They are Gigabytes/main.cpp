@@ -13,38 +13,14 @@ MiniaudioEngine music;
 MiniaudioEngine player;
 
 
-static void KeyboardHandler(unsigned char key, int x, int y)
-{
-    GameCamera.OnKeyboard(key);
-
-    switch (key)
-    {
-    case 27:
-        exit(0);
-        break;
-    }
-}
-
-static void KeyboardSpecialHandler(int key, int x, int y)
-{
-    GameCamera.OnKeyboard(key);
-}
-
 static void MouseHandler(int button, int state, int x, int y)
 {
-    if (button == GLUT_LEFT_BUTTON && state==GLUT_DOWN)
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
         player.Play("../contents/Audio/click.wav");
     if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
         player.Play("../contents/Audio/click2.wav");
 
-    GameCamera.OnMouse(button, state, x, y);
-}
-
-static void PassiveMotionHandler(int x, int y)
-{
-    //std::cout << x << ' ' << y << '\n';
-    GameCamera.OnMouse(0, 0, x, y);
-    PassiveMouseComponentsHandler(x, y);
+    GameMouseHandler(button, state, x, y);
 }
 
 static void UpdateWindowSize(int width, int height)

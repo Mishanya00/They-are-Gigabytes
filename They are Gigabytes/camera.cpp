@@ -8,6 +8,17 @@ namespace rgl
     //------------------------------------------------//
     //              Quaternion camera                 //
     //------------------------------------------------//
+    Camera::Camera()
+    {
+        window_width_ = 1920;
+        window_height_ = 1080;
+        position_ = Vector3f(0.0f, 0.0f, 0.0f);
+        target_ = Vector3f(0.0f, 0.0f, 1.0f);
+        up_ = Vector3f(0.0f, 1.0f, 0.0f);
+
+        Init();
+    }
+
 
     Camera::Camera(int WindowWidth, int WindowHeight)
     {

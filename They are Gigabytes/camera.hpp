@@ -8,6 +8,8 @@ namespace rgl
 	{
 	public:
 
+		Camera();
+
         Camera(int WindowWidth, int WindowHeight);
 
         Camera(int WindowWidth, int WindowHeight, const Vector3f& Pos, 
