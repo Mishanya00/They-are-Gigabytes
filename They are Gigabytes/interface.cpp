@@ -137,16 +137,16 @@ void LowerPanel::Click()
     std::cout << "UpperPanel is clicked!\n";
 }
 
-Label1::Label1(std::shared_ptr<FontRenderer> font) : Panel()
+Label::Label(int xCoord, int yCoord, std::shared_ptr<FontRenderer> font) : Panel()
 {
     font_ = font;
-    left_ = 500;
-    bottom_ = 500;
+    left_ = xCoord;
+    bottom_ = yCoord;
 }
 
-void Label1::Render(InterfaceTechnique& shader)
+void Label::Render(InterfaceTechnique& shader)
 {
-    font_->RenderText(FONT_TYPE_OLD_STANDARD_30, rgl::clBlack, rgl::clBlack, 500, 500, "text.c_str()");
+    font_->RenderText(FONT_TYPE_OLD_STANDARD_30, rgl::clBlack, rgl::clBlack, left_, bottom_, "text.c_str()");
 }
 /*
 TextPanel::TextPanel(std::shared_ptr<rgl::FontRenderer> font_renderer, int xCoord, int yCoord) : Panel(0, 0, 0, 0)

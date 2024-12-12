@@ -15,7 +15,7 @@ std::shared_ptr<BasicMesh> extractor_mesh;
 void LoadMeshes()
 {
     tower_mesh = std::make_shared<BasicMesh>();
-    if (!tower_mesh->LoadMesh("../contents/buildings/tower/tower2.obj")) {
+    if (!tower_mesh->LoadMesh("../contents/buildings/tower/tower.obj")) {
         std::cerr << "Tower mesh not loaded!\n";
     }
 

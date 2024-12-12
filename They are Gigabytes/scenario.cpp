@@ -23,7 +23,7 @@ void Scenario::ReadScenarioInfo()
     mishanya::ReadFile(scenario_name_, buffer);
     ss << buffer;
 
-    ss >> x >> y;
+    ss >> y >> x;
 
     // One file for map and for all objects on it, so initially we skip to the buildings part
     for (int i = 0; i < y; i++)

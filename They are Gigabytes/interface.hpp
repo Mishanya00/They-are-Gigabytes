@@ -65,13 +65,44 @@ namespace rgl
 		void Click();
 	};
 
-	class Label1 : public Panel
+	class Label : public Panel
 	{
 	public:
-		Label1(std::shared_ptr<FontRenderer> font);
+		Label(int xCoord, int yCoord, std::shared_ptr<FontRenderer> font);
 
 		void Render(InterfaceTechnique& shader) override;
 		//void Click();
+
+	private:
+		std::shared_ptr<FontRenderer> font_;
+	};
+
+	class PlayButton : public Panel
+	{
+	public:
+		PlayButton();
+
+		void Click();
+	private:
+		std::shared_ptr<FontRenderer> font_;
+	};
+
+	class SettingsButton : public Panel
+	{
+	public:
+		SettingsButton();
+
+		void Click();
+	private:
+		std::shared_ptr<FontRenderer> font_;
+	};
+
+	class ExitButton : public Panel
+	{
+	public:
+		ExitButton();
+
+		void Click();
 	private:
 		std::shared_ptr<FontRenderer> font_;
 	};

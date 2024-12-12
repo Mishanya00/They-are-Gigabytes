@@ -94,7 +94,7 @@ void GameKernelInit()
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-    ActiveScenario = std::make_unique<Scenario>("../contents/scenarios/second_map.txt");
+    ActiveScenario = std::make_unique<Scenario>("../contents/scenarios/map2.txt");
     ActiveScenario->DrawSubsystemInit();
 }
 
@@ -105,17 +105,12 @@ void GameInterfaceInit()
 
     Font = std::make_shared<rgl::FontRenderer>();
     Font->InitFontRenderer(ClientWidth, ClientHeight);
-    /*
-    ComponentsList.push_back(rgl::Panel(0.0f, 0.0f, 1920.0f, 150.0f));
-    ComponentsList[ComponentsList.size() - 1].SetColor(Vector4f(0.0f, 0.0, 0.0f, 0.75f));
-    ComponentsList.push_back(rgl::UpperPanel(0.0f, 1030.0f, 1920.0f, 1080.0f));
-    ComponentsList[ComponentsList.size() - 1].SetColor(Vector4f(0.0f, 0.0, 0.0f, 0.75f));
-    ComponentsList.push_back(rgl::TextPanel(Font, 100, 100));*/
-    //ComponentsList[ComponentsList.size() - 1].SetColor(Vector4f(0.0f, 0.0, 0.0f, 0.75f));
 
     ComponentsList.push_back(std::make_unique<rgl::UpperPanel>());
     ComponentsList.push_back(std::make_unique<rgl::LowerPanel>());
-    ComponentsList.push_back(std::make_unique<rgl::Label1>(Font));
+    //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 100, Font));
+    //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 200, Font));
+    //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 300, Font));
 }
 
 void GameFrame()
