@@ -1,0 +1,14 @@
+# Blender 4.3.1 MTL File: 'cpu_pyramid.blend'
+# www.blender.org
+
+newmtl Материал.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd cpu_Material_BaseColor.png
+map_Ns cpu_Material_Roughness.png
+map_refl cpu_Material_Metallic.png
+map_Bump -bm 1.000000 cpu_Material_Normal.png

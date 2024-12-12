@@ -4,6 +4,7 @@
 
 using namespace rgl;
 
+// Actually, there are some bad code, may be I should not manually create "components library"
 
 Selection::Selection()
 {
@@ -39,7 +40,26 @@ void Selection::Render(InterfaceTechnique& shader)
     glDisableVertexAttribArray(0);
 }
 
-Panel::Panel(float left, float bottom, float right, float top)
+Panel::Panel()
+{
+    color_ = Vector4f(0.0f, 0.0f, 0.0f, 1.0f); // black
+    left_ = 0;
+    right_ = 0;
+    bottom_ = 0;
+    top_ = 0;
+    vertices_[0] = Vector3f(left_, bottom_, 0.0f);
+    vertices_[1] = Vector3f(right_, bottom_, 0.0f);
+    vertices_[2] = Vector3f(right_, top_, 0.0f);
+    vertices_[3] = Vector3f(left_, bottom_, 0.0f);
+    vertices_[4] = Vector3f(right_, top_, 0.0f);
+    vertices_[5] = Vector3f(left_, top_, 0.0f);
+
+    glGenBuffers(1, &VBO_);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO_);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_), vertices_, GL_STATIC_DRAW);
+}
+
+void Panel::SetRect(int left, int bottom, int right, int top)
 {
     left_ = left;
     bottom_ = bottom;
@@ -53,11 +73,8 @@ Panel::Panel(float left, float bottom, float right, float top)
     vertices_[4] = Vector3f(right, top, 0.0f);
     vertices_[5] = Vector3f(left, top, 0.0f);
 
-    color_ = Vector3f(0.0f, 0.0f, 0.0f); // black
-
-    glGenBuffers(1, &VBO_);
     glBindBuffer(GL_ARRAY_BUFFER, VBO_);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_), vertices_, GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices_), vertices_);
 }
 
 bool Panel::isHover()
@@ -72,7 +89,7 @@ bool Panel::isVisible()
 
 void Panel::Render(InterfaceTechnique& shader)
 {
-    shader.SetColorUniform(color_.x, color_.y, color_.z, 1.0f);
+    shader.SetColorUniform(color_.x, color_.y, color_.z, color_.w);
     glBindBuffer(GL_ARRAY_BUFFER, VBO_);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -80,7 +97,7 @@ void Panel::Render(InterfaceTechnique& shader)
     glDisableVertexAttribArray(0);
 }
 
-void Panel::SetColor(Vector3f new_color)
+void Panel::SetColor(Vector4f new_color)
 {
     color_ = new_color;
 }
@@ -98,11 +115,57 @@ void Panel::Click()
     std::cout << "Panel is clicked!\n";
 }
 
-UpperPanel::UpperPanel(float left, float bottom, float right, float top) : Panel(left, bottom, right, top)
+UpperPanel::UpperPanel() : Panel()
 {
+    SetRect(0, 0, 1920, 150);
+    SetColor(Vector4f(0.0f, 0.0, 0.0f, 0.75f));
 }
 
 void UpperPanel::Click()
 {
     std::cout << "UpperPanel is clicked!\n";
 }
+
+LowerPanel::LowerPanel() : Panel()
+{
+    SetRect(0, 1000, 1920, 1080);
+    SetColor(Vector4f(0.0f, 0.0, 0.0f, 0.75f));
+}
+
+void LowerPanel::Click()
+{
+    std::cout << "UpperPanel is clicked!\n";
+}
+
+Label1::Label1(std::shared_ptr<FontRenderer> font) : Panel()
+{
+    font_ = font;
+    left_ = 500;
+    bottom_ = 500;
+}
+
+void Label1::Render(InterfaceTechnique& shader)
+{
+    font_->RenderText(FONT_TYPE_OLD_STANDARD_30, rgl::clBlack, rgl::clBlack, 500, 500, "text.c_str()");
+}
+/*
+TextPanel::TextPanel(std::shared_ptr<rgl::FontRenderer> font_renderer, int xCoord, int yCoord) : Panel(0, 0, 0, 0)
+{
+    text = "text";
+    x = xCoord;
+    y = yCoord;
+    isVisible = true;
+    color = rgl::clBlack;
+    font_ = font_renderer;
+}
+
+TextPanel::TextPanel(std::shared_ptr<rgl::FontRenderer> font_renderer, std::string label_text, int xCoord, int yCoord) : TextPanel(font_renderer, xCoord, yCoord)
+{
+    text = label_text;
+}
+
+void TextPanel::Render(rgl::FONT_TYPE type)
+{
+    font_->RenderText(type, color, color, x, y, text.c_str());
+}
+*/

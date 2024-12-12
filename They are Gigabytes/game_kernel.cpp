@@ -21,8 +21,8 @@
 int ClientWidth = 1920;
 int ClientHeight = 1080;
 
-std::vector<rgl::Panel> ComponentsList;
-rgl::FontRenderer Font;
+std::vector<std::unique_ptr<rgl::Panel>> ComponentsList; // array of pointers to allow polymorphism
+std::shared_ptr<rgl::FontRenderer> Font;
 std::unique_ptr<Scenario> ActiveScenario;
 
 InterfaceTechnique* InterfaceShader;
@@ -75,8 +75,8 @@ void PassiveMouseComponentsHandler(int x, int y)
     y = ClientHeight - y;
     for (int i = 0; i < ComponentsList.size(); i++)
     {
-        ComponentsList[i].SetHover(x, y);
-        if (ComponentsList[i].isHover())
+        ComponentsList[i]->SetHover(x, y);
+        if (ComponentsList[i]->isHover())
             std::cout << "Panel " << i << " is hovered!\n";
     }
 }
@@ -94,21 +94,28 @@ void GameKernelInit()
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-    ActiveScenario = std::make_unique<Scenario>("../contents/scenarios/first_map.txt");
+    ActiveScenario = std::make_unique<Scenario>("../contents/scenarios/second_map.txt");
     ActiveScenario->DrawSubsystemInit();
 }
 
 void GameInterfaceInit()
 {
-    ComponentsList.push_back(rgl::Panel(0.0f, 0.0f, 1920.0f, 150.0f));
-    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.0, 0.0f));
-    ComponentsList.push_back(rgl::UpperPanel(0.0f, 1030.0f, 1920.0f, 1080.0f));
-    ComponentsList[ComponentsList.size() - 1].SetColor(Vector3f(0.0f, 0.0, 0.0f));
-
-    Font.InitFontRenderer(ClientWidth, ClientHeight);
-
     InterfaceShader = new InterfaceTechnique;
     InterfaceShader->Init();
+
+    Font = std::make_shared<rgl::FontRenderer>();
+    Font->InitFontRenderer(ClientWidth, ClientHeight);
+    /*
+    ComponentsList.push_back(rgl::Panel(0.0f, 0.0f, 1920.0f, 150.0f));
+    ComponentsList[ComponentsList.size() - 1].SetColor(Vector4f(0.0f, 0.0, 0.0f, 0.75f));
+    ComponentsList.push_back(rgl::UpperPanel(0.0f, 1030.0f, 1920.0f, 1080.0f));
+    ComponentsList[ComponentsList.size() - 1].SetColor(Vector4f(0.0f, 0.0, 0.0f, 0.75f));
+    ComponentsList.push_back(rgl::TextPanel(Font, 100, 100));*/
+    //ComponentsList[ComponentsList.size() - 1].SetColor(Vector4f(0.0f, 0.0, 0.0f, 0.75f));
+
+    ComponentsList.push_back(std::make_unique<rgl::UpperPanel>());
+    ComponentsList.push_back(std::make_unique<rgl::LowerPanel>());
+    ComponentsList.push_back(std::make_unique<rgl::Label1>(Font));
 }
 
 void GameFrame()
@@ -131,15 +138,10 @@ void DrawInterface()
 
     for (int i = 0; i < ComponentsList.size(); i++)
     {
-        ComponentsList[i].Render(*InterfaceShader);
+        ComponentsList[i]->Render(*InterfaceShader);
     }
 
-    Font.RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
-    Font.RenderText(rgl::FONT_TYPE_OLD_STANDARD_46, rgl::clBlue, rgl::clYellow, 50, 900, "They are Gigabytes!");
-    Font.RenderText(rgl::FONT_TYPE_SOURCE_CODE_PRO_30, rgl::clYellow, rgl::clYellow, 50, 800, "They are Gigabytes!");
-    Font.RenderText(rgl::FONT_TYPE_SOURCE_CODE_PRO_46, rgl::clRed, rgl::clYellow, 50, 700, "They are Gigabytes!");
-    Font.RenderText(rgl::FONT_TYPE_SOURCE_SANS_PRO_30, rgl::clCyan, rgl::clYellow, 50, 600, "They are Gigabytes!");
-    Font.RenderText(rgl::FONT_TYPE_SOURCE_SANS_PRO_46, rgl::clWhite, rgl::clYellow, 50, 500, "They are Gigabytes!");
+    Font->RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
 }
 
 void DrawGameFrame()

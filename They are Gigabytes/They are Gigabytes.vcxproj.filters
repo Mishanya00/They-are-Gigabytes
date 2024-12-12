@@ -30,10 +30,6 @@
     <Filter Include="Model">
       <UniqueIdentifier>{b98bc88e-89a5-43dc-9510-6bb57394e68d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Other">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,15 +56,6 @@
     <ClCompile Include="basic_mesh.cpp">
       <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="audio.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
-    <ClCompile Include="math_3d.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
-    <ClCompile Include="mishanya_utils.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
     <ClCompile Include="map.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
@@ -90,17 +77,26 @@
     <ClCompile Include="miniaudio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="interface.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
     <ClCompile Include="interface_technique.cpp">
       <Filter>Shaders\Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Include\FreetypeGL\freetypeGL.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
     <ClCompile Include="scenario.cpp">
       <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="mishanya_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math_3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\FreetypeGL\freetypeGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,15 +124,6 @@
     <ClInclude Include="mesh_common.hpp">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="mishanya_utils.hpp">
-      <Filter>Other</Filter>
-    </ClInclude>
-    <ClInclude Include="audio.hpp">
-      <Filter>Other</Filter>
-    </ClInclude>
-    <ClInclude Include="math_3d.h">
-      <Filter>Other</Filter>
-    </ClInclude>
     <ClInclude Include="map.hpp">
       <Filter>Gameplay</Filter>
     </ClInclude>
@@ -158,17 +145,26 @@
     <ClInclude Include="meshes_manager.hpp">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="interface.hpp">
-      <Filter>Other</Filter>
-    </ClInclude>
     <ClInclude Include="interface_technique.hpp">
       <Filter>Shaders\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FreetypeGL\freetypeGL.h">
-      <Filter>Other</Filter>
-    </ClInclude>
     <ClInclude Include="scenario.hpp">
       <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\FreetypeGL\freetypeGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interface.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math_3d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mishanya_utils.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,7 @@ std::shared_ptr<BasicMesh> zigg_mesh;
 std::shared_ptr<BasicMesh> cpu_mesh;
 std::shared_ptr<BasicMesh> tile_mesh;
 std::shared_ptr<BasicMesh> energy_tile_mesh;
+std::shared_ptr<BasicMesh> extractor_mesh;
 
 void LoadMeshes()
 {
@@ -36,5 +37,10 @@ void LoadMeshes()
     energy_tile_mesh = std::make_shared<BasicMesh>();
     if (!energy_tile_mesh->LoadMesh(ENERGY_TILE_MODEL_PATH)) {
         std::cerr << "energy tile mesh not loaded!\n";
+    }
+
+    extractor_mesh = std::make_shared<BasicMesh>();
+    if (!extractor_mesh->LoadMesh("../contents/buildings/extractor/extractor.obj")) {
+        std::cerr << "energy extractor mesh not loaded!\n";
     }
 }

@@ -1,4 +1,4 @@
-# Blender 4.3.0 MTL File: 'cpu_pyramid.blend'
+# Blender 4.3.1 MTL File: 'cpu_pyramid.blend'
 # www.blender.org
 
 newmtl Материал
@@ -13,6 +13,6 @@ Pcr 0.030000
 # aniso 0.000000
 # anisor 0.000000
 map_Kd cpu_DefaultMaterial_BaseColor.png
-map_Pm cpu_DefaultMaterial_Metallic.png
-map_Pr cpu_DefaultMaterial_Roughness.png
+map_Ns cpu_DefaultMaterial_Roughness.png
+map_refl cpu_DefaultMaterial_Metallic.png
 map_Bump -bm 1.000000 cpu_DefaultMaterial_Normal.png
