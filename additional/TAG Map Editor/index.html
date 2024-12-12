@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <title>[TAG] Map Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>They are Gigabytes! Map editor</h1>
+        <div class="input-section">
+            <label for="width">Width:</label>
+            <input type="number" id="width" min="1" value="5">
+            <label for="height">Height:</label>
+            <input type="number" id="height" min="1" value="5">
+            <button id="generate-map">Generate Map</button>
+        </div>
+        <div class="map-editor">
+            <div id="map-grid-container">
+                <div id="map-grid"></div>
+            </div>
+        </div>
+        <div class="building-panel">
+            <h2>Buildings</h2>
+            <div id="building-list">
+                <div class="building" data-building="100"><img src="contents/cell.jpg" alt="Tile"></div>
+                <div class="building" data-building="200"><img src="contents/energy_tile.jpg" alt="Energy tile"></div>
+                <div class="building" data-building="5"><img src="contents/cpu.jpg" alt="CPU"></div>
+                <div class="building" data-building="3"><img src="contents/extractor.jpg" alt="Extractor"></div>
+                <div class="building" data-building="2"><img src="contents/tower.jpg" alt="Tower"></div>
+                <div class="building" data-building="-1"><img src="contents/ziggurat2.jpg" alt="Ziggurat"></div>
+            </div>
+        </div>
+        <button id="save-map">Save Map</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

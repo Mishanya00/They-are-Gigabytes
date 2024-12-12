@@ -1,0 +1,145 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('contents/background.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 50, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+}
+
+.input-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.input-section label {
+    margin-right: 10px;
+    color: #fff;
+}
+
+.input-section input {
+    width: 60px;
+    margin-right: 10px;
+    background-color: #001f3f;
+    color: #fff;
+    border: 1px solid #0074d9;
+}
+
+.map-editor {
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+#map-grid-container {
+    overflow: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    max-height: 400px; /* Adjust as needed */
+    overflow-y: auto; /* Add vertical scrollbar */
+}
+
+#map-grid {
+    display: grid;
+    gap: 2px;
+    background-color: #001f3f;
+}
+
+.cell {
+    background: url('contents/cell.jpg') no-repeat center center;
+    background-size: cover;
+    border: 1px solid #0074d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    min-height: 50px;
+    min-width: 50px;
+}
+
+.cell img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.building-panel {
+    margin-bottom: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+#building-list {
+    display: flex;
+}
+
+.building {
+    background-color: #0074d9;
+    color: #fff;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    transition: background-color 0.3s ease;
+}
+
+.building img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.building.selected {
+    background-color: #ff851b;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #0074d9;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
+	appearance: textfield;
+}
+ 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	display: none;
+}
