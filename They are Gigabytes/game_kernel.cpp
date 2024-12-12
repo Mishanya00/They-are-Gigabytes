@@ -17,45 +17,6 @@
 
 #include "scenario.hpp"
 
-
-int ClientWidth = 1920;
-int ClientHeight = 1080;
-
-std::vector<std::unique_ptr<rgl::Panel>> ComponentsList; // array of pointers to allow polymorphism
-std::shared_ptr<rgl::FontRenderer> Font;
-std::unique_ptr<Scenario> ActiveScenario;
-
-InterfaceTechnique* InterfaceShader;
-
-
-void KeyboardHandler(unsigned char key, int x, int y)
-{
-    ActiveScenario->GameCamera.OnKeyboard(key);
-
-    switch (key)
-    {
-    case 27:
-        exit(0);
-        break;
-    }
-}
-
-void KeyboardSpecialHandler(int key, int x, int y)
-{
-    ActiveScenario->GameCamera.OnKeyboard(key);
-}
-
-void PassiveMotionHandler(int x, int y)
-{
-    ActiveScenario->GameCamera.OnMouse(0, 0, x, y);
-    PassiveMouseComponentsHandler(x, y);
-}
-
-void GameMouseHandler(int button, int state, int x, int y)
-{
-    ActiveScenario->GameCamera.OnMouse(button, state, x, y);
-}
-
 struct Vertex
 {
     Vector3f pos;
@@ -70,6 +31,49 @@ struct Vertex
     }
 };
 
+int ClientWidth = 1920;
+int ClientHeight = 1080;
+
+std::vector<std::unique_ptr<rgl::Panel>> ComponentsList; // array of pointers to allow polymorphism
+std::shared_ptr<rgl::FontRenderer> Font;
+std::unique_ptr<Scenario> ActiveScenario;
+
+InterfaceTechnique* InterfaceShader;
+
+
+void KeyboardHandler(unsigned char key, int x, int y)
+{
+    if (ActiveScenario)
+        ActiveScenario->GameCamera.OnKeyboard(key);
+
+    switch (key)
+    {
+    case 27:
+        exit(0);
+        break;
+    }
+}
+
+void KeyboardSpecialHandler(int key, int x, int y)
+{
+    if (ActiveScenario)
+        ActiveScenario->GameCamera.OnKeyboard(key);
+}
+
+void PassiveMotionHandler(int x, int y)
+{
+    if (ActiveScenario)
+        ActiveScenario->GameCamera.OnMouse(0, 0, x, y);
+
+    PassiveMouseComponentsHandler(x, y);
+}
+
+void GameMouseHandler(int button, int state, int x, int y)
+{
+    if (ActiveScenario)
+        ActiveScenario->GameCamera.OnMouse(button, state, x, y);
+}
+
 void PassiveMouseComponentsHandler(int x, int y)
 {
     y = ClientHeight - y;
@@ -79,6 +83,18 @@ void PassiveMouseComponentsHandler(int x, int y)
         if (ComponentsList[i]->isHover())
             std::cout << "Panel " << i << " is hovered!\n";
     }
+}
+
+void SetMenuComponents()
+{
+    ComponentsList.clear();
+
+    ComponentsList.push_back(std::make_unique<rgl::Panel>());
+    ComponentsList[0]->SetRect(0, 0, 1920, 1080);
+    ComponentsList[0]->SetColor(Vector4f(0.024, 0.471, 0.922, 1.0f));
+    ComponentsList.push_back(std::make_unique<rgl::PlayButton>(Font));
+    ComponentsList.push_back(std::make_unique<rgl::SettingsButton>(Font));
+    ComponentsList.push_back(std::make_unique<rgl::ExitButton>(Font));
 }
 
 void GameKernelInit()
@@ -94,8 +110,8 @@ void GameKernelInit()
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
-    ActiveScenario = std::make_unique<Scenario>("../contents/scenarios/map2.txt");
-    ActiveScenario->DrawSubsystemInit();
+    //ActiveScenario = std::make_unique<Scenario>("../contents/scenarios/map2.txt");
+    //ActiveScenario->DrawSubsystemInit();
 }
 
 void GameInterfaceInit()
@@ -106,8 +122,11 @@ void GameInterfaceInit()
     Font = std::make_shared<rgl::FontRenderer>();
     Font->InitFontRenderer(ClientWidth, ClientHeight);
 
-    ComponentsList.push_back(std::make_unique<rgl::UpperPanel>());
-    ComponentsList.push_back(std::make_unique<rgl::LowerPanel>());
+    //ComponentsList.push_back(std::make_unique<rgl::UpperPanel>());
+    //ComponentsList.push_back(std::make_unique<rgl::LowerPanel>());
+
+    SetMenuComponents();
+
     //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 100, Font));
     //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 200, Font));
     //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 300, Font));
@@ -115,20 +134,22 @@ void GameInterfaceInit()
 
 void GameFrame()
 {
-    ActiveScenario->GameCamera.OnFrame();
+    if (ActiveScenario)
+        ActiveScenario->GameCamera.OnFrame();
 }
 
 void UpdateGameWindowSize(int width, int height)
 {
-    ActiveScenario->ProjectionInfo.Width = (float)ClientWidth;
-    ActiveScenario->ProjectionInfo.Height = (float)ClientHeight;
-    ActiveScenario->GameCamera.SetWindowSize(ClientWidth, ClientHeight);
+    if (ActiveScenario)
+    {
+        ActiveScenario->ProjectionInfo.Width = (float)ClientWidth;
+        ActiveScenario->ProjectionInfo.Height = (float)ClientHeight;
+        ActiveScenario->GameCamera.SetWindowSize(ClientWidth, ClientHeight);
+    }
 }
 
 void DrawInterface()
 {
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_DEPTH_TEST);
     InterfaceShader->Enable();
 
     for (int i = 0; i < ComponentsList.size(); i++)
@@ -141,5 +162,6 @@ void DrawInterface()
 
 void DrawGameFrame()
 {
-    ActiveScenario->DrawGameFrame();
+    if (ActiveScenario)
+        ActiveScenario->DrawGameFrame();
 }

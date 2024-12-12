@@ -15,7 +15,7 @@ public:
 
 	virtual bool Init();
 
-	void Enable();
+	virtual void Enable();
 
 
 	// Here will be all uniform parameters that are needed to transmit to shader program of any class

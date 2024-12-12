@@ -89,6 +89,7 @@ bool Panel::isVisible()
 
 void Panel::Render(InterfaceTechnique& shader)
 {
+    shader.Enable();
     shader.SetColorUniform(color_.x, color_.y, color_.z, color_.w);
     glBindBuffer(GL_ARRAY_BUFFER, VBO_);
     glEnableVertexAttribArray(0);
@@ -148,24 +149,43 @@ void Label::Render(InterfaceTechnique& shader)
 {
     font_->RenderText(FONT_TYPE_OLD_STANDARD_30, rgl::clBlack, rgl::clBlack, left_, bottom_, "text.c_str()");
 }
-/*
-TextPanel::TextPanel(std::shared_ptr<rgl::FontRenderer> font_renderer, int xCoord, int yCoord) : Panel(0, 0, 0, 0)
+
+// Some duplicated code just to create separate click() handlers
+PlayButton::PlayButton(std::shared_ptr<FontRenderer> font) : Panel()
 {
-    text = "text";
-    x = xCoord;
-    y = yCoord;
-    isVisible = true;
-    color = rgl::clBlack;
-    font_ = font_renderer;
+    font_ = font;
+    SetRect(500, 700, 1500, 800);
+    SetColor(Vector4f(0.482, 0.698, 0.91, 1.0f));
 }
 
-TextPanel::TextPanel(std::shared_ptr<rgl::FontRenderer> font_renderer, std::string label_text, int xCoord, int yCoord) : TextPanel(font_renderer, xCoord, yCoord)
+void PlayButton::Render(InterfaceTechnique& shader)
 {
-    text = label_text;
+    Panel::Render(shader);
+    font_->RenderText(FONT_TYPE_OLD_STANDARD_46, rgl::clBlack, rgl::clBlack, (left_+right_)/2 - 100, (top_+bottom_)/2 - 25, "PLAY");
 }
 
-void TextPanel::Render(rgl::FONT_TYPE type)
+SettingsButton::SettingsButton(std::shared_ptr<FontRenderer> font)
 {
-    font_->RenderText(type, color, color, x, y, text.c_str());
+    font_ = font;
+    SetRect(500, 500, 1500, 600);
+    SetColor(Vector4f(0.482, 0.698, 0.91, 1.0f));
 }
-*/
+
+void SettingsButton::Render(InterfaceTechnique& shader)
+{
+    Panel::Render(shader);
+    font_->RenderText(FONT_TYPE_OLD_STANDARD_46, rgl::clBlack, rgl::clBlack, (left_ + right_) / 2 - 150, (top_ + bottom_) / 2 - 25, "SETTINGS");
+}
+
+ExitButton::ExitButton(std::shared_ptr<FontRenderer> font)
+{
+    font_ = font;
+    SetRect(500, 300, 1500, 400);
+    SetColor(Vector4f(0.482, 0.698, 0.91, 1.0f));
+}
+
+void ExitButton::Render(InterfaceTechnique& shader)
+{
+    Panel::Render(shader);
+    font_->RenderText(FONT_TYPE_OLD_STANDARD_46, rgl::clBlack, rgl::clBlack, (left_ + right_) / 2 - 100, (top_ + bottom_) / 2 - 25, "EXIT");
+}

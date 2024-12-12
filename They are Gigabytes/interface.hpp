@@ -77,12 +77,14 @@ namespace rgl
 		std::shared_ptr<FontRenderer> font_;
 	};
 
+	// MAIN MENU BUTTONS
+
 	class PlayButton : public Panel
 	{
 	public:
-		PlayButton();
+		PlayButton(std::shared_ptr<FontRenderer> font);
 
-		void Click();
+		void Render(InterfaceTechnique& shader) override;
 	private:
 		std::shared_ptr<FontRenderer> font_;
 	};
@@ -90,9 +92,10 @@ namespace rgl
 	class SettingsButton : public Panel
 	{
 	public:
-		SettingsButton();
+		SettingsButton(std::shared_ptr<FontRenderer> font);
 
-		void Click();
+		void Render(InterfaceTechnique& shader) override;
+
 	private:
 		std::shared_ptr<FontRenderer> font_;
 	};
@@ -100,30 +103,11 @@ namespace rgl
 	class ExitButton : public Panel
 	{
 	public:
-		ExitButton();
+		ExitButton(std::shared_ptr<FontRenderer> font);
 
-		void Click();
-	private:
-		std::shared_ptr<FontRenderer> font_;
-	};
-	/*
-	class TextPanel : public Panel
-	{
-	public:
-		TextPanel(std::shared_ptr<rgl::FontRenderer> font_renderer, int xCoord, int yCoord);
-		TextPanel(std::shared_ptr<rgl::FontRenderer>, std::string label_text, int xCoord, int yCoord);
-
-		//void Render();
-		void Render(rgl::FONT_TYPE type);
-
-		// Public for direct changes from code such as in Visual Components Libs
-		std::string text;
-		vec4 color;
-		int x, y;
-		bool isVisible;
+		void Render(InterfaceTechnique& shader) override;
 
 	private:
 		std::shared_ptr<FontRenderer> font_;
 	};
-	*/
 }

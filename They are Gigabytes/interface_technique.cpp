@@ -1,8 +1,6 @@
 #include "interface_technique.hpp"
 
-InterfaceTechnique::InterfaceTechnique()
-{
-}
+InterfaceTechnique::InterfaceTechnique() {}
 
 bool InterfaceTechnique::Init()
 {
@@ -34,6 +32,12 @@ bool InterfaceTechnique::Init()
 
 void InterfaceTechnique::SetColorUniform(GLfloat r, GLfloat g, GLfloat b, GLfloat alpha)
 {
-    //glUniform4fv(colorLoc, 1, GL_TRUE, (const GLfloat*)RGB);
     glUniform4f(colorLoc, r, g, b, alpha);
+}
+
+void InterfaceTechnique::Enable()
+{
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_DEPTH_TEST);
+    Technique::Enable();
 }
