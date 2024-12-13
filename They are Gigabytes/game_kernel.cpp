@@ -62,6 +62,7 @@ void KeyboardSpecialHandler(int key, int x, int y)
 
 void PassiveMotionHandler(int x, int y)
 {
+    std::cout << x << ' ' << y << '\n';
     if (ActiveScenario)
         ActiveScenario->GameCamera.OnMouse(0, 0, x, y);
 
@@ -91,10 +92,38 @@ void SetMenuComponents()
 
     ComponentsList.push_back(std::make_unique<rgl::Panel>());
     ComponentsList[0]->SetRect(0, 0, 1920, 1080);
-    ComponentsList[0]->SetColor(Vector4f(0.024, 0.471, 0.922, 1.0f));
-    ComponentsList.push_back(std::make_unique<rgl::PlayButton>(Font));
-    ComponentsList.push_back(std::make_unique<rgl::SettingsButton>(Font));
-    ComponentsList.push_back(std::make_unique<rgl::ExitButton>(Font));
+    ComponentsList[0]->SetColor(Vector4f(0.051, 0.157, 0.62, 1.0f));
+    ComponentsList[0]->SetComponentType(rgl::ctButtonPlay);
+
+    ComponentsList.push_back(std::make_unique<rgl::TextPanel>(Font));
+    ComponentsList[1]->SetRect(500, 700, 1500, 800);
+    ComponentsList[1]->SetText("PLAY!");
+    ComponentsList[1]->SetComponentType(rgl::ctButtonPlay);
+
+    ComponentsList.push_back(std::make_unique<rgl::TextPanel>(Font));
+    ComponentsList[2]->SetRect(500, 500, 1500, 600);
+    ComponentsList[2]->SetText("SETTINGS!");
+    ComponentsList[2]->SetComponentType(rgl::ctButtonPlay);
+
+    ComponentsList.push_back(std::make_unique<rgl::TextPanel>(Font));
+    ComponentsList[3]->SetRect(500, 300, 1500, 400);
+    ComponentsList[3]->SetText("Exit!");
+    ComponentsList[3]->SetComponentType(rgl::ctButtonPlay);
+}
+
+void SetGameComponents()
+{
+    ComponentsList.clear();
+
+    ComponentsList.push_back(std::make_unique<rgl::UpperPanel>());
+    ComponentsList.push_back(std::make_unique<rgl::LowerPanel>());
+}
+
+void LaunchScenario(std::string scenario_name)
+{
+    ActiveScenario = std::make_unique<Scenario>(scenario_name);
+    ActiveScenario->DrawSubsystemInit();
+    SetGameComponents();
 }
 
 void GameKernelInit()
@@ -109,9 +138,7 @@ void GameKernelInit()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-
-    //ActiveScenario = std::make_unique<Scenario>("../contents/scenarios/map2.txt");
-    //ActiveScenario->DrawSubsystemInit();
+    LaunchScenario("../contents/scenarios/map.txt");
 }
 
 void GameInterfaceInit()
@@ -122,14 +149,7 @@ void GameInterfaceInit()
     Font = std::make_shared<rgl::FontRenderer>();
     Font->InitFontRenderer(ClientWidth, ClientHeight);
 
-    //ComponentsList.push_back(std::make_unique<rgl::UpperPanel>());
-    //ComponentsList.push_back(std::make_unique<rgl::LowerPanel>());
-
-    SetMenuComponents();
-
-    //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 100, Font));
-    //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 200, Font));
-    //ComponentsList.push_back(std::make_unique<rgl::Label>(100, 300, Font));
+    //SetMenuComponents();
 }
 
 void GameFrame()

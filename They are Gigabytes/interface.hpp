@@ -9,6 +9,13 @@
 
 namespace rgl
 {
+	enum ComponentType {
+		ctNone,
+		ctButtonPlay,
+		ctButtonSettings,
+		ctButtonExit
+	};
+
 	class Selection
 	{
 	public:
@@ -36,16 +43,22 @@ namespace rgl
 		void SetRect(int left, int bottom, int right, int top);
 		void SetHover(int mouseX, int mouseY);
 		void SetColor(Vector4f new_color);
+		void SetComponentType(ComponentType new_type);
 
 		bool isHover();
 		bool isVisible();
 		virtual void Click();
 
+		// for polymorphism (TextPanel). Panel class does not use this functionality
+		virtual void SetText(std::string new_text) {}		 
+		virtual void SetFontType(FONT_TYPE new_font_type) {}
+
 	protected:
+		ComponentType type_ = ctNone;
 		GLuint VBO_;
 		int left_, bottom_, right_, top_;
 		Vector3f vertices_[6];
-		Vector4f color_;
+		vec4 color_;
 		char isHover_, isDown_, isVisible_;
 	};
 
@@ -79,35 +92,18 @@ namespace rgl
 
 	// MAIN MENU BUTTONS
 
-	class PlayButton : public Panel
+	class TextPanel : public Panel
 	{
 	public:
-		PlayButton(std::shared_ptr<FontRenderer> font);
+		TextPanel(std::shared_ptr<FontRenderer> font);
+
+		void SetText(std::string new_text);
+		void SetFontType(FONT_TYPE new_font_type);
 
 		void Render(InterfaceTechnique& shader) override;
 	private:
-		std::shared_ptr<FontRenderer> font_;
-	};
-
-	class SettingsButton : public Panel
-	{
-	public:
-		SettingsButton(std::shared_ptr<FontRenderer> font);
-
-		void Render(InterfaceTechnique& shader) override;
-
-	private:
-		std::shared_ptr<FontRenderer> font_;
-	};
-
-	class ExitButton : public Panel
-	{
-	public:
-		ExitButton(std::shared_ptr<FontRenderer> font);
-
-		void Render(InterfaceTechnique& shader) override;
-
-	private:
+		std::string text_;
+		FONT_TYPE font_type_;
 		std::shared_ptr<FontRenderer> font_;
 	};
 }

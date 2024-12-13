@@ -42,11 +42,16 @@ void Selection::Render(InterfaceTechnique& shader)
 
 Panel::Panel()
 {
-    color_ = Vector4f(0.0f, 0.0f, 0.0f, 1.0f); // black
+    color_.x = 0.0f;
+    color_.y = 0.0f;
+    color_.z = 0.0f;
+    color_.w = 1.0f;
+
     left_ = 0;
     right_ = 0;
     bottom_ = 0;
     top_ = 0;
+
     vertices_[0] = Vector3f(left_, bottom_, 0.0f);
     vertices_[1] = Vector3f(right_, bottom_, 0.0f);
     vertices_[2] = Vector3f(right_, top_, 0.0f);
@@ -57,6 +62,11 @@ Panel::Panel()
     glGenBuffers(1, &VBO_);
     glBindBuffer(GL_ARRAY_BUFFER, VBO_);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_), vertices_, GL_STATIC_DRAW);
+}
+
+void Panel::SetComponentType(ComponentType new_type)
+{
+    type_ = new_type;
 }
 
 void Panel::SetRect(int left, int bottom, int right, int top)
@@ -100,7 +110,10 @@ void Panel::Render(InterfaceTechnique& shader)
 
 void Panel::SetColor(Vector4f new_color)
 {
-    color_ = new_color;
+    color_.x = new_color.x;
+    color_.y = new_color.y;
+    color_.z = new_color.z;
+    color_.w = new_color.w;
 }
 
 void Panel::SetHover(int mouseX, int mouseY)
@@ -151,41 +164,25 @@ void Label::Render(InterfaceTechnique& shader)
 }
 
 // Some duplicated code just to create separate click() handlers
-PlayButton::PlayButton(std::shared_ptr<FontRenderer> font) : Panel()
+TextPanel::TextPanel(std::shared_ptr<FontRenderer> font) : Panel()
 {
     font_ = font;
     SetRect(500, 700, 1500, 800);
     SetColor(Vector4f(0.482, 0.698, 0.91, 1.0f));
 }
 
-void PlayButton::Render(InterfaceTechnique& shader)
+void TextPanel::SetFontType(FONT_TYPE new_font_type)
+{
+    font_type_ = new_font_type;
+}
+
+void TextPanel::SetText(std::string new_text)
+{
+    text_ = new_text;
+}
+
+void TextPanel::Render(InterfaceTechnique& shader)
 {
     Panel::Render(shader);
-    font_->RenderText(FONT_TYPE_OLD_STANDARD_46, rgl::clBlack, rgl::clBlack, (left_+right_)/2 - 100, (top_+bottom_)/2 - 25, "PLAY");
-}
-
-SettingsButton::SettingsButton(std::shared_ptr<FontRenderer> font)
-{
-    font_ = font;
-    SetRect(500, 500, 1500, 600);
-    SetColor(Vector4f(0.482, 0.698, 0.91, 1.0f));
-}
-
-void SettingsButton::Render(InterfaceTechnique& shader)
-{
-    Panel::Render(shader);
-    font_->RenderText(FONT_TYPE_OLD_STANDARD_46, rgl::clBlack, rgl::clBlack, (left_ + right_) / 2 - 150, (top_ + bottom_) / 2 - 25, "SETTINGS");
-}
-
-ExitButton::ExitButton(std::shared_ptr<FontRenderer> font)
-{
-    font_ = font;
-    SetRect(500, 300, 1500, 400);
-    SetColor(Vector4f(0.482, 0.698, 0.91, 1.0f));
-}
-
-void ExitButton::Render(InterfaceTechnique& shader)
-{
-    Panel::Render(shader);
-    font_->RenderText(FONT_TYPE_OLD_STANDARD_46, rgl::clBlack, rgl::clBlack, (left_ + right_) / 2 - 100, (top_ + bottom_) / 2 - 25, "EXIT");
+    font_->RenderText(font_type_, rgl::clBlack, rgl::clBlack, (left_+right_)/2 - 100, (top_+bottom_)/2 - 20, text_.c_str());
 }
