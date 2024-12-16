@@ -1,5 +1,6 @@
 #include "game_kernel.hpp"
 
+#include <glfw3.h>
 #include <vector>
 #include <iostream>
 #include <memory>
@@ -41,38 +42,42 @@ std::unique_ptr<Scenario> ActiveScenario;
 InterfaceTechnique* InterfaceShader;
 
 
-void KeyboardHandler(unsigned char key, int x, int y)
+void GameKeyboardHandler(int key)
 {
     if (ActiveScenario)
         ActiveScenario->GameCamera.OnKeyboard(key);
 
     switch (key)
     {
-    case 27:
+    case GLFW_KEY_ESCAPE:
         exit(0);
         break;
     }
 }
 
-void KeyboardSpecialHandler(int key, int x, int y)
+void GameKeyboardSpecialHandler(int key, int x, int y)
 {
     if (ActiveScenario)
         ActiveScenario->GameCamera.OnKeyboard(key);
 }
 
-void PassiveMotionHandler(int x, int y)
+void GamePassiveMotionHandler(int x, int y)
 {
     std::cout << x << ' ' << y << '\n';
     if (ActiveScenario)
-        ActiveScenario->GameCamera.OnMouse(0, 0, x, y);
+        ActiveScenario->GameCamera.OnMouse(x, y);
 
     PassiveMouseComponentsHandler(x, y);
 }
 
 void GameMouseHandler(int button, int state, int x, int y)
 {
+}
+
+void GameMouseScrollHandler(double yoffset)
+{
     if (ActiveScenario)
-        ActiveScenario->GameCamera.OnMouse(button, state, x, y);
+        ActiveScenario->GameCamera.OnScroll(yoffset);
 }
 
 void PassiveMouseComponentsHandler(int x, int y)

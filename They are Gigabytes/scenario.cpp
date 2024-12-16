@@ -50,8 +50,8 @@ void Scenario::ScenarioInit()
 {
     GameCamera.SetWindowSize(1920, 1080);
     GameCamera.SetPosition(Vector3f(0.0f, 3.0f, -5.0f));
-    GameCamera.SetSpeed(0.2f);
-    GameCamera.SetRotationSpeed(1.5f);
+    GameCamera.SetSpeed(0.1f);
+    GameCamera.SetRotationSpeed(0.75f);
     GameCamera.Rotate(45.0f, 0, 0);
 
     ReadScenarioInfo();

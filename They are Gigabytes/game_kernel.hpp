@@ -18,6 +18,7 @@ void GameInterfaceInit();
 void DrawInterface();
 
 void GameMouseHandler(int button, int state, int x, int y);
-void KeyboardHandler(unsigned char key, int x, int y);
-void PassiveMotionHandler(int x, int y);
-void KeyboardSpecialHandler(int key, int x, int y);
+void GameKeyboardHandler(int key);
+void GamePassiveMotionHandler(int x, int y);
+void GameKeyboardSpecialHandler(int key, int x, int y);
+void GameMouseScrollHandler(double yoffset);

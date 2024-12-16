@@ -205,15 +205,29 @@ namespace rgl
         Update();
     }
 
-    void Camera::OnMouse(int button, int state, int x, int y)
+    void Camera::OnScroll(double yoffset)
+    {
+        if (yoffset > 0)
+        {
+            if (position_.y > 1.0f) // prohibits camera to be too near from map
+                position_ += target_ * 3 * speed_;
+        }
+        else if (yoffset < 0)
+        {
+            if (position_.y < 10.0f) // prohibits camera to be too far from map
+                position_ -= target_ * 3 * speed_;
+        }
+    }
+
+    void Camera::OnMouse(int x, int y)
     {
         mouse_pos_.x = x;
         mouse_pos_.y = y;
 
+        /*
         switch (button)
         {   // mouse wheel lacks special const to determine. So according to docs its 3 and 4
         case 3:
-            
             if (position_.y > 1.0f) // prohibits camera to be too near from map
                 position_ += target_ * speed_;
             break;
@@ -221,7 +235,7 @@ namespace rgl
             if (position_.y < 10.0f) // prohibits camera to be too far from map
             position_ -= target_ * speed_;
             break;
-        }
+        }*/
 
         if (x <= margin_) {
             is_left_edge_ = true;

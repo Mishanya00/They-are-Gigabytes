@@ -26,7 +26,8 @@ namespace rgl
 		void MoveAcrossVector(Vector3f const & target_vector, bool isNotVertMove = true, float distance = 0);
 
 		void OnKeyboard(unsigned char key);
-        void OnMouse(int button, int state, int x, int y);
+        void OnMouse(int x, int y);
+		void OnScroll(double yoffset);
         void OnRender();
 		void OnFrame();
 
