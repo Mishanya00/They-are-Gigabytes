@@ -16,9 +16,9 @@ MiniaudioEngine player;
 static void MouseHandler(int button, int state, int x, int y)
 {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-        player.Play("../contents/Audio/click.wav");
+        player.Play("contents/Audio/click.wav");
     if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-        player.Play("../contents/Audio/click2.wav");
+        player.Play("contents/Audio/click2.wav");
 
     GameMouseHandler(button, state, x, y);
 }
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 
     RegisterGlutCallbacks();
 
-    player.Play("../contents/Audio/main_theme2.mp3");
+    player.Play("contents/Audio/main_theme2.mp3");
    
     glutMainLoop();
 }

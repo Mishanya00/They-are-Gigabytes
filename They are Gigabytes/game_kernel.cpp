@@ -138,7 +138,7 @@ void GameKernelInit()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    LaunchScenario("../contents/scenarios/map.txt");
+    LaunchScenario("contents/scenarios/map.txt");
 }
 
 void GameInterfaceInit()

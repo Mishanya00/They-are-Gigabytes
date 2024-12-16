@@ -7,7 +7,7 @@
 #include <iostream>
 #include <sstream>
 
-#define TILE_MODEL_PATH "../contents/buildings/tile/tile.obj"
+#define TILE_MODEL_PATH "contents/buildings/tile/tile.obj"
 
 
 Map::Map()

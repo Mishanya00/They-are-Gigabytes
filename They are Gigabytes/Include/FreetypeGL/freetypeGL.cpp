@@ -26,17 +26,17 @@ typedef struct {
 } vertex_t;
 
 static const char* FontPaths[] = {
-    "../contents/fonts/amiri-regular.ttf",
-    "../contents/fonts/Liberastika-regular.ttf",
-    "../contents/fonts/Lobster-regular.ttf",    
-    "../contents/fonts/LuckiestGuy.ttf",
-    "../contents/fonts/OldStandard-regular.ttf",
-    "../contents/fonts/SourceCodePro-regular.ttf",
-    "../contents/fonts/SourceSansPro-regular.ttf",
-    "../contents/fonts/Vera.ttf",
-    "../contents/fonts/VeraMoBd.ttf",
-    "../contents/fonts/VeraMoBI.ttf",
-    "../contents/fonts/VeraMono.ttf"
+    "contents/fonts/amiri-regular.ttf",
+    "contents/fonts/Liberastika-regular.ttf",
+    "contents/fonts/Lobster-regular.ttf",    
+    "contents/fonts/LuckiestGuy.ttf",
+    "contents/fonts/OldStandard-regular.ttf",
+    "contents/fonts/SourceCodePro-regular.ttf",
+    "contents/fonts/SourceSansPro-regular.ttf",
+    "contents/fonts/Vera.ttf",
+    "contents/fonts/VeraMoBd.ttf",
+    "contents/fonts/VeraMoBI.ttf",
+    "contents/fonts/VeraMono.ttf"
 };
 
 void add_text(vertex_buffer_t* m_pBuffer, texture_font_t * pFont, char* text, vec2 pen, vec4 fg_color_1, vec4 fg_color_2)
@@ -118,12 +118,12 @@ void FontRenderer::LoadFont(FONT_TYPE type, int size)
 
 void FontRenderer::LoadFonts()
 {
-    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "../contents/fonts/OldStandard-regular.ttf"));
-    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "../contents/fonts/OldStandard-regular.ttf"));
-    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "../contents/fonts/SourceCodePro-regular.ttf"));
-    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "../contents/fonts/SourceCodePro-regular.ttf"));
-    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "../contents/fonts/SourceSansPro-regular.ttf"));
-    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "../contents/fonts/SourceSansPro-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "contents/fonts/OldStandard-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "contents/fonts/OldStandard-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "contents/fonts/SourceCodePro-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "contents/fonts/SourceCodePro-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 30, "contents/fonts/SourceSansPro-regular.ttf"));
+    m_pFonts.push_back(texture_font_new_from_file(m_pAtlas, 46, "contents/fonts/SourceSansPro-regular.ttf"));
 
     /*
     for (int i = 0; i < NUM_FONTS; i++) {
