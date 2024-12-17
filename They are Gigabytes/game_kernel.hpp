@@ -1,11 +1,5 @@
 #pragma once
 
-#include "world_transform.hpp"
-#include "camera.hpp"
-#include <glew.h>
-#include "texture.hpp"
-
-
 extern int ClientWidth;
 extern int ClientHeight;
 

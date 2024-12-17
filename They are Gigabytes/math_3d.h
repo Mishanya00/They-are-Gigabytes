@@ -12,7 +12,6 @@
 #include <assimp/matrix3x3.h>
 #include <assimp/matrix4x4.h>
 
-
 #include <assert.h>     // for normalize func
 
 #define powi(base,exp) (int)powf((float)(base), (float)(exp))

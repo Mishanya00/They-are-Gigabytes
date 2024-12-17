@@ -1,12 +1,8 @@
 #include <iostream>
-
 #include <glew.h>
-#include <glut.h>
 #include <glfw3.h>
 
 #include "math_3d.h"
-#include "world_transform.hpp"
-#include "camera.hpp"
 #include "game_kernel.hpp"
 #include "audio.hpp"
 
@@ -95,25 +91,26 @@ GLFWwindow* InitGLFW(int major_ver, int minor_ver, int width, int height, bool i
 
 static void MouseHandler(int button, int state, int x, int y)
 {
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    if (button == GLFW_MOUSE_BUTTON_LEFT && state == GLFW_PRESS)
         player.Play("contents/Audio/click.wav");
-    if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && state == GLFW_PRESS)
         player.Play("contents/Audio/click2.wav");
 
     GameMouseHandler(button, state, x, y);
 }
-
+/*
 static void UpdateWindowSize(int width, int height)
 {
-    ClientWidth = glutGet(GLUT_WINDOW_WIDTH);
-    ClientHeight = glutGet(GLUT_WINDOW_HEIGHT);
+    //ClientWidth = glutGet(GLUT_WINDOW_WIDTH);
+    //ClientHeight = glutGet(GLUT_WINDOW_HEIGHT);
+    glfwGetWindowSize(&ClientWidth)
     glViewport(0, 0, ClientWidth, ClientHeight);
 
     std::cout << ClientWidth << ' ' << ClientHeight << '\n';
 
     UpdateGameWindowSize(ClientWidth, ClientHeight);
 }
-
+*/
 static void RenderScene(GLFWwindow* window)
 {
     GameFrame();
@@ -164,14 +161,6 @@ static void RegisterCallbacks(GLFWwindow * window)
     glfwSetCursorPosCallback(window, CursorPosCallback);
     glfwSetMouseButtonCallback(window, MouseButtonCallback);
     glfwSetScrollCallback(window, MouseScrollCallback);
-
-    /*
-    glutDisplayFunc(RenderScene);
-    glutSpecialFunc(KeyboardSpecialHandler);
-    glutMouseFunc(MouseHandler);
-    glutPassiveMotionFunc(PassiveMotionHandler);
-    glutReshapeFunc(UpdateWindowSize);
-    */
 }
 
 int main(int argc, char** argv)

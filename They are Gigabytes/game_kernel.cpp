@@ -1,12 +1,12 @@
 #include "game_kernel.hpp"
 
+#include <glew.h>   // Should be before GLFW even if I dont use glew.
 #include <glfw3.h>
 #include <vector>
 #include <iostream>
 #include <memory>
-#include <glew.h>
 #include "math_3d.h"
-#include "game_kernel.hpp"
+
 
 #include "shaders.hpp"
 #include "interface_technique.hpp"
