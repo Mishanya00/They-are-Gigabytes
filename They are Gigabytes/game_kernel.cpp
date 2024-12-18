@@ -34,6 +34,7 @@ struct Vertex
 
 
 void LaunchScenario(std::string scenario_name);
+void SetMenuComponents();
 
 
 int ClientWidth = 1920;
@@ -54,7 +55,8 @@ void GameKeyboardHandler(int key)
     switch (key)
     {
     case GLFW_KEY_ESCAPE:
-        exit(0);
+        ActiveScenario = nullptr;
+        SetMenuComponents();
         break;
     }
 }
@@ -119,8 +121,6 @@ void PassiveMouseComponentsHandler(int x, int y)
     for (int i = 0; i < ComponentsList.size(); i++)
     {
         ComponentsList[i]->SetHover(x, y);
-        //if (ComponentsList[i]->isHover())
-            //std::cout << "Panel " << i << " is hovered!\n";
     }
 }
 
