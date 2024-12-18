@@ -167,7 +167,7 @@ int main(int argc, char** argv)
 {
     GLFWwindow* Window;
 
-    Window = InitGLFW(0, 0, 1920, 1080, true, "Test");
+    Window = InitGLFW(0, 0, 1920, 1080, true, "They Are Gigabytes");
     RegisterCallbacks(Window);
 
     GameKernelInit();

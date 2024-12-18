@@ -45,6 +45,8 @@ namespace rgl
 		void SetColor(Vector4f new_color);
 		void SetComponentType(ComponentType new_type);
 
+		ComponentType GetComponentType();
+
 		bool isHover();
 		bool isVisible();
 		virtual void Click();

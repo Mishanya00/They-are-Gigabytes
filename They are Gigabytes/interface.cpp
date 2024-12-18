@@ -69,6 +69,11 @@ void Panel::SetComponentType(ComponentType new_type)
     type_ = new_type;
 }
 
+ComponentType Panel::GetComponentType()
+{
+    return type_;
+}
+
 void Panel::SetRect(int left, int bottom, int right, int top)
 {
     left_ = left;
@@ -100,7 +105,12 @@ bool Panel::isVisible()
 void Panel::Render(InterfaceTechnique& shader)
 {
     shader.Enable();
-    shader.SetColorUniform(color_.x, color_.y, color_.z, color_.w);
+
+    if (isHover_)
+        shader.SetColorUniform(color_.x+0.1, color_.y+0.1, color_.z + 0.1, color_.w);
+    else
+        shader.SetColorUniform(color_.x, color_.y, color_.z, color_.w);
+
     glBindBuffer(GL_ARRAY_BUFFER, VBO_);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);

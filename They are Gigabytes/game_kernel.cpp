@@ -32,6 +32,10 @@ struct Vertex
     }
 };
 
+
+void LaunchScenario(std::string scenario_name);
+
+
 int ClientWidth = 1920;
 int ClientHeight = 1080;
 
@@ -63,7 +67,7 @@ void GameKeyboardSpecialHandler(int key, int x, int y)
 
 void GamePassiveMotionHandler(int x, int y)
 {
-    std::cout << x << ' ' << y << '\n';
+    //std::cout << x << ' ' << y << '\n';
     if (ActiveScenario)
         ActiveScenario->GameCamera.OnMouse(x, y);
 
@@ -72,6 +76,35 @@ void GamePassiveMotionHandler(int x, int y)
 
 void GameMouseHandler(int button, int state, int x, int y)
 {
+    if (button == GLFW_MOUSE_BUTTON_LEFT && state == GLFW_PRESS)
+    {
+        for (int i = 0; i < ComponentsList.size(); ++i)
+        {
+            if (ComponentsList[i]->isHover())
+            {
+                switch (ComponentsList[i]->GetComponentType())
+                {
+                case rgl::ctButtonPlay:
+                    std::cout << "Play btn pressed!\n";
+
+                    if (!ActiveScenario)
+                    {
+                        LoadMeshes();
+                        LaunchScenario("contents/scenarios/map.txt");
+                    }
+
+                    break;
+                case rgl::ctButtonSettings:
+                    std::cout << "Settings btn pressed!\n";
+                    break;
+                case rgl::ctButtonExit:
+                    std::cout << "Exit btn pressed!\n";
+                    exit(0);
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void GameMouseScrollHandler(double yoffset)
@@ -86,8 +119,8 @@ void PassiveMouseComponentsHandler(int x, int y)
     for (int i = 0; i < ComponentsList.size(); i++)
     {
         ComponentsList[i]->SetHover(x, y);
-        if (ComponentsList[i]->isHover())
-            std::cout << "Panel " << i << " is hovered!\n";
+        //if (ComponentsList[i]->isHover())
+            //std::cout << "Panel " << i << " is hovered!\n";
     }
 }
 
@@ -98,7 +131,6 @@ void SetMenuComponents()
     ComponentsList.push_back(std::make_unique<rgl::Panel>());
     ComponentsList[0]->SetRect(0, 0, 1920, 1080);
     ComponentsList[0]->SetColor(Vector4f(0.051, 0.157, 0.62, 1.0f));
-    ComponentsList[0]->SetComponentType(rgl::ctButtonPlay);
 
     ComponentsList.push_back(std::make_unique<rgl::TextPanel>(Font));
     ComponentsList[1]->SetRect(500, 700, 1500, 800);
@@ -108,12 +140,12 @@ void SetMenuComponents()
     ComponentsList.push_back(std::make_unique<rgl::TextPanel>(Font));
     ComponentsList[2]->SetRect(500, 500, 1500, 600);
     ComponentsList[2]->SetText("SETTINGS!");
-    ComponentsList[2]->SetComponentType(rgl::ctButtonPlay);
+    ComponentsList[2]->SetComponentType(rgl::ctButtonSettings);
 
     ComponentsList.push_back(std::make_unique<rgl::TextPanel>(Font));
     ComponentsList[3]->SetRect(500, 300, 1500, 400);
     ComponentsList[3]->SetText("Exit!");
-    ComponentsList[3]->SetComponentType(rgl::ctButtonPlay);
+    ComponentsList[3]->SetComponentType(rgl::ctButtonExit);
 }
 
 void SetGameComponents()
@@ -133,8 +165,6 @@ void LaunchScenario(std::string scenario_name)
 
 void GameKernelInit()
 {
-    LoadMeshes();
-
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
@@ -143,7 +173,6 @@ void GameKernelInit()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    LaunchScenario("contents/scenarios/map.txt");
 }
 
 void GameInterfaceInit()
@@ -154,7 +183,7 @@ void GameInterfaceInit()
     Font = std::make_shared<rgl::FontRenderer>();
     Font->InitFontRenderer(ClientWidth, ClientHeight);
 
-    //SetMenuComponents();
+    SetMenuComponents();
 }
 
 void GameFrame()
