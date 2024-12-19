@@ -14,6 +14,7 @@ enum BuildingType {
 	btAntivirus = 6,
 	btScaner = 7,
 	btPointDefense = 8,
+	btScience = 9,
 	btZiggurat = -1,
 };
 

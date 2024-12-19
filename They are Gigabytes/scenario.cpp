@@ -39,7 +39,7 @@ void Scenario::ReadScenarioInfo()
         for (int j = 0; j < x; j++)
         {
             ss >> curr_element;
-            if ( curr_element == btZiggurat || curr_element == btCPU || curr_element == btShieldTower || curr_element == btEnergyExtractor)
+            if ( curr_element == btZiggurat || curr_element == btCPU || curr_element == btShieldTower || curr_element == btEnergyExtractor || curr_element == btScience)
                 BuildingsList.push_back(std::make_unique<Building>(static_cast<BuildingType>(curr_element),
                     Vector3f(static_cast<float>(2 * j), 0.0f, static_cast<float>(2 * i)), 1000, 1000));
         }

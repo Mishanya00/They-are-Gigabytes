@@ -11,6 +11,7 @@ std::shared_ptr<BasicMesh> cpu_mesh;
 std::shared_ptr<BasicMesh> tile_mesh;
 std::shared_ptr<BasicMesh> energy_tile_mesh;
 std::shared_ptr<BasicMesh> extractor_mesh;
+std::shared_ptr<BasicMesh> science_mesh;
 
 void LoadMeshes()
 {
@@ -41,6 +42,11 @@ void LoadMeshes()
 
     extractor_mesh = std::make_shared<BasicMesh>();
     if (!extractor_mesh->LoadMesh("contents/buildings/extractor/extractor.obj")) {
+        std::cerr << "energy extractor mesh not loaded!\n";
+    }
+
+    science_mesh = std::make_shared<BasicMesh>();
+    if (!science_mesh->LoadMesh("contents/buildings/science/labratory.obj")) {
         std::cerr << "energy extractor mesh not loaded!\n";
     }
 }

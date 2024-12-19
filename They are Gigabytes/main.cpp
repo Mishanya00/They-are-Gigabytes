@@ -6,7 +6,6 @@
 #include "game_kernel.hpp"
 #include "audio.hpp"
 
-MiniaudioEngine music;
 MiniaudioEngine player;
 
 static int glMajorVersion = 0;
@@ -172,7 +171,7 @@ int main(int argc, char** argv)
 
     GameKernelInit();
     GameInterfaceInit();
-    player.Play("contents/Audio/main_theme2.mp3");
+    player.Play("contents/Audio/main_theme.mp3");
 
     while (!glfwWindowShouldClose(Window))
     {

@@ -1,7 +1,5 @@
 #include "basic_model.hpp"
 
-#include "world_transform.hpp"
-
 
 BasicModel::BasicModel(std::shared_ptr<BasicMesh> mesh, Vector3f coords) : mesh_(mesh)
 {

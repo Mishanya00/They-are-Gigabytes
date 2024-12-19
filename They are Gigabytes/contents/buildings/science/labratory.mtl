@@ -1,0 +1,14 @@
+# Blender 4.3.1 MTL File: 'labratory.blend'
+# www.blender.org
+
+newmtl Material.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd DefaultMaterial_BaseColor.png
+map_Ns DefaultMaterial_Roughness.png
+map_refl DefaultMaterial_Metallic.png
+map_Bump -bm 1.000000 DefaultMaterial_Normal.png

@@ -27,6 +27,9 @@ Building::Building(BuildingType type, Vector3f position, int max_hp, int hp)
 		model_ = std::make_unique<BasicModel>(extractor_mesh, 4.0f, 0, 4.0f);
 		model_->SetScale(0.4f);
 		break;
+	case btScience:
+		model_ = std::make_unique<BasicModel>(science_mesh, 4.0f, 0, 4.0f);
+		model_->SetScale(0.4f);
 	default:
 		return;
 	}
