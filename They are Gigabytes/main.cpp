@@ -97,19 +97,7 @@ static void MouseHandler(int button, int state, int x, int y)
 
     GameMouseHandler(button, state, x, y);
 }
-/*
-static void UpdateWindowSize(int width, int height)
-{
-    //ClientWidth = glutGet(GLUT_WINDOW_WIDTH);
-    //ClientHeight = glutGet(GLUT_WINDOW_HEIGHT);
-    glfwGetWindowSize(&ClientWidth)
-    glViewport(0, 0, ClientWidth, ClientHeight);
 
-    std::cout << ClientWidth << ' ' << ClientHeight << '\n';
-
-    UpdateGameWindowSize(ClientWidth, ClientHeight);
-}
-*/
 static void RenderScene(GLFWwindow* window)
 {
     GameFrame();
@@ -122,7 +110,6 @@ static void RenderScene(GLFWwindow* window)
 
     glfwPollEvents();
 }
-
 
 static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -177,7 +164,6 @@ int main(int argc, char** argv)
     {
         RenderScene(Window);
     }
-
     glfwTerminate();
     return 0;
 }

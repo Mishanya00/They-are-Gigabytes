@@ -13,5 +13,6 @@ extern std::shared_ptr<BasicMesh> tile_mesh;
 extern std::shared_ptr<BasicMesh> energy_tile_mesh;
 extern std::shared_ptr<BasicMesh> extractor_mesh;
 extern std::shared_ptr<BasicMesh> science_mesh;
+extern std::shared_ptr<BasicMesh> antivirus_mesh;
 
 void LoadMeshes();

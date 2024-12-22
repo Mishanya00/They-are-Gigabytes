@@ -69,7 +69,6 @@ void GameKeyboardSpecialHandler(int key, int x, int y)
 
 void GamePassiveMotionHandler(int x, int y)
 {
-    //std::cout << x << ' ' << y << '\n';
     if (ActiveScenario)
         ActiveScenario->GameCamera.OnMouse(x, y);
 
@@ -92,9 +91,8 @@ void GameMouseHandler(int button, int state, int x, int y)
                     if (!ActiveScenario)
                     {
                         LoadMeshes();
-                        LaunchScenario("contents/scenarios/map.txt");
+                        LaunchScenario("contents/scenarios/map_all.txt");
                     }
-
                     break;
                 case rgl::ctButtonSettings:
                     std::cout << "Settings btn pressed!\n";

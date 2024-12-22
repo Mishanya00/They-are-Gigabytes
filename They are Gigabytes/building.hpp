@@ -6,6 +6,7 @@
 
 
 enum BuildingType {
+	btZiggurat = -1,
 	btKernel = 1,
 	btShieldTower = 2,
 	btEnergyExtractor = 3,
@@ -14,8 +15,7 @@ enum BuildingType {
 	btAntivirus = 6,
 	btScaner = 7,
 	btPointDefense = 8,
-	btScience = 9,
-	btZiggurat = -1,
+	btScience = 9
 };
 
 class Building

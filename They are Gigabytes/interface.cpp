@@ -173,7 +173,6 @@ void Label::Render(InterfaceTechnique& shader)
     font_->RenderText(FONT_TYPE_OLD_STANDARD_30, rgl::clBlack, rgl::clBlack, left_, bottom_, "text.c_str()");
 }
 
-// Some duplicated code just to create separate click() handlers
 TextPanel::TextPanel(std::shared_ptr<FontRenderer> font) : Panel()
 {
     font_ = font;

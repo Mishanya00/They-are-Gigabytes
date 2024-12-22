@@ -12,6 +12,7 @@ std::shared_ptr<BasicMesh> tile_mesh;
 std::shared_ptr<BasicMesh> energy_tile_mesh;
 std::shared_ptr<BasicMesh> extractor_mesh;
 std::shared_ptr<BasicMesh> science_mesh;
+std::shared_ptr<BasicMesh> antivirus_mesh;
 
 void LoadMeshes()
 {
@@ -48,5 +49,10 @@ void LoadMeshes()
     science_mesh = std::make_shared<BasicMesh>();
     if (!science_mesh->LoadMesh("contents/buildings/science/labratory.obj")) {
         std::cerr << "energy extractor mesh not loaded!\n";
+    }
+
+    antivirus_mesh = std::make_shared<BasicMesh>();
+    if (!antivirus_mesh->LoadMesh("contents/buildings/antivirus/antivirus.obj")) {
+        std::cerr << "antivirus mesh not loaded!\n";
     }
 }
