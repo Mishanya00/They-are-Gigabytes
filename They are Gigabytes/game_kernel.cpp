@@ -91,7 +91,7 @@ void GameMouseHandler(int button, int state, int x, int y)
                     if (!ActiveScenario)
                     {
                         LoadMeshes();
-                        LaunchScenario("contents/scenarios/map_all.txt");
+                        LaunchScenario("contents/scenarios/map_demo.txt");
                     }
                     break;
                 case rgl::ctButtonSettings:
