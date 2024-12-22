@@ -43,7 +43,8 @@ This game is being created for educational purposes and I do my best to follow O
 * More difficult shader techniques (Because models I use support shining, normal mapping, etc...)
 
 
-![2024-11-05-11-31-30-image](https://github.com/user-attachments/assets/da3516b9-263f-4c9f-b46f-420c94cfea5a)
+![изображение](https://github.com/user-attachments/assets/ae2a7f18-2aeb-4412-994c-ef59fb40fd28)
+
 
 
       *Picture 1 - current state of graphics in game*
