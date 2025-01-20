@@ -1,12 +1,16 @@
 #include "game_kernel.hpp"
 
 #include <glew.h>   // Should be before GLFW even if I dont use glew.
-#include <glfw3.h>
+#include <GLFW/glfw3.h>
 #include <vector>
 #include <iostream>
 #include <memory>
-#include "math_3d.h"
 
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+#include <imgui.h>
+
+#include "math_3d.h"
 
 #include "shaders.hpp"
 #include "interface_technique.hpp"
@@ -209,6 +213,17 @@ void DrawInterface()
     }
 
     Font->RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
+
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    ImGui::Begin("Main menu");
+    ImGui::Text("Will it work?");
+    ImGui::End();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void DrawGameFrame()
