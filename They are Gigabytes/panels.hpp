@@ -1,5 +1,5 @@
 #pragma once
-/*
+
 #include <string>
 #include <vector>
 #include <memory>
@@ -9,28 +9,11 @@
 
 namespace rgl
 {
-	enum ComponentType {
+	enum PanelType {
 		ctNone,
 		ctButtonPlay,
 		ctButtonSettings,
 		ctButtonExit
-	};
-
-	class Selection
-	{
-	public:
-
-		Selection();
-		void Render(InterfaceTechnique& shader);
-		void SetColor(Vector3f color);
-
-	private:
-		
-		GLuint VBO_;
-		Vector3f color_;
-		bool isVisible_;
-		float left_, right_, bottom_, top_;
-		Vector3f vertices_[6];
 	};
 
 	class Panel
@@ -43,25 +26,25 @@ namespace rgl
 		void SetRect(int left, int bottom, int right, int top);
 		void SetHover(int mouseX, int mouseY);
 		void SetColor(Vector4f new_color);
-		void SetComponentType(ComponentType new_type);
+		void SetComponentType(PanelType new_type);
 
-		ComponentType GetComponentType();
+		PanelType GetComponentType();
 
 		bool isHover();
 		bool isVisible();
 		virtual void Click();
 
 		// for polymorphism (TextPanel). Panel class does not use this functionality
-		virtual void SetText(std::string new_text) {}		 
+		virtual void SetText(std::string new_text) {}
 		virtual void SetFontType(FONT_TYPE new_font_type) {}
 
 	protected:
-		ComponentType type_ = ctNone;
+		PanelType type_ = ctNone;
 		GLuint VBO_;
 		int left_, bottom_, right_, top_;
 		Vector3f vertices_[6];
 		vec4 color_;
-		char isHover_, isDown_, isVisible_;
+		char isHover_ = false, isDown_ = false, isVisible_ = true;
 	};
 
 	class UpperPanel : public Panel
@@ -109,4 +92,3 @@ namespace rgl
 		std::shared_ptr<FontRenderer> font_;
 	};
 }
-*/

@@ -44,6 +44,8 @@ public:
     void SetWorldUniform(const Matrix4f& gWorld);
     void SetViewUniform(const Matrix4f& gView);
     void SetProjectionUniform(const Matrix4f& gPerspective);
+    void SetCameraLocalPos(const Vector3f& LocalPosition);
+
     void SetTextureUnit(unsigned int TextureUnit);
     void SetLight(const DirectionalLight& Light);
     void SetMaterial(const Material& material);
@@ -52,6 +54,7 @@ private:
 
     GLuint worldLoc, viewLoc, perspectiveLoc;
     GLuint samplerLoc;
+    GLuint CameraLocalPosLoc;
 
     struct {
         GLuint AmbientColor;

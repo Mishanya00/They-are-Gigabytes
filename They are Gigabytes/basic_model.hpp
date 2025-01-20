@@ -7,7 +7,6 @@
 
 #include "math_3d.h"
 #include "technique.hpp"
-#include "first_technique.hpp"
 #include "lighting_technique.hpp"
 #include "world_transform.hpp"
 
@@ -28,7 +27,6 @@ public:
 	void Move(Vector3f d_move);
 	void Move(float x, float y, float z);
 
-	void Render(FirstTechnique & shader);
 	void Render(LightingTechnique& shader, DirectionalLight& light);
 
 	Vector3f GetPosition();

@@ -48,6 +48,7 @@ bool LightingTechnique::Init()
     lightLoc.AmbientIntensity = GetUniformLocation("gDirectionalLight.AmbientIntensity");
     lightLoc.Direction = GetUniformLocation("gDirectionalLight.Direction");
     lightLoc.DiffuseIntensity = GetUniformLocation("gDirectionalLight.DiffuseIntensity");
+    CameraLocalPosLoc = GetUniformLocation("gCameraLocalPos");
 
     if (
         samplerLoc == 0xFFFFFFFF ||
@@ -56,7 +57,8 @@ bool LightingTechnique::Init()
         lightLoc.Color == 0xFFFFFFFF ||
         lightLoc.DiffuseIntensity == 0xFFFFFFFF ||
         lightLoc.Direction == 0xFFFFFFFF ||
-        lightLoc.AmbientIntensity == 0xFFFFFFFF)
+        lightLoc.AmbientIntensity == 0xFFFFFFFF ||
+        CameraLocalPosLoc == -1)
     {
         return false;
     }
@@ -68,6 +70,7 @@ void LightingTechnique::SetWorldUniform(const Matrix4f& gWorld)
 {
     glUniformMatrix4fv(worldLoc, 1, GL_TRUE, (const GLfloat*)gWorld.m);
 }
+
 void LightingTechnique::SetViewUniform(const Matrix4f& gView)
 {
     glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (const GLfloat*)gView.m);
@@ -78,12 +81,15 @@ void LightingTechnique::SetProjectionUniform(const Matrix4f& gPerspective)
     glUniformMatrix4fv(perspectiveLoc, 1, GL_TRUE, (const GLfloat*)gPerspective.m);
 }
 
+void LightingTechnique::SetCameraLocalPos(const Vector3f& LocalPosition)
+{
+    glUniform3fv(CameraLocalPosLoc, 1, (const GLfloat*)LocalPosition);
+}
 
 void LightingTechnique::SetTextureUnit(unsigned int TextureUnit)
 {
     glUniform1i(samplerLoc, TextureUnit);
 }
-
 
 void LightingTechnique::SetLight(const DirectionalLight& Light)
 {
@@ -94,7 +100,6 @@ void LightingTechnique::SetLight(const DirectionalLight& Light)
     glUniform1f(lightLoc.AmbientIntensity, Light.AmbientIntensity);
     glUniform1f(lightLoc.DiffuseIntensity, Light.DiffuseIntensity);
 }
-
 
 void LightingTechnique::SetMaterial(const Material& material)
 {

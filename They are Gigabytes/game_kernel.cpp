@@ -13,7 +13,7 @@
 
 #include "meshes_manager.hpp"
 
-#include "interface.hpp"
+#include "panels.hpp"
 #include "freetypeGL.h"
 
 #include "scenario.hpp"
@@ -35,7 +35,6 @@ struct Vertex
 
 void LaunchScenario(std::string scenario_name);
 void SetMenuComponents();
-
 
 int ClientWidth = 1920;
 int ClientHeight = 1080;
@@ -91,7 +90,7 @@ void GameMouseHandler(int button, int state, int x, int y)
                     if (!ActiveScenario)
                     {
                         LoadMeshes();
-                        LaunchScenario("contents/scenarios/map_demo.txt");
+                        LaunchScenario("contents/scenarios/map_all.txt");
                     }
                     break;
                 case rgl::ctButtonSettings:

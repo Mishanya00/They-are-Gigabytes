@@ -151,9 +151,15 @@ static void RegisterCallbacks(GLFWwindow * window)
 
 int main(int argc, char** argv)
 {
+    bool isFullScreen = true;
+
+#ifdef _DEBUG
+    isFullScreen = false;
+#endif
+
     GLFWwindow* Window;
 
-    Window = InitGLFW(0, 0, 1920, 1080, true, "They Are Gigabytes");
+    Window = InitGLFW(0, 0, 1920, 1080, isFullScreen, "They Are Gigabytes");
     RegisterCallbacks(Window);
 
     GameKernelInit();

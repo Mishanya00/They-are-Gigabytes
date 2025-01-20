@@ -59,9 +59,9 @@ void Scenario::ScenarioInit()
 
 void Scenario::DrawSubsystemInit()
 {
-    GlobalLight.AmbientIntensity = 0.2f;
+    GlobalLight.AmbientIntensity = 0.3f;
     GlobalLight.DiffuseIntensity = 1.0f;
-    GlobalLight.Color = Vector3f(1.0f, 1.0f, 1.2f);
+    GlobalLight.Color = Vector3f(0.9f, 0.9f, 1.0f);
     GlobalLight.WorldDirection = Vector3f(0.5f, -1.0f, 0.5f);
 
     ActiveShader = new LightingTechnique;

@@ -92,6 +92,20 @@ namespace rgl
 		return WorldTransformation;
 	}
 
+	Matrix4f WorldTransform::GetReversedTranslationMatrix() const
+	{
+		Matrix4f ReversedTranslation;
+		ReversedTranslation.InitTranslationTransform(position_.Negate());
+		return ReversedTranslation;
+	}
+
+	Matrix4f WorldTransform::GetReversedRotationMatrix() const
+	{
+		Matrix4f ReversedRotation;
+		ReversedRotation.InitRotateTransformZYX(-rotation_.x, -rotation_.y, -rotation_.z);
+		return ReversedRotation;
+	}
+
 	float WorldTransform::GetScale() const { return scale_; }
 	Vector3f WorldTransform::GetPosition() const { return position_; }
 	Vector3f WorldTransform::GetRotation() const { return rotation_; }

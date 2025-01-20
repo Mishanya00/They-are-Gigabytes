@@ -1,45 +1,10 @@
-/*
-#include "interface.hpp"
+#include "panels.hpp"
 
 #include <iostream>
 
 using namespace rgl;
 
 // Actually, there are some bad code, may be I should not manually create "components library"
-
-Selection::Selection()
-{
-    color_ = Vector3f(0, 1.0f, 0);
-
-    vertices_[0] = Vector3f(0.0f, 0.0f, 0.0f);
-    vertices_[1] = Vector3f(0.0f, 0.0f, 0.0f);
-    vertices_[2] = Vector3f(0.0f, 0.0f, 0.0f);
-    vertices_[3] = Vector3f(0.0f, 0.0f, 0.0f);
-    vertices_[4] = Vector3f(0.0f, 0.0f, 0.0f);
-    vertices_[5] = Vector3f(0.0f, 0.0f, 0.0f);
-
-    isVisible_ = false;
-    color_ = Vector3f(0.0f, 0.0f, 0.0f); // black
-
-    glGenBuffers(1, &VBO_);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO_);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_), vertices_, GL_STATIC_DRAW);
-}
-
-void Selection::SetColor(Vector3f color)
-{
-    color_ = color;
-}
-
-void Selection::Render(InterfaceTechnique& shader)
-{
-    shader.SetColorUniform(color_.x, color_.y, color_.z, 1.0f);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO_);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    glDisableVertexAttribArray(0);
-}
 
 Panel::Panel()
 {
@@ -65,12 +30,12 @@ Panel::Panel()
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_), vertices_, GL_STATIC_DRAW);
 }
 
-void Panel::SetComponentType(ComponentType new_type)
+void Panel::SetComponentType(PanelType new_type)
 {
     type_ = new_type;
 }
 
-ComponentType Panel::GetComponentType()
+PanelType Panel::GetComponentType()
 {
     return type_;
 }
@@ -95,7 +60,7 @@ void Panel::SetRect(int left, int bottom, int right, int top)
 
 bool Panel::isHover()
 {
-	return isHover_;
+    return isHover_;
 }
 
 bool Panel::isVisible()
@@ -108,7 +73,7 @@ void Panel::Render(InterfaceTechnique& shader)
     shader.Enable();
 
     if (isHover_)
-        shader.SetColorUniform(color_.x+0.1, color_.y+0.1, color_.z + 0.1, color_.w);
+        shader.SetColorUniform(color_.x + 0.1, color_.y + 0.1, color_.z + 0.1, color_.w);
     else
         shader.SetColorUniform(color_.x, color_.y, color_.z, color_.w);
 
@@ -194,6 +159,5 @@ void TextPanel::SetText(std::string new_text)
 void TextPanel::Render(InterfaceTechnique& shader)
 {
     Panel::Render(shader);
-    font_->RenderText(font_type_, rgl::clBlack, rgl::clBlack, (left_+right_)/2 - 100, (top_+bottom_)/2 - 20, text_.c_str());
+    font_->RenderText(font_type_, rgl::clBlack, rgl::clBlack, (left_ + right_) / 2 - 100, (top_ + bottom_) / 2 - 20, text_.c_str());
 }
-*/

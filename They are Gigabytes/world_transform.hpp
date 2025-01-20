@@ -29,6 +29,9 @@ namespace rgl
 		void Scale(float d_scale);
 
 		Matrix4f GetMatrix();
+		Matrix4f GetReversedTranslationMatrix() const;
+		Matrix4f GetReversedRotationMatrix() const;
+
 		float GetScale() const;
 		Vector3f GetPosition() const;
 		Vector3f GetRotation() const;

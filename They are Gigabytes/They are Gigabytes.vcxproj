@@ -150,11 +150,11 @@
     <ClCompile Include="miniaudio.cpp" />
     <ClCompile Include="mishanya_utils.cpp" />
     <ClCompile Include="meshes_manager.cpp" />
+    <ClCompile Include="panels.cpp" />
     <ClCompile Include="scenario.cpp" />
     <ClCompile Include="shaders.cpp" />
     <ClCompile Include="technique.cpp" />
     <ClCompile Include="texture.cpp" />
-    <ClCompile Include="first_technique.cpp" />
     <ClCompile Include="world_transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,11 +174,11 @@
     <ClInclude Include="mesh_common.hpp" />
     <ClInclude Include="mishanya_utils.hpp" />
     <ClInclude Include="meshes_manager.hpp" />
+    <ClInclude Include="panels.hpp" />
     <ClInclude Include="scenario.hpp" />
     <ClInclude Include="shaders.hpp" />
     <ClInclude Include="technique.hpp" />
     <ClInclude Include="texture.hpp" />
-    <ClInclude Include="first_technique.hpp" />
     <ClInclude Include="world_transform.hpp" />
   </ItemGroup>
   <ItemGroup>

@@ -45,18 +45,18 @@ void BasicModel::Move(float x, float y, float z)
 	world_matrix_.Translate(x, y, z);
 }
 
-void BasicModel::Render(FirstTechnique& shader)
-{
-	shader.SetWorldUniform(world_matrix_.GetMatrix());
-	mesh_->Render();
-}
-
 void BasicModel::Render(LightingTechnique& shader, DirectionalLight& light)
 {
-	light.CalcLocalDirection(world_matrix_.GetMatrix());
+	Matrix4f model_matrix = world_matrix_.GetMatrix();
+
+	light.CalcLocalDirection(model_matrix);
 	shader.SetLight(light);
 	shader.SetWorldUniform(world_matrix_.GetMatrix());
 	shader.SetMaterial(mesh_->GetMaterial());
+
+	model_matrix = world_matrix_.GetReversedTranslationMatrix();
+	shader.SetCameraLocalPos(Vector3f(model_matrix.m[3][0], model_matrix.m[3][1], model_matrix.m[3][2]));
+
 	mesh_->Render();
 }
 
