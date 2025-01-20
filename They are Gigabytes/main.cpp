@@ -5,12 +5,12 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui.h>
 
+#include "interface.hpp"
 #include "math_3d.h"
 #include "game_kernel.hpp"
 #include "audio.hpp"
 
 MiniaudioEngine player;
-ImGuiIO* ContextIO;
 
 static int glMajorVersion = 0;
 static int glMinorVersion = 0;
@@ -155,14 +155,7 @@ static void RegisterCallbacks(GLFWwindow * window)
 
 static void ImGuiInit(GLFWwindow * window)
 {
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ContextIO = &ImGui::GetIO(); (void)ContextIO;
-    ContextIO->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    ContextIO->ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
-    ContextIO->DeltaTime = 1.0f / 80.0f;
-
-    ImGui::StyleColorsDark();
+    GUI::Init();
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330"); // Here is GLSL version
