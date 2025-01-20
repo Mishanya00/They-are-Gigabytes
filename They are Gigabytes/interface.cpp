@@ -9,6 +9,11 @@
 ImGuiIO* ContextIO;
 std::vector<ImFont*> fonts;
 
+ImVec2 operator+(const ImVec2& a, const ImVec2& b)
+{
+    return ImVec2(a.x + b.x, a.y + b.y);
+}
+
 
 namespace GUI
 {
@@ -33,6 +38,10 @@ namespace GUI
         ContextIO->DeltaTime = 1.0f / 80.0f;
 
         fonts.push_back(ContextIO->Fonts->AddFontFromFileTTF("contents\\fonts\\ImGui\\Roboto-Medium.ttf", 36));
+        fonts.push_back(ContextIO->Fonts->AddFontFromFileTTF("contents\\fonts\\ImGui\\DroidSans.ttf", 36));
+        fonts.push_back(ContextIO->Fonts->AddFontFromFileTTF("contents\\fonts\\ImGui\\Karla-Regular.ttf", 36));
+        fonts.push_back(ContextIO->Fonts->AddFontFromFileTTF("contents\\fonts\\ImGui\\ProggyClean.ttf", 36));
+        fonts.push_back(ContextIO->Fonts->AddFontFromFileTTF("contents\\fonts\\ImGui\\ProggyTiny.ttf", 36));
 
         ImGui::StyleColorsDark();
     }
@@ -48,15 +57,24 @@ namespace GUI
         ImGui::SetNextWindowPos(viewport->WorkPos);
         ImGui::SetNextWindowSize(viewport->WorkSize);
 
-        ImGui::Begin("Main menu", nullptr, window_flags);
-        
-        ImGui::Text("Will it work?");
-        ImGui::Text("Will it work?");
-        ImGui::Text("Will it work?");
-        ImGui::Text("Will it work?");
-        ImGui::Text("Will it work?");
-        ImGui::Text("Will it work?");
+        if (ImGui::Begin("Main menu", nullptr, window_flags))
+        {
+            ImVec2 btnSize = { viewport->Size.x / 4, viewport->Size.y / 8 };
+            ImVec2 btnPos = { viewport->Size.x * 0.4f, viewport->Size.y * 0.25f };
 
+            ImGui::PushFont(fonts[4]);
+
+            ImGui::SetCursorPos(btnPos);
+            ImGui::Button("Play", btnSize);
+
+            ImGui::SetCursorPos(ImVec2(btnPos.x, btnPos.y+btnSize.y));
+            ImGui::Button("Settings", btnSize);
+
+            ImGui::SetCursorPos(ImVec2(btnPos.x, btnPos.y + 2 * btnSize.y));
+            ImGui::Button("Quit", btnSize);
+
+            ImGui::PopFont();
+        }
         ImGui::End();
 
         ImGui::Render();
