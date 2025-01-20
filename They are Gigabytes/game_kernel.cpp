@@ -131,11 +131,12 @@ void UpdateGameWindowSize(int width, int height)
 
 void DrawInterface()
 {
-    InterfaceShader->Enable();
-
-    Font->RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
-
-    GUI::DrawMainMenu();
+    //InterfaceShader->Enable();
+    if (!ActiveScenario) {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        Font->RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
+        GUI::DrawMainMenu();
+    }
 }
 
 void DrawGameFrame()
