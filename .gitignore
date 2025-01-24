@@ -75,6 +75,7 @@ StyleCopReport.xml
 *.ilk
 *.meta
 *.obj
+!They are Gigabytes/contents/*.obj
 *.iobj
 *.pch
 *.pdb
