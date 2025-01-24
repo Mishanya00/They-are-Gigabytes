@@ -73,9 +73,33 @@ namespace GUI
             ImGui::Button("Settings", btnSize);
 
             ImGui::SetCursorPos(ImVec2(btnPos.x, btnPos.y + 2 * btnSize.y));
-            ImGui::Button("Quit", btnSize);
+            if (ImGui::Button("Quit", btnSize)) {
+                exit(0);
+            }
 
             ImGui::PopFont();
+        }
+        ImGui::End();
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    }
+
+    void DrawGameInterface()
+    {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        static ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;
+        const ImGuiViewport* viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(viewport->WorkPos);
+        ImGui::SetNextWindowSize(ImVec2(viewport->WorkSize.x, 100));
+
+
+        if (ImGui::Begin("Upper panel", nullptr, window_flags))
+        {
+            ImGui::Text(std::to_string(ContextIO->Framerate).c_str());
         }
         ImGui::End();
 

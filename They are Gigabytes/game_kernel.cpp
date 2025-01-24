@@ -147,6 +147,9 @@ void DrawInterface()
         Font->RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
         GUI::DrawMainMenu(MenuState);
     }
+    else {
+        GUI::DrawGameInterface();
+    }
 }
 
 void DrawGameFrame()

@@ -164,11 +164,10 @@ static void ImGuiInit(GLFWwindow * window)
 int main(int argc, char** argv)
 {
     bool isFullScreen = true;
-    /*
+
 #ifdef _DEBUG
     isFullScreen = false;
 #endif
-*/
 
     GLFWwindow* Window;
 

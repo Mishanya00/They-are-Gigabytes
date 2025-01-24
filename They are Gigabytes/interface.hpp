@@ -12,4 +12,5 @@ namespace GUI
 
 	void Init();
 	void DrawMainMenu(MainMenuState & state);
+	void DrawGameInterface();
 }
