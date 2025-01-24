@@ -1,7 +1,11 @@
 #include <iostream>
 #include <glew.h>
-#include <glfw3.h>
+#include <GLFW/glfw3.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+#include <imgui.h>
 
+#include "interface.hpp"
 #include "math_3d.h"
 #include "game_kernel.hpp"
 #include "audio.hpp"
@@ -149,6 +153,14 @@ static void RegisterCallbacks(GLFWwindow * window)
     glfwSetScrollCallback(window, MouseScrollCallback);
 }
 
+static void ImGuiInit(GLFWwindow * window)
+{
+    GUI::Init();
+
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330"); // Here is GLSL version
+}
+
 int main(int argc, char** argv)
 {
     bool isFullScreen = true;
@@ -161,6 +173,7 @@ int main(int argc, char** argv)
 
     Window = InitGLFW(0, 0, 1920, 1080, isFullScreen, "They Are Gigabytes");
     RegisterCallbacks(Window);
+    ImGuiInit(Window);
 
     GameKernelInit();
     GameInterfaceInit();
