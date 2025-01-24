@@ -40,7 +40,6 @@ int ClientHeight = 1080;
 std::unique_ptr<Scenario> ActiveScenario;
 
 InterfaceTechnique* InterfaceShader;
-GUI::MainMenuState MenuState;
 
 
 void GameKeyboardHandler(int key)
@@ -109,16 +108,13 @@ void GameInterfaceInit()
 {
     InterfaceShader = new InterfaceTechnique;
     InterfaceShader->Init();
-
-    MenuState.isActiveScenario = false;
-    MenuState.scenarioName = "contents/scenarios/map.txt";
 }
 
 void GameFrame()
 {
-    if (MenuState.isActiveScenario == true) {
-        LaunchScenario(MenuState.scenarioName);
-        MenuState.isActiveScenario = false;
+    if (GUI::MenuState.isActiveScenario == true) {
+        LaunchScenario(GUI::MenuState.scenarioName);
+        GUI::MenuState.isActiveScenario = false;
     }
     if (ActiveScenario)
         ActiveScenario->GameCamera.OnFrame();
@@ -139,7 +135,7 @@ void DrawInterface()
     //InterfaceShader->Enable();
     if (!ActiveScenario) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        GUI::DrawMainMenu(MenuState);
+        GUI::DrawMainMenu();
     }
     else {
         GUI::DrawGameInterface();

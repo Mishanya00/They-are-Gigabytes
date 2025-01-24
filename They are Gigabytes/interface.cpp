@@ -5,6 +5,8 @@
 #include <imgui.h>
 #include <vector>
 
+#include "mishanya_utils.hpp"
+
 
 ImGuiIO* ContextIO;
 std::vector<ImFont*> fonts;
@@ -17,6 +19,9 @@ ImVec2 operator+(const ImVec2& a, const ImVec2& b)
 
 namespace GUI
 {
+    MainMenuState MenuState;                // State of the menu to exchange this info with game kernel
+    const ImGuiViewport* WindowViewport;    // Global var for getting window parameters each frame
+
     const ImVec4 cBlack = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
     const ImVec4 cWhite = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
     const ImVec4 cRed = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
@@ -44,42 +49,102 @@ namespace GUI
         fonts.push_back(ContextIO->Fonts->AddFontFromFileTTF("contents\\fonts\\ImGui\\ProggyTiny.ttf", 36));
 
         ImGui::StyleColorsDark();
+
+        MenuState.window = cwMain;
+        MenuState.isActiveScenario = false;
+        MenuState.scenarioName = "contents/scenarios/map.txt";
     }
 
-    void DrawMainMenu(MainMenuState& state)
+    void ShowPlayWindow()
     {
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        static std::vector<std::string> saves;
+        std::string session_name;
 
-        static ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;
-        const ImGuiViewport* viewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(viewport->WorkPos);
-        ImGui::SetNextWindowSize(viewport->WorkSize);
+        if (saves.size() == 0) {
+            saves = mishanya::GetFileList("contents/scenarios");
+        }
+
+        ImGuiWindowFlags play_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse;
+        ImGui::SetNextWindowPos(WindowViewport->WorkPos);
+        ImGui::SetNextWindowSize(WindowViewport->WorkSize);
+
+        if (ImGui::Begin("Play menu", nullptr, play_flags))
+        {
+            if (ImGui::Button("BACK"))
+            {
+                MenuState.window = cwMain;
+            }
+            else if (ImGui::Button("PLAY"))
+            {
+                MenuState.window = cwMain;
+                MenuState.isActiveScenario = true;
+            }
+
+            ImVec2 btnSize = { WindowViewport->Size.x / 4, WindowViewport->Size.y / 16 };
+            ImVec2 btnPos = { WindowViewport->Size.x * 0.4f, WindowViewport->Size.y * 0.1f };
+
+            ImGui::SetCursorPos(btnPos);
+
+            for (auto& save : saves) {
+                session_name = mishanya::GetFileFromPath(save);
+                mishanya::RemoveFileExtension(session_name);
+                ImGui::Button(session_name.c_str());
+                btnPos.y += btnSize.y;
+                ImGui::SetCursorPos(btnPos);
+            }
+        }
+        ImGui::End();
+    }
+
+    void ShowMainWindow()
+    {
+        static const ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;
+
+        ImGui::SetNextWindowPos(WindowViewport->WorkPos);
+        ImGui::SetNextWindowSize(WindowViewport->WorkSize);
 
         if (ImGui::Begin("Main menu", nullptr, window_flags))
         {
-            ImVec2 btnSize = { viewport->Size.x / 4, viewport->Size.y / 8 };
-            ImVec2 btnPos = { viewport->Size.x * 0.4f, viewport->Size.y * 0.25f };
-
-            ImGui::PushFont(fonts[4]);
+            ImVec2 btnSize = { WindowViewport->Size.x / 4, WindowViewport->Size.y / 8 };
+            ImVec2 btnPos = { WindowViewport->Size.x * 0.4f, WindowViewport->Size.y * 0.25f };
 
             ImGui::SetCursorPos(btnPos);
             if (ImGui::Button("Play", btnSize)) {
-                state.isActiveScenario = true;
+                MenuState.window = cwPlay;
             }
 
-            ImGui::SetCursorPos(ImVec2(btnPos.x, btnPos.y+btnSize.y));
+            ImGui::SetCursorPos(ImVec2(btnPos.x, btnPos.y + btnSize.y));
             ImGui::Button("Settings", btnSize);
 
             ImGui::SetCursorPos(ImVec2(btnPos.x, btnPos.y + 2 * btnSize.y));
             if (ImGui::Button("Quit", btnSize)) {
                 exit(0);
             }
-
-            ImGui::PopFont();
         }
         ImGui::End();
+    }
+
+    void DrawMainMenu()
+    {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        WindowViewport = ImGui::GetMainViewport();
+
+        ImGui::PushFont(fonts[4]);
+
+        switch (MenuState.window)
+        {
+        case cwMain:
+            ShowMainWindow();
+            break;
+        case cwPlay:
+            ShowPlayWindow();
+            break;
+        }
+
+        ImGui::PopFont();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -94,9 +159,10 @@ namespace GUI
         static ImGuiWindowFlags upper_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;
         static ImGuiWindowFlags lower_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse;
 
-        const ImGuiViewport* viewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(viewport->WorkPos);
-        ImGui::SetNextWindowSize(ImVec2(viewport->WorkSize.x, 100));
+        WindowViewport = ImGui::GetMainViewport();
+
+        ImGui::SetNextWindowPos(WindowViewport->WorkPos);
+        ImGui::SetNextWindowSize(ImVec2(WindowViewport->WorkSize.x, 100));
 
 
         if (ImGui::Begin("Upper panel", nullptr, upper_flags))
@@ -105,8 +171,8 @@ namespace GUI
         }
         ImGui::End();
 
-        ImGui::SetNextWindowPos(ImVec2(viewport->WorkPos.x, viewport->WorkSize.y - 100));
-        ImGui::SetNextWindowSize(ImVec2(viewport->WorkSize.x, 100));
+        ImGui::SetNextWindowPos(ImVec2(WindowViewport->WorkPos.x, WindowViewport->WorkSize.y - 100));
+        ImGui::SetNextWindowSize(ImVec2(WindowViewport->WorkSize.x, 100));
 
         if (ImGui::Begin("Lower panel", nullptr, lower_flags))
         {
