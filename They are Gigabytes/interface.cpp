@@ -46,7 +46,7 @@ namespace GUI
         ImGui::StyleColorsDark();
     }
 
-    void DrawMainMenu()
+    void DrawMainMenu(MainMenuState& state)
     {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
@@ -65,7 +65,9 @@ namespace GUI
             ImGui::PushFont(fonts[4]);
 
             ImGui::SetCursorPos(btnPos);
-            ImGui::Button("Play", btnSize);
+            if (ImGui::Button("Play", btnSize)) {
+                state.isActiveScenario = true;
+            }
 
             ImGui::SetCursorPos(ImVec2(btnPos.x, btnPos.y+btnSize.y));
             ImGui::Button("Settings", btnSize);

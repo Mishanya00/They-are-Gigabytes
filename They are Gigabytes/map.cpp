@@ -57,7 +57,6 @@ void Map::ReadSave(std::string save_file)
 			tiles_[i][j].model->SetScale(1.01f);	// Initially models were created a little smaller that should be. This line to avoid artefacts
 		}
 	}
-	
 }
 
 void Map::Render(LightingTechnique& shader, DirectionalLight& light)

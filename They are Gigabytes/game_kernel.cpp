@@ -42,6 +42,7 @@ std::shared_ptr<rgl::FontRenderer> Font;
 std::unique_ptr<Scenario> ActiveScenario;
 
 InterfaceTechnique* InterfaceShader;
+GUI::MainMenuState MenuState;
 
 
 void GameKeyboardHandler(int key)
@@ -94,6 +95,8 @@ void LaunchScenario(std::string scenario_name)
 
 void GameKernelInit()
 {
+    LoadMeshes();
+
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
@@ -111,10 +114,17 @@ void GameInterfaceInit()
 
     Font = std::make_shared<rgl::FontRenderer>();
     Font->InitFontRenderer(ClientWidth, ClientHeight);
+
+    MenuState.isActiveScenario = false;
+    MenuState.scenarioName = "contents/scenarios/map.txt";
 }
 
 void GameFrame()
 {
+    if (MenuState.isActiveScenario == true) {
+        LaunchScenario(MenuState.scenarioName);
+        MenuState.isActiveScenario = false;
+    }
     if (ActiveScenario)
         ActiveScenario->GameCamera.OnFrame();
 }
@@ -135,7 +145,7 @@ void DrawInterface()
     if (!ActiveScenario) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         Font->RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
-        GUI::DrawMainMenu();
+        GUI::DrawMainMenu(MenuState);
     }
 }
 
