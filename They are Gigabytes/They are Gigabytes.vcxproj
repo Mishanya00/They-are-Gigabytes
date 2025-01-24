@@ -129,7 +129,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;freetype-gl.lib;freetype.lib;assimp-vc143-mt.lib;freeglutd.lib;glew32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp-vc143-mt.lib;freeglutd.lib;glew32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>Lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -147,7 +147,6 @@
     <ClCompile Include="ImGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
-    <ClCompile Include="Include\FreetypeGL\freetypeGL.cpp" />
     <ClCompile Include="interface.cpp" />
     <ClCompile Include="interface_technique.cpp" />
     <ClCompile Include="lighting_technique.cpp" />
@@ -179,7 +178,6 @@
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
-    <ClInclude Include="Include\FreetypeGL\freetypeGL.h" />
     <ClInclude Include="interface.hpp" />
     <ClInclude Include="interface_technique.hpp" />
     <ClInclude Include="lighting_technique.hpp" />

@@ -91,13 +91,24 @@ namespace GUI
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        static ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;
+        static ImGuiWindowFlags upper_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;
+        static ImGuiWindowFlags lower_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse;
+
         const ImGuiViewport* viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->WorkPos);
         ImGui::SetNextWindowSize(ImVec2(viewport->WorkSize.x, 100));
 
 
-        if (ImGui::Begin("Upper panel", nullptr, window_flags))
+        if (ImGui::Begin("Upper panel", nullptr, upper_flags))
+        {
+            ImGui::Text(std::to_string(ContextIO->Framerate).c_str());
+        }
+        ImGui::End();
+
+        ImGui::SetNextWindowPos(ImVec2(viewport->WorkPos.x, viewport->WorkSize.y - 100));
+        ImGui::SetNextWindowSize(ImVec2(viewport->WorkSize.x, 100));
+
+        if (ImGui::Begin("Lower panel", nullptr, lower_flags))
         {
             ImGui::Text(std::to_string(ContextIO->Framerate).c_str());
         }

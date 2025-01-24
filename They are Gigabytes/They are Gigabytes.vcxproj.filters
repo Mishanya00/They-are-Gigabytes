@@ -92,16 +92,10 @@
     <ClCompile Include="math_3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\FreetypeGL\freetypeGL.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="interface.cpp">
-      <Filter>Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="panels.cpp">
       <Filter>Interface</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
@@ -178,9 +172,6 @@
     <ClInclude Include="audio.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\FreetypeGL\freetypeGL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="math_3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -188,9 +179,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interface.hpp">
-      <Filter>Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="panels.hpp">
       <Filter>Interface</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">

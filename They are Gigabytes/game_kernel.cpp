@@ -15,7 +15,6 @@
 #include "shaders.hpp"
 #include "interface_technique.hpp"
 #include "meshes_manager.hpp"
-#include "freetypeGL.h"
 #include "scenario.hpp"
 
 
@@ -38,7 +37,6 @@ void LaunchScenario(std::string scenario_name);
 int ClientWidth = 1920;
 int ClientHeight = 1080;
 
-std::shared_ptr<rgl::FontRenderer> Font;
 std::unique_ptr<Scenario> ActiveScenario;
 
 InterfaceTechnique* InterfaceShader;
@@ -112,9 +110,6 @@ void GameInterfaceInit()
     InterfaceShader = new InterfaceTechnique;
     InterfaceShader->Init();
 
-    Font = std::make_shared<rgl::FontRenderer>();
-    Font->InitFontRenderer(ClientWidth, ClientHeight);
-
     MenuState.isActiveScenario = false;
     MenuState.scenarioName = "contents/scenarios/map.txt";
 }
@@ -144,7 +139,6 @@ void DrawInterface()
     //InterfaceShader->Enable();
     if (!ActiveScenario) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        Font->RenderText(rgl::FONT_TYPE_OLD_STANDARD_30, rgl::clOrange1, rgl::clYellow, 50, 1000, "They are Gigabytes!");
         GUI::DrawMainMenu(MenuState);
     }
     else {
