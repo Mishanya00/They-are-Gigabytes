@@ -16,7 +16,7 @@ They are Gigabytes [TAG] - is a future RTS 3D videogame. Virus attacked computer
 
 * Miniaudio (C lib for audio that is implemented through miniaudio.cpp and miniaudio.h files)
 
-* FreetypeGL for text output and fonts support
+* Dear ImGui for user interface
 
 * Others (that I maybe forget or will add in future)
 
