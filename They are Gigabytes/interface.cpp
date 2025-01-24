@@ -74,21 +74,24 @@ namespace GUI
             {
                 MenuState.window = cwMain;
             }
-            else if (ImGui::Button("PLAY"))
-            {
-                MenuState.window = cwMain;
-                MenuState.isActiveScenario = true;
-            }
-
+            
             ImVec2 btnSize = { WindowViewport->Size.x / 4, WindowViewport->Size.y / 16 };
             ImVec2 btnPos = { WindowViewport->Size.x * 0.4f, WindowViewport->Size.y * 0.1f };
+
+            ImGui::SetCursorPos(ImVec2(WindowViewport->Size.x * 0.4f, WindowViewport->Size.y * 0.1f - 50));
+            ImGui::TextColored(cGreen, "Available maps:", btnSize);
 
             ImGui::SetCursorPos(btnPos);
 
             for (auto& save : saves) {
                 session_name = mishanya::GetFileFromPath(save);
                 mishanya::RemoveFileExtension(session_name);
-                ImGui::Button(session_name.c_str());
+
+                if (ImGui::Button( session_name.c_str(), btnSize) ) {
+                    MenuState.isActiveScenario = true;
+                    MenuState.scenarioName = save;
+                }
+
                 btnPos.y += btnSize.y;
                 ImGui::SetCursorPos(btnPos);
             }
