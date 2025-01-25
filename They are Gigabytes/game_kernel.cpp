@@ -42,16 +42,28 @@ std::unique_ptr<Scenario> ActiveScenario;
 InterfaceTechnique* InterfaceShader;
 
 
-void GameKeyboardHandler(int key)
+void GameKeyboardHandler(int key, int action)
 {
     if (ActiveScenario)
         ActiveScenario->GameCamera.OnKeyboard(key);
 
-    switch (key)
+    if (action == GLFW_PRESS)
     {
-    case GLFW_KEY_ESCAPE:
-        ActiveScenario = nullptr;
-        break;
+        switch (key)
+        {
+        case (GLFW_KEY_1):
+            ActiveScenario->LightingShader->InverseEffectStatus(lseNoise);
+            break;
+        case (GLFW_KEY_2):
+            ActiveScenario->LightingShader->InverseEffectStatus(lseVignette);
+            break;
+        case (GLFW_KEY_3):
+            ActiveScenario->LightingShader->InverseEffectStatus(lseColorGrading);
+            break;
+        case GLFW_KEY_ESCAPE:
+            ActiveScenario = nullptr;
+            break;
+        }
     }
 }
 

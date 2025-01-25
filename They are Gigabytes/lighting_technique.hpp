@@ -9,6 +9,13 @@ enum LightingShaderRenderMode {
     lsrmClassic = 0,
     lsrmSelected = 1,
     lsrmPartial = 2,
+    lsrmVignette = 3,
+};
+
+enum LightShaderEffect {
+    lseNoise = 1,
+    lseVignette = 2,
+    lseColorGrading = 4,
 };
 
 class BaseLight
@@ -56,6 +63,8 @@ public:
     void SetLight(const DirectionalLight& Light);
     void SetMaterial(const Material& material);
     void SetRenderMode(LightingShaderRenderMode renderMode);
+    void SetEffectStatus(LightShaderEffect effect, int status = 1);
+    void InverseEffectStatus(LightShaderEffect effect);
 
 private:
 
@@ -63,6 +72,7 @@ private:
     GLuint samplerLoc;
     GLuint CameraLocalPosLoc;
     GLuint renderModeLoc;
+    GLuint effectFlagsLoc;
 
     struct {
         GLuint AmbientColor;
@@ -75,4 +85,6 @@ private:
         GLuint Direction;
         GLuint DiffuseIntensity;
     } lightLoc;
+
+    GLuint effect_flags_ = 0;
 };

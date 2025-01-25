@@ -12,7 +12,7 @@ void GameInterfaceInit();
 void DrawInterface();
 
 void GameMouseHandler(int button, int state, int x, int y);
-void GameKeyboardHandler(int key);
+void GameKeyboardHandler(int key, int action);
 void GamePassiveMotionHandler(int x, int y);
 void GameKeyboardSpecialHandler(int key, int x, int y);
 void GameMouseScrollHandler(double yoffset);

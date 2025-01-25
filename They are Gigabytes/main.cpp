@@ -118,7 +118,7 @@ static void RenderScene(GLFWwindow* window)
 static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     std::cout << key << '\n';
-    GameKeyboardHandler(key);
+    GameKeyboardHandler(key, action);
 }
 
 static void CursorPosCallback(GLFWwindow* window, double x, double y)

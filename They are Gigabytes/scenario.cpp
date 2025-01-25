@@ -92,9 +92,9 @@ void Scenario::DrawGameFrame()
 
     for (int i = 0; i < BuildingsList.size(); i++)
     {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        LightingShader->SetRenderMode(lsrmSelected);
-        BuildingsList[i]->Render(*LightingShader, GlobalLight);
+        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        //LightingShader->SetRenderMode(lsrmSelected);
+        //BuildingsList[i]->Render(*LightingShader, GlobalLight);
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         LightingShader->SetRenderMode(lsrmClassic);

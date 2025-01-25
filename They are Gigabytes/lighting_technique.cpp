@@ -50,6 +50,7 @@ bool LightingTechnique::Init()
     lightLoc.DiffuseIntensity = GetUniformLocation("gDirectionalLight.DiffuseIntensity");
     CameraLocalPosLoc = GetUniformLocation("gCameraLocalPos");
     renderModeLoc = GetUniformLocation("gRenderMode");
+    effectFlagsLoc = GetUniformLocation("gEffectFlags");
 
     if (
         samplerLoc == -1 ||
@@ -60,11 +61,28 @@ bool LightingTechnique::Init()
         lightLoc.Direction == -1 ||
         lightLoc.AmbientIntensity == -1 ||
         CameraLocalPosLoc == -1 ||
-        renderModeLoc == -1 )
+        renderModeLoc == -1 ||
+        effectFlagsLoc == -1 )
     {
         return false;
     }
     return true;
+}
+
+void LightingTechnique::SetEffectStatus(LightShaderEffect effect, int status)
+{
+    if (status) {
+        effect_flags_ |= effect;
+    }
+    else {
+        effect_flags_ = effect_flags_ & (~effect);
+    }
+    glUniform1i(effectFlagsLoc, effect_flags_);
+}
+
+void LightingTechnique::InverseEffectStatus(LightShaderEffect effect) {
+    effect_flags_ ^= effect;
+    glUniform1i(effectFlagsLoc, effect_flags_);
 }
 
 void LightingTechnique::SetRenderMode(LightingShaderRenderMode renderMode) {
