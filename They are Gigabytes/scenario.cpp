@@ -64,15 +64,15 @@ void Scenario::DrawSubsystemInit()
     GlobalLight.Color = Vector3f(0.9f, 0.9f, 1.0f);
     GlobalLight.WorldDirection = Vector3f(0.5f, -1.0f, 0.5f);
 
-    ActiveShader = new LightingTechnique;
-    ActiveShader->Init();
+    LightingShader = std::make_unique<LightingTechnique>();
+    LightingShader->Init();
 }
 
 void Scenario::DrawGameFrame()
 {
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
-    ActiveShader->Enable();
+    LightingShader->Enable();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -83,14 +83,21 @@ void Scenario::DrawGameFrame()
 
     Matrix4f ViewMatrix = GameCamera.GetMatrix();
 
-    ActiveShader->SetWorldUniform(WorldMatrix.GetMatrix());
-    ActiveShader->SetProjectionUniform(ProjectionMatrix);
-    ActiveShader->SetViewUniform(ViewMatrix);
+    LightingShader->SetRenderMode(lsrmClassic);
+    LightingShader->SetWorldUniform(WorldMatrix.GetMatrix());
+    LightingShader->SetProjectionUniform(ProjectionMatrix);
+    LightingShader->SetViewUniform(ViewMatrix);
 
-    Field->Render(*ActiveShader, GlobalLight);
+    Field->Render(*LightingShader, GlobalLight);
 
     for (int i = 0; i < BuildingsList.size(); i++)
     {
-        BuildingsList[i]->Render(*ActiveShader, GlobalLight);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        LightingShader->SetRenderMode(lsrmSelected);
+        BuildingsList[i]->Render(*LightingShader, GlobalLight);
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        LightingShader->SetRenderMode(lsrmClassic);
+        BuildingsList[i]->Render(*LightingShader, GlobalLight);
     }
 }

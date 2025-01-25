@@ -5,6 +5,12 @@
 #include "material.hpp"
 
 
+enum LightingShaderRenderMode {
+    lsrmClassic = 0,
+    lsrmSelected = 1,
+    lsrmPartial = 2,
+};
+
 class BaseLight
 {
 public:
@@ -49,12 +55,14 @@ public:
     void SetTextureUnit(unsigned int TextureUnit);
     void SetLight(const DirectionalLight& Light);
     void SetMaterial(const Material& material);
+    void SetRenderMode(LightingShaderRenderMode renderMode);
 
 private:
 
     GLuint worldLoc, viewLoc, perspectiveLoc;
     GLuint samplerLoc;
     GLuint CameraLocalPosLoc;
+    GLuint renderModeLoc;
 
     struct {
         GLuint AmbientColor;

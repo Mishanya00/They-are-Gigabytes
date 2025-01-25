@@ -2,6 +2,7 @@
 
 in vec2 TexCoord0;
 in vec3 Normal0;
+flat in int RenderMode;
 
 out vec4 FragColor;
 
@@ -43,4 +44,9 @@ void main()
 
     FragColor = texture(gSampler, TexCoord0.xy);
     FragColor.xyz *= (AmbientColor + DiffuseColor).xyz;
+
+    if (RenderMode == 1) {
+        FragColor = mix(FragColor, vec4(0.0, 1.0, 0.0, 1.0), 0.5);
+    }
+
 }

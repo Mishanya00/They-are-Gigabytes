@@ -177,7 +177,7 @@ int main(int argc, char** argv)
 
     GameKernelInit();
     GameInterfaceInit();
-    player.Play("contents/Audio/main_theme.mp3");
+    //player.Play("contents/Audio/main_theme.mp3");
 
     while (!glfwWindowShouldClose(Window))
     {

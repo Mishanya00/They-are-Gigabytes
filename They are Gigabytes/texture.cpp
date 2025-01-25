@@ -12,7 +12,6 @@ namespace rgl
         m_fileName = FileName;
     }
 
-
     Texture::Texture(GLenum TextureTarget)
     {
         m_textureTarget = TextureTarget;

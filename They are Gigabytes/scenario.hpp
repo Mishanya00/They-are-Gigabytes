@@ -13,6 +13,8 @@
 #include "camera.hpp"
 
 
+#include <memory>
+
 class Scenario
 {
 public:
@@ -21,7 +23,6 @@ public:
 	void ScenarioInit();
 	void DrawSubsystemInit();
 	void DrawGameFrame();
-
 
 	rgl::Camera GameCamera;
 	PersProjInfo ProjectionInfo{ 90.0f, (float)1920, (float)1080, 0.1f, 100.0f };
@@ -36,6 +37,6 @@ private:
 	std::unique_ptr<Map> Field;
 	
 	rgl::WorldTransform WorldMatrix;
-	LightingTechnique* ActiveShader;
+	std::unique_ptr<LightingTechnique> LightingShader;
 	DirectionalLight GlobalLight;
 };

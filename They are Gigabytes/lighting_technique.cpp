@@ -49,21 +49,26 @@ bool LightingTechnique::Init()
     lightLoc.Direction = GetUniformLocation("gDirectionalLight.Direction");
     lightLoc.DiffuseIntensity = GetUniformLocation("gDirectionalLight.DiffuseIntensity");
     CameraLocalPosLoc = GetUniformLocation("gCameraLocalPos");
+    renderModeLoc = GetUniformLocation("gRenderMode");
 
     if (
-        samplerLoc == 0xFFFFFFFF ||
-        materialLoc.AmbientColor == 0xFFFFFFFF ||
-        materialLoc.DiffuseColor == 0xFFFFFFFF ||
-        lightLoc.Color == 0xFFFFFFFF ||
-        lightLoc.DiffuseIntensity == 0xFFFFFFFF ||
-        lightLoc.Direction == 0xFFFFFFFF ||
-        lightLoc.AmbientIntensity == 0xFFFFFFFF ||
-        CameraLocalPosLoc == -1)
+        samplerLoc == -1 ||
+        materialLoc.AmbientColor == -1 ||
+        materialLoc.DiffuseColor == -1 ||
+        lightLoc.Color == -1 ||
+        lightLoc.DiffuseIntensity == -1 ||
+        lightLoc.Direction == -1 ||
+        lightLoc.AmbientIntensity == -1 ||
+        CameraLocalPosLoc == -1 ||
+        renderModeLoc == -1 )
     {
         return false;
     }
-
     return true;
+}
+
+void LightingTechnique::SetRenderMode(LightingShaderRenderMode renderMode) {
+    glUniform1i(renderModeLoc, renderMode);
 }
 
 void LightingTechnique::SetWorldUniform(const Matrix4f& gWorld)
