@@ -1,7 +1,7 @@
 #version 330 core
 
 #define NOISE_EFFECT 1
-#define VIGNETTE_EFFECT 2
+#define INVISIBLE_EFFECT 2
 #define COLOR_GRADING_EFFECT 4
 #define SHININESS_EFFECT 16
 
@@ -56,13 +56,19 @@ void main()
     FragColor = texture(gSampler, TexCoord0.xy);
 
     if ( (gEffectFlags & SHININESS_EFFECT) != 0) {
+
+        vec3 sepia = vec3(dot(FragColor.rgb, vec3(0.393, 0.769, 0.189)),
+                  dot(FragColor.rgb, vec3(0.349, 0.686, 0.168)),
+                  dot(FragColor.rgb, vec3(0.272, 0.534, 0.131)));
+        FragColor.rgb = mix(FragColor.rgb, sepia, 0.5); // Смешиваем с сепией
+
         mat4 invView = inverse(View);
 
         vec3 cameraPos = invView[3].xyz;
         vec3 viewDir = normalize(cameraPos - WorldPos0); // Направление взгляда
         vec3 reflectDir = reflect(-gDirectionalLight.Direction, Normal0);
 
-        float specularFactor = pow(max(dot(viewDir, reflectDir), 0.0), 32.0); // Shininess level (32 — is "shininess")
+        float specularFactor = pow(max(dot(viewDir, reflectDir), 0.0), 150.0); // Shininess level (32 — is "shininess")
 
         vec4 specular = vec4(gDirectionalLight.Color * specularFactor, 1.0);
 
@@ -86,20 +92,24 @@ void main()
         color = mix(color, vec4(0.0, 0.0, 1.0, 1.0), 0.5);
     }
     
-    if ( (gEffectFlags & VIGNETTE_EFFECT) != 0) {
-        vec2 uv = TexCoord0 * 2.0 - 1.0;
-        float vignette = 1.0 - dot(uv, uv) * 0.5;
-        color = color * vignette; 
+    if ( (gEffectFlags & INVISIBLE_EFFECT) != 0) {
+        color = mix(color, vec4(1.0, 1.0, 0.0, 1.0), 0.5);
+        color.a *= 0.2;
     }
     
     if ( (gEffectFlags & NOISE_EFFECT) != 0) {
         vec2 uv = TexCoord0;
-        float grain = random(uv * 100.0) * 0.1; // Генерация зернистости
-        color = color + vec4(grain); // Добавьте зернистость
+        float grain = random(uv * 100.0) * 0.1;
+        color = color + vec4(grain);
     }
 
     if ( (gEffectFlags & COLOR_GRADING_EFFECT) != 0) {
         color.rgb = pow(color.rgb, vec3(1.2));
+    }
+
+    float brightness = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722)); // Яркость пикселя
+    if (brightness > 0.6) { // Если пиксель достаточно яркий
+        color.rgb += vec3(0.2); // Добавляем свечение
     }
 
     FragColor = color;
