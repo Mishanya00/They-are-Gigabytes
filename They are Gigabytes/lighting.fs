@@ -3,9 +3,11 @@
 #define NOISE_EFFECT 1
 #define VIGNETTE_EFFECT 2
 #define COLOR_GRADING_EFFECT 4
+#define SHININESS_EFFECT 16
 
 in vec2 TexCoord0;
 in vec3 Normal0;
+in vec3 WorldPos0;
 flat in int RenderMode;
 
 out vec4 FragColor;
@@ -28,12 +30,11 @@ uniform int gEffectFlags;
 uniform DirectionalLight gDirectionalLight;
 uniform Material gMaterial;
 uniform sampler2D gSampler;
-
+uniform mat4 View;
 
 float random(vec2 st) {
     return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453);
 }
-
 
 void main()
 {
@@ -52,9 +53,24 @@ void main()
                        DiffuseFactor;
     }
 
-
     FragColor = texture(gSampler, TexCoord0.xy);
-    FragColor.xyz *= (AmbientColor + DiffuseColor).xyz;
+
+    if ( (gEffectFlags & SHININESS_EFFECT) != 0) {
+        mat4 invView = inverse(View);
+
+        vec3 cameraPos = invView[3].xyz;
+        vec3 viewDir = normalize(cameraPos - WorldPos0); // Направление взгляда
+        vec3 reflectDir = reflect(-gDirectionalLight.Direction, Normal0);
+
+        float specularFactor = pow(max(dot(viewDir, reflectDir), 0.0), 32.0); // Shininess level (32 — is "shininess")
+
+        vec4 specular = vec4(gDirectionalLight.Color * specularFactor, 1.0);
+
+        FragColor.xyz *= (AmbientColor + DiffuseColor + specular).xyz;
+    }
+    else {
+        FragColor.xyz *= (AmbientColor + DiffuseColor).xyz;
+    }
 
     vec4 color = FragColor;
 

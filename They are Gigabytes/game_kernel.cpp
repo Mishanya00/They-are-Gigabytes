@@ -60,6 +60,9 @@ void GameKeyboardHandler(int key, int action)
         case (GLFW_KEY_3):
             ActiveScenario->LightingShader->InverseEffectStatus(lseColorGrading);
             break;
+        case (GLFW_KEY_4):
+            ActiveScenario->LightingShader->InverseEffectStatus(lseShineness);
+            break;
         case GLFW_KEY_ESCAPE:
             ActiveScenario = nullptr;
             break;

@@ -16,6 +16,7 @@ enum LightShaderEffect {
     lseNoise = 1,
     lseVignette = 2,
     lseColorGrading = 4,
+    lseShineness = 16,
 };
 
 class BaseLight
