@@ -20,7 +20,7 @@ They are Gigabytes [TAG] - is a future RTS 3D videogame. Virus attacked computer
 
 * Others (that I maybe forget or will add in future)
 
-This game is being created for educational purposes and I do my best to follow OOP and Architecture recommendatioins to make the game easy to develop and modify.
+ This game is being created for educational purposes and I do my best to follow OOP and Architecture recommendatioins to make the game easy to develop and modify. It's planned to document the code of this game after creation so that it'll be a nice educational example for those who want to delve deeper into gamedesign/computer graphics/architecture of big projects. 
 
 **What's done?**
 
