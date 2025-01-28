@@ -104,7 +104,21 @@ static void MouseHandler(int button, int state, int x, int y)
 
 static void RenderScene(GLFWwindow* window)
 {
-    GameFrame();
+    static const double fixed_timestep = 1.0 / 60.0;
+    static double accumulated_time = 0.0;
+    static double previous_time = glfwGetTime();
+    static double current_time;
+    static double frame_time;
+
+    current_time = glfwGetTime();
+    frame_time = current_time - previous_time;
+    previous_time = current_time;
+    accumulated_time += frame_time;
+
+    while (accumulated_time >= fixed_timestep) {
+        GameFrame();
+        accumulated_time -= fixed_timestep;
+    }
 
     DrawGameFrame();
 
