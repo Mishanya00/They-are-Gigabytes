@@ -5,7 +5,7 @@ namespace GUI {
 	struct TGameState {
 		bool isSelectedEffect;
 		bool isInvisibleEffect;
-		
+		bool isPaused;
 		bool isEscMenuVisible;
 	};
 

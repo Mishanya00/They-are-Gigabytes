@@ -70,7 +70,9 @@ void GameKeyboardHandler(int key, int action)
             GUI::GameState.isSelectedEffect = !GUI::GameState.isSelectedEffect;
             break;
         case GLFW_KEY_ESCAPE:
-            ActiveScenario = nullptr;
+            GUI::GameState.isEscMenuVisible = true;
+            GUI::GameState.isPaused = true;
+            //ActiveScenario = nullptr;
             break;
         }
     }
@@ -137,7 +139,7 @@ void GameFrame()
         LaunchScenario(GUI::MenuState.scenarioName);
         GUI::MenuState.isActiveScenario = false;
     }
-    if (ActiveScenario)
+    if (ActiveScenario && !GUI::GameState.isPaused)
         ActiveScenario->GameCamera.OnFrame();
 }
 
