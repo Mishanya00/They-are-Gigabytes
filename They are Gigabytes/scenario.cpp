@@ -50,8 +50,8 @@ void Scenario::ScenarioInit()
 {
     GameCamera.SetWindowSize(1920, 1080);
     GameCamera.SetPosition(Vector3f(0.0f, 3.0f, -5.0f));
-    GameCamera.SetSpeed(0.1f);
-    GameCamera.SetRotationSpeed(0.75f);
+    GameCamera.SetSpeed(0.05f);
+    GameCamera.SetRotationSpeed(0.35f);
     GameCamera.Rotate(45.0f, 0, 0);
 
     ReadScenarioInfo();
@@ -90,13 +90,19 @@ void Scenario::DrawGameFrame()
 
     Field->Render(*LightingShader, GlobalLight);
 
-    LightingShader->SetEffectStatus(lseVignette, 1);
     for (int i = 0; i < BuildingsList.size(); i++)
     {
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        //LightingShader->SetRenderMode(lsrmSelected);
-        //BuildingsList[i]->Render(*LightingShader, GlobalLight);
-        
+        if (isInvisibleEffect) {
+            LightingShader->SetEffectStatus(lseVignette, 1);
+        }
+        else { LightingShader->SetEffectStatus(lseVignette, 0); }
+
+        if (isSelectedEffect) {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            LightingShader->SetRenderMode(lsrmSelected);
+            BuildingsList[i]->Render(*LightingShader, GlobalLight);
+        }
+
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         LightingShader->SetRenderMode(lsrmClassic);
         BuildingsList[i]->Render(*LightingShader, GlobalLight);

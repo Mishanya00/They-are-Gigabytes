@@ -55,13 +55,17 @@ void GameKeyboardHandler(int key, int action)
             ActiveScenario->LightingShader->InverseEffectStatus(lseNoise);
             break;
         case (GLFW_KEY_2):
-            ActiveScenario->LightingShader->InverseEffectStatus(lseVignette);
+            //ActiveScenario->LightingShader->InverseEffectStatus(lseVignette);
+            ActiveScenario->isInvisibleEffect = !ActiveScenario->isInvisibleEffect;
             break;
         case (GLFW_KEY_3):
             ActiveScenario->LightingShader->InverseEffectStatus(lseColorGrading);
             break;
         case (GLFW_KEY_4):
             ActiveScenario->LightingShader->InverseEffectStatus(lseShineness);
+            break;
+        case (GLFW_KEY_5):
+            ActiveScenario->isSelectedEffect = !ActiveScenario->isSelectedEffect;
             break;
         case GLFW_KEY_ESCAPE:
             ActiveScenario = nullptr;

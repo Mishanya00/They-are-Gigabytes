@@ -12,12 +12,15 @@
 #include "world_transform.hpp"
 #include "camera.hpp"
 
-
 #include <memory>
 
 class Scenario
 {
 public:
+
+	bool isSelectedEffect = false;
+	bool isInvisibleEffect = false;
+
 	Scenario(std::string map_name);
 	
 	void ScenarioInit();
