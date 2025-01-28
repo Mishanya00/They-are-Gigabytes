@@ -115,6 +115,10 @@ static void RenderScene(GLFWwindow* window)
     previous_time = current_time;
     accumulated_time += frame_time;
 
+    if (accumulated_time >= 0.25) {     // to avoid "death spiral"
+        accumulated_time = 0.25;
+    }
+
     while (accumulated_time >= fixed_timestep) {
         GameFrame();
         accumulated_time -= fixed_timestep;

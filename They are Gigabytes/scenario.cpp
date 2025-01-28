@@ -2,6 +2,7 @@
 
 #include <glew.h>
 #include <sstream>
+#include "scenario_interface.hpp"
 
 
 Scenario::Scenario(std::string map_name)
@@ -50,10 +51,11 @@ void Scenario::ScenarioInit()
 {
     GameCamera.SetWindowSize(1920, 1080);
     GameCamera.SetPosition(Vector3f(0.0f, 3.0f, -5.0f));
-    GameCamera.SetSpeed(0.05f);
-    GameCamera.SetRotationSpeed(0.35f);
+    GameCamera.SetSpeed(0.1f);
+    GameCamera.SetRotationSpeed(0.75f);
     GameCamera.Rotate(45.0f, 0, 0);
 
+    GUI::InitGameState();
     ReadScenarioInfo();
 }
 
@@ -92,12 +94,12 @@ void Scenario::DrawGameFrame()
 
     for (int i = 0; i < BuildingsList.size(); i++)
     {
-        if (isInvisibleEffect) {
+        if (GUI::GameState.isInvisibleEffect) {
             LightingShader->SetEffectStatus(lseVignette, 1);
         }
         else { LightingShader->SetEffectStatus(lseVignette, 0); }
 
-        if (isSelectedEffect) {
+        if (GUI::GameState.isSelectedEffect) {
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
             LightingShader->SetRenderMode(lsrmSelected);
             BuildingsList[i]->Render(*LightingShader, GlobalLight);

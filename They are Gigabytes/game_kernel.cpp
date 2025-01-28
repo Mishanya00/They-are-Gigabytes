@@ -10,12 +10,15 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui.h>
 
-#include "interface.hpp"
 #include "math_3d.h"
 #include "shaders.hpp"
-#include "interface_technique.hpp"
-#include "meshes_manager.hpp"
+
 #include "scenario.hpp"
+#include "interface.hpp"
+#include "scenario_interface.hpp"
+#include "interface_technique.hpp"
+
+#include "meshes_manager.hpp"
 
 
 struct Vertex
@@ -55,8 +58,7 @@ void GameKeyboardHandler(int key, int action)
             ActiveScenario->LightingShader->InverseEffectStatus(lseNoise);
             break;
         case (GLFW_KEY_2):
-            //ActiveScenario->LightingShader->InverseEffectStatus(lseVignette);
-            ActiveScenario->isInvisibleEffect = !ActiveScenario->isInvisibleEffect;
+            GUI::GameState.isInvisibleEffect = !GUI::GameState.isInvisibleEffect;
             break;
         case (GLFW_KEY_3):
             ActiveScenario->LightingShader->InverseEffectStatus(lseColorGrading);
@@ -65,7 +67,7 @@ void GameKeyboardHandler(int key, int action)
             ActiveScenario->LightingShader->InverseEffectStatus(lseShineness);
             break;
         case (GLFW_KEY_5):
-            ActiveScenario->isSelectedEffect = !ActiveScenario->isSelectedEffect;
+            GUI::GameState.isSelectedEffect = !GUI::GameState.isSelectedEffect;
             break;
         case GLFW_KEY_ESCAPE:
             ActiveScenario = nullptr;

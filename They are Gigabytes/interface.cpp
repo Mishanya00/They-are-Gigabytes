@@ -7,20 +7,18 @@
 
 #include "mishanya_utils.hpp"
 
-
-ImGuiIO* ContextIO;
-std::vector<ImFont*> fonts;
-
 ImVec2 operator+(const ImVec2& a, const ImVec2& b)
 {
     return ImVec2(a.x + b.x, a.y + b.y);
 }
 
-
 namespace GUI
 {
+    ImGuiIO* ContextIO;
+    std::vector<ImFont*> fonts;
+
     MainMenuState MenuState;                // State of the menu to exchange this info with game kernel
-    const ImGuiViewport* WindowViewport;    // Global var for getting window parameters each frame
+    ImGuiViewport* WindowViewport;          // Global var for getting window parameters each frame
 
     const ImVec4 cBlack = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
     const ImVec4 cWhite = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
@@ -129,9 +127,7 @@ namespace GUI
 
     void DrawMainMenu()
     {
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        SetupFrame();
 
         WindowViewport = ImGui::GetMainViewport();
 
@@ -149,40 +145,20 @@ namespace GUI
 
         ImGui::PopFont();
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        FinishFrame();
     }
 
-    void DrawGameInterface()
+    void SetupFrame()
     {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        static ImGuiWindowFlags upper_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBackground;
-        static ImGuiWindowFlags lower_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoCollapse;
-
         WindowViewport = ImGui::GetMainViewport();
+    }
 
-        ImGui::SetNextWindowPos(WindowViewport->WorkPos);
-        ImGui::SetNextWindowSize(ImVec2(WindowViewport->WorkSize.x, 100));
-
-
-        if (ImGui::Begin("Upper panel", nullptr, upper_flags))
-        {
-            ImGui::Text(std::to_string(ContextIO->Framerate).c_str());
-        }
-        ImGui::End();
-
-        ImGui::SetNextWindowPos(ImVec2(WindowViewport->WorkPos.x, WindowViewport->WorkSize.y - 100));
-        ImGui::SetNextWindowSize(ImVec2(WindowViewport->WorkSize.x, 100));
-
-        if (ImGui::Begin("Lower panel", nullptr, lower_flags))
-        {
-            ImGui::Text(std::to_string(ContextIO->Framerate).c_str());
-        }
-        ImGui::End();
-
+    void FinishFrame()
+    {
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }

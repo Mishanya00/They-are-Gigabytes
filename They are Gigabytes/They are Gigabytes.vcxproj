@@ -141,6 +141,7 @@
     <ClCompile Include="basic_model.cpp" />
     <ClCompile Include="building.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="scenario_interface.cpp" />
     <ClCompile Include="game_kernel.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="basic_model.hpp" />
     <ClInclude Include="building.hpp" />
     <ClInclude Include="camera.hpp" />
+    <ClInclude Include="scenario_interface.hpp" />
     <ClInclude Include="game_kernel.hpp" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />

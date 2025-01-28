@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include <imgui.h>
 
 
 namespace GUI
@@ -19,8 +21,14 @@ namespace GUI
 	};
 
 	extern MainMenuState MenuState;
+	extern ImGuiViewport* WindowViewport;
+	extern ImGuiIO* ContextIO;
+	extern std::vector<ImFont*> fonts;
 
 	void Init();
+	
+	void SetupFrame();
+	void FinishFrame();
+
 	void DrawMainMenu();
-	void DrawGameInterface();
 }
