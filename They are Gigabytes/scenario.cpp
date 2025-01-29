@@ -90,6 +90,9 @@ void Scenario::DrawGameFrame()
     LightingShader->SetProjectionUniform(ProjectionMatrix);
     LightingShader->SetViewUniform(ViewMatrix);
 
+    LightingShader->SetEffectStatus(lseColorGrading, GUI::GameState.isColorGradingEffect);
+    LightingShader->SetEffectStatus(lseNoise, GUI::GameState.isNoiseEffect);
+
     Field->Render(*LightingShader, GlobalLight);
 
     for (int i = 0; i < BuildingsList.size(); i++)

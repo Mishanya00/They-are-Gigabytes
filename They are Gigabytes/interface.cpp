@@ -20,16 +20,6 @@ namespace GUI
     MainMenuState MenuState;                // State of the menu to exchange this info with game kernel
     ImGuiViewport* WindowViewport;          // Global var for getting window parameters each frame
 
-    const ImVec4 cBlack = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
-    const ImVec4 cWhite = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-    const ImVec4 cRed = ImVec4(1.00f, 0.00f, 0.00f, 1.00f);
-    const ImVec4 cGreen = ImVec4(0.00f, 1.00f, 0.00f, 1.00f);
-    const ImVec4 cBlue = ImVec4(0.00f, 0.00f, 1.00f, 1.00f);
-    const ImVec4 cYellow = ImVec4(1.00f, 1.00f, 0.00f, 1.00f);
-    const ImVec4 cMagenta = ImVec4(1.00f, 0.00f, 1.00f, 1.00f);
-    const ImVec4 cCyan = ImVec4(0.00f, 1.00f, 1.00f, 1.00f);
-    const ImVec4 cTransparent = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-
 
 	void Init()
     {

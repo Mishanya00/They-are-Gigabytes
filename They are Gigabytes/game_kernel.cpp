@@ -55,13 +55,13 @@ void GameKeyboardHandler(int key, int action)
         switch (key)
         {
         case (GLFW_KEY_1):
-            ActiveScenario->LightingShader->InverseEffectStatus(lseNoise);
+            GUI::GameState.isNoiseEffect = !GUI::GameState.isNoiseEffect;
             break;
         case (GLFW_KEY_2):
             GUI::GameState.isInvisibleEffect = !GUI::GameState.isInvisibleEffect;
             break;
         case (GLFW_KEY_3):
-            ActiveScenario->LightingShader->InverseEffectStatus(lseColorGrading);
+            GUI::GameState.isColorGradingEffect = !GUI::GameState.isColorGradingEffect;
             break;
         case (GLFW_KEY_4):
             ActiveScenario->LightingShader->InverseEffectStatus(lseShineness);

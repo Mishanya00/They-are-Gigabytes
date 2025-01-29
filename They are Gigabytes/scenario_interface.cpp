@@ -12,9 +12,13 @@ namespace GUI {
 
     void InitGameState()
     {
+        GameState.isNoiseEffect= false;
+        GameState.isColorGradingEffect = false;
         GameState.isInvisibleEffect = false;
         GameState.isSelectedEffect = false;
+
         GameState.isEscMenuVisible = false;
+
         GameState.isPaused = false;
         GameState.isClosed = false;
     }
@@ -31,17 +35,21 @@ namespace GUI {
 
         if (ImGui::Begin("Esc menu", nullptr, esc_flags))
         {
-            ImGui::Text("Just a test text!");
+            ImGui::TextColored(cBlue, "Settings");
+
+            ImGui::Checkbox("Invisible effect", &GameState.isInvisibleEffect);
+            ImGui::Checkbox("Selected effect", &GameState.isSelectedEffect);
+            ImGui::Checkbox("Noise effect", &GameState.isNoiseEffect);
+            ImGui::Checkbox("Color Grading effect", &GameState.isColorGradingEffect);
+
             if (ImGui::Button("Back to game"))
             {
                 GameState.isPaused = false;
                 GameState.isEscMenuVisible = false;
             }
-            if (ImGui::Button("Back to menu")) {
+            if (ImGui::SameLine(), ImGui::Button("Back to menu")) {
                 GameState.isClosed = true;
             }
-            ImGui::Checkbox("Invisible effect", &GameState.isInvisibleEffect);
-            ImGui::Checkbox("Selected effect", &GameState.isSelectedEffect);
         }
         ImGui::End();
 	}

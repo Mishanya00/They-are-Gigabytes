@@ -3,10 +3,14 @@
 namespace GUI {
 
 	struct TGameState {
+		bool isNoiseEffect;
 		bool isSelectedEffect;
 		bool isInvisibleEffect;
+		bool isColorGradingEffect;
+
 		bool isPaused;
 		bool isClosed;
+		
 		bool isEscMenuVisible;
 	};
 
