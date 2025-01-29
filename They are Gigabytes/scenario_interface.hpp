@@ -6,6 +6,7 @@ namespace GUI {
 		bool isSelectedEffect;
 		bool isInvisibleEffect;
 		bool isPaused;
+		bool isClosed;
 		bool isEscMenuVisible;
 	};
 

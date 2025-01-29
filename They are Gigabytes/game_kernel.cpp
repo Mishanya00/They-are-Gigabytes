@@ -162,6 +162,9 @@ void DrawInterface()
     }
     else {
         GUI::DrawGameInterface();
+        if (ActiveScenario && GUI::GameState.isClosed) {
+            ActiveScenario = nullptr;   // Someday I will create Finish() method for scenario
+        }
     }
 }
 

@@ -16,6 +16,7 @@ namespace GUI {
         GameState.isSelectedEffect = false;
         GameState.isEscMenuVisible = false;
         GameState.isPaused = false;
+        GameState.isClosed = false;
     }
 
 	void DrawEscWindow()
@@ -35,6 +36,9 @@ namespace GUI {
             {
                 GameState.isPaused = false;
                 GameState.isEscMenuVisible = false;
+            }
+            if (ImGui::Button("Back to menu")) {
+                GameState.isClosed = true;
             }
         }
         ImGui::End();
