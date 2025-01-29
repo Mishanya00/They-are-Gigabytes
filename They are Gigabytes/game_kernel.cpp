@@ -70,9 +70,14 @@ void GameKeyboardHandler(int key, int action)
             GUI::GameState.isSelectedEffect = !GUI::GameState.isSelectedEffect;
             break;
         case GLFW_KEY_ESCAPE:
-            GUI::GameState.isEscMenuVisible = true;
-            GUI::GameState.isPaused = true;
-            //ActiveScenario = nullptr;
+            if (GUI::GameState.isEscMenuVisible) {
+                GUI::GameState.isEscMenuVisible = false;
+                GUI::GameState.isPaused = false;
+            }
+            else {
+                GUI::GameState.isEscMenuVisible = true;
+                GUI::GameState.isPaused = true;
+            }
             break;
         }
     }
