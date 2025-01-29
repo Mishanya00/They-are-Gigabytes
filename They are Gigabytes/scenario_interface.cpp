@@ -40,6 +40,8 @@ namespace GUI {
             if (ImGui::Button("Back to menu")) {
                 GameState.isClosed = true;
             }
+            ImGui::Checkbox("Invisible effect", &GameState.isInvisibleEffect);
+            ImGui::Checkbox("Selected effect", &GameState.isSelectedEffect);
         }
         ImGui::End();
 	}
